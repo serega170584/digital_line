@@ -23,11 +23,6 @@ class Stage
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $stageOrder;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $isPlayoff;
@@ -45,18 +40,6 @@ class Stage
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getStageOrder(): ?string
-    {
-        return $this->stageOrder;
-    }
-
-    public function setStageOrder(string $stageOrder): self
-    {
-        $this->stageOrder = $stageOrder;
 
         return $this;
     }
