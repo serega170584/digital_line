@@ -15,23 +15,23 @@ use Doctrine\ORM\EntityManagerInterface;
 trait RepositoryTrait
 {
     /**
-     * @return InitializedEntityInterface
+     * @return object
      */
     public function createEntityObject()
     {
         /**
-         * @var InitializedEntityInterface $entity
+         * @var object $entity
          */
         $entity = new $this->_entityName();
         return $entity;
     }
 
     /**
-     * @param $entity
+     * @param object $entity
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function saveEntity(InitializedEntityInterface $entity)
+    public function saveEntity(object $entity)
     {
         $entityManager = $this->getEntityManager();
         $entityManager->persist($entity);
