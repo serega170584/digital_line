@@ -29,5 +29,8 @@ class CompetitionController extends AbstractController
     public function table(GroupGenerator $generator): Response
     {
         $generator->generate();
+        return $this->render('competition/index.html.twig', [
+            'controller_name' => 'CompetitionController',
+        ]);
     }
 }
