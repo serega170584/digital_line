@@ -2,8 +2,11 @@
 
 namespace App\Repository;
 
+use App\Domain\RepositoryInterface;
+use App\Domain\RepositoryTrait;
 use App\Entity\Group;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -12,8 +15,10 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Group[]    findAll()
  * @method Group[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GroupRepository extends ServiceEntityRepository
+class GroupRepository extends ServiceEntityRepository implements RepositoryInterface
 {
+    use RepositoryTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Group::class);
@@ -47,4 +52,13 @@ class GroupRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function addEntity(ArrayCollection $fields)
+    {
+        /**
+         * @var Group $entity
+         */
+        $entity = $this->createEntityObject();
+        $entity->setName('Division ' . $fields->current());
+        $this->saveEntity($entity);
+    }
 }
