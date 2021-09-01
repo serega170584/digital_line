@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TeamRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,16 @@ class Team
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Play::class, mappedBy="еteam", orphanRemoval=true)
+     */
+    private $plays;
+
+    public function __construct()
+    {
+        $this->plays = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +47,36 @@ class Team
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Play[]
+     */
+    public function getPlays(): Collection
+    {
+        return $this->plays;
+    }
+
+    public function addPlay(Play $play): self
+    {
+        if (!$this->plays->contains($play)) {
+            $this->plays[] = $play;
+            $play->setеteam($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlay(Play $play): self
+    {
+        if ($this->plays->removeElement($play)) {
+            // set the owning side to null (unless already changed)
+            if ($play->getеteam() === $this) {
+                $play->setеteam(null);
+            }
+        }
 
         return $this;
     }
