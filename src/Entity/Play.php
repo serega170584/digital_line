@@ -21,7 +21,7 @@ class Play
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="plays")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $еteam;
+    private $team;
 
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="plays")
@@ -40,14 +40,14 @@ class Play
         return $this->id;
     }
 
-    public function getеteam(): ?Team
+    public function getTeam(): ?Team
     {
-        return $this->еteam;
+        return $this->team;
     }
 
-    public function setеteam(?Team $еteam): self
+    public function setTeam(?Team $team): self
     {
-        $this->еteam = $еteam;
+        $this->team = $team;
 
         return $this;
     }
