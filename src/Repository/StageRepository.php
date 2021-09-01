@@ -23,18 +23,6 @@ class StageRepository extends ServiceEntityRepository
         parent::__construct($registry, Stage::class);
     }
 
-    /**
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function execute()
-    {
-        $entity = $this->createEntityObject();
-        $entityManager = $this->getEntityManager();
-        $entityManager->persist($entity);
-        $entityManager->flush();
-    }
-
     // /**
     //  * @return Stage[] Returns an array of Stage objects
     //  */
