@@ -21,16 +21,16 @@ class CompetitionController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/table", name="table")
-     * @param GroupGenerator $generator
-     * @return Response
-     */
-    public function table(GroupGenerator $generator): Response
-    {
-        $generator->generate();
-        return $this->render('competition/index.html.twig', [
-            'controller_name' => 'CompetitionController',
-        ]);
-    }
+//    /**
+//     * @Route("/table", name="table")
+//     * @param GroupGenerator $generator
+//     * @return Response
+//     */
+//    public function table(GroupGenerator $generator): Response
+//    {
+//        $generator->generate();
+//        return $this->render('competition/index.html.twig', [
+//            'controller_name' => 'CompetitionController',
+//        ]);
+//    }
 }
