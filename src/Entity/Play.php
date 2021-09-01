@@ -36,13 +36,11 @@ class Play
     private $stage;
 
     /**
-     * @ORM\scoredGoals
      * @ORM\Column(type="integer")
      */
     private $scoredGoals;
 
     /**
-     * @ORM\lostGoals
      * @ORM\Column(type="integer")
      */
     private $lostGoals;
