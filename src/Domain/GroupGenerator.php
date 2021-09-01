@@ -24,6 +24,8 @@ class GroupGenerator extends Generator
 
     public function generate()
     {
+        var_dump($records);
+        die('asd');
         $records = $this->records;
         foreach ($records as $fields) {
             $this->repository->addEntity($fields);
