@@ -29,6 +29,12 @@ class Team
      */
     private $plays;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="teams")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $teamGroup;
+
     public function __construct()
     {
         $this->plays = new ArrayCollection();
@@ -77,6 +83,18 @@ class Team
                 $play->setTeam(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTeamGroup(): ?Group
+    {
+        return $this->teamGroup;
+    }
+
+    public function setTeamGroup(?Group $teamGroup): self
+    {
+        $this->teamGroup = $teamGroup;
 
         return $this;
     }
