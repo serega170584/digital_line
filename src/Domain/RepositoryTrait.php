@@ -27,17 +27,14 @@ trait RepositoryTrait
     }
 
     /**
-     * @param mixed ...$attributes
-     * @return InitializedEntityInterface
+     * @param $entity
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function addEntity(...$attributes)
+    public function saveEntity(InitializedEntityInterface $entity)
     {
-        $entity = $this->createEntityObject();
         $entityManager = $this->getEntityManager();
         $entityManager->persist($entity);
         $entityManager->flush();
-        return $entity;
     }
 }

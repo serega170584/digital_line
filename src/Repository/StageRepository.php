@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Domain\InitializedEntityInterface;
 use App\Domain\RepositoryTrait;
 use App\Entity\Stage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -62,4 +63,18 @@ class StageRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @param mixed ...$attributes
+     * @return InitializedEntityInterface
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function addEntity(...$attributes)
+    {
+        $entity = $this->createEntityObject();
+
+        return $entity;
+    }
+
 }
