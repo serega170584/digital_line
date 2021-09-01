@@ -58,7 +58,7 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
          * @var Group $entity
          */
         $entity = $this->createEntityObject();
-        $entity->setName('Division ' . $fields->current());
+        $entity->setName($fields->current());
         $this->saveEntity($entity);
     }
 }
