@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Domain\InitializedEntityInterface;
 use App\Repository\StageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=StageRepository::class)
  */
-class Stage implements InitializedEntityInterface
+class Stage
 {
     /**
      * @ORM\Id
