@@ -16,7 +16,7 @@ class CompetitionController extends AbstractController
      */
     public function index(StageRepository $repository): Response
     {
-        var_dump($repository);
+        var_dump($repository->execute());
         die('asd');
         return $this->render('competition/index.html.twig', [
             'controller_name' => 'CompetitionController',
