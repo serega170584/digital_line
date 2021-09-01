@@ -25,7 +25,7 @@ class Team
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Play::class, mappedBy="еteam", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Play::class, mappedBy="team", orphanRemoval=true)
      */
     private $plays;
 
@@ -63,7 +63,7 @@ class Team
     {
         if (!$this->plays->contains($play)) {
             $this->plays[] = $play;
-            $play->setеteam($this);
+            $play->setTeam($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class Team
     {
         if ($this->plays->removeElement($play)) {
             // set the owning side to null (unless already changed)
-            if ($play->getеteam() === $this) {
-                $play->setеteam(null);
+            if ($play->getTeam() === $this) {
+                $play->setTeam(null);
             }
         }
 
