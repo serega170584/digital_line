@@ -17,7 +17,7 @@ class GroupGenerator extends Generator
         $fields = new ArrayCollection();
         $fields->add('A');
         $this->records->add($fields);
-        $fields->clear();
+        $fields = new ArrayCollection();
         $fields->add('B');
         $this->records->add($fields);
     }
