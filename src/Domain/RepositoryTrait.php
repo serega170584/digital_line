@@ -18,7 +18,8 @@ trait RepositoryTrait
         /**
          * @var InitializedEntityInterface $entity
          */
-        $entity = (new $this->_entityName)();
+        $entityName = $this->_entityName;
+        $entity = (new $entityName)();
         return $entity;
     }
 }
