@@ -23,16 +23,21 @@
                 Group {{ group.getName() }}
                 <table>
                     {% for team in group.getTeams() %}
-                        <tr><td>{{ team.getName() }}</td></tr>
-{#                        <tr>#}
-{#<td>{% team.getName() %}</td>#}
-{#                        </tr>#}
+                        <tr>
+                            <td>{{ team.getName() }}</td>
+                            {% for play in team.getPlays() %}
+                                <td>{{ play.getScoredGoals() }}:{{ play.getLostGoals() }}</td>
+                            {% endfor %}
+                        </tr>
+                        {# <tr> #}
+                        {# <td>{% team.getName() %}</td> #}
+                        {# </tr> #}
                     {% endfor %}
-{#                    {% for team in group.getTeams() %}#}
-{#                        <tr>#}
-{#                            <td>{% team.getName() %}</td>#}
-{#                        </tr>#}
-{#                    {% endfor %}#}
+                    {# {% for team in group.getTeams() %} #}
+                    {# <tr> #}
+                    {# <td>{% team.getName() %}</td> #}
+                    {# </tr> #}
+                    {# {% endfor %} #}
                 </table>
             </div>
         {% endfor %}
