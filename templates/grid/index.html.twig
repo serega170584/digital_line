@@ -22,6 +22,11 @@
             <div>
                 Group {{ group.getName() }}
                 <table>
+                    {% for team in group.getTeams() %}
+                        <tr>
+<td>{% team.getName() %}</td>
+                        </tr>
+                    {% endfor %}
 {#                    {% for team in group.getTeams() %}#}
 {#                        <tr>#}
 {#                            <td>{% team.getName() %}</td>#}
