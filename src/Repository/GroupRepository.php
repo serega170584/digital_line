@@ -82,4 +82,15 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
     {
         $this->generator = $generator;
     }
+
+    /**
+     * @return Group[]
+     */
+    public function findGroups()
+    {
+        return $this->createQueryBuilder('g')
+            ->orderBy('g.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

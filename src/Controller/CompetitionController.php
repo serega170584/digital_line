@@ -8,6 +8,7 @@ use App\Domain\Generators\StageGenerator;
 use App\Domain\Generators\TeamGenerator;
 use App\Domain\Generators\TeamPointsGenerator;
 use App\Domain\Strategies\PlainPointStrategy;
+use App\Domain\Tournaments\GroupTournament;
 use App\Repository\GroupRepository;
 use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
@@ -70,6 +71,18 @@ class CompetitionController extends AbstractController
         $this->getDoctrine()->getManager()->flush();
         return $this->render('competition/index.html.twig', [
             'controller_name' => 'CompetitionController',
+        ]);
+    }
+
+    /**
+     * @Route("/grid", name="grid")
+     * @param GroupTournament $groupTournament
+     * @return Response
+     */
+    public function grid(GroupTournament $groupTournament): Response
+    {
+        return $this->render('grid/index.html.twig', [
+            'groups' => $groupTournament,
         ]);
     }
 }
