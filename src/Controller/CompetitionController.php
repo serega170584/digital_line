@@ -7,13 +7,13 @@ use App\Domain\Generators\PlayGenerator;
 use App\Domain\Generators\StageGenerator;
 use App\Domain\Generators\TeamGenerator;
 use App\Domain\Generators\TeamPointsGenerator;
+use App\Domain\Strategies\PlainPointStrategy;
 use App\Repository\GroupRepository;
 use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class CompetitionController extends AbstractController
 {
@@ -40,6 +40,7 @@ class CompetitionController extends AbstractController
      * @param PlayGenerator $playGenerator
      * @param PlayRepository $playRepository
      * @param TeamPointsGenerator $teamPointsGenerator
+     * @param PlainPointStrategy $plainPointStrategy
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -48,7 +49,7 @@ class CompetitionController extends AbstractController
                           TeamGenerator $teamGenerator, TeamRepository $teamRepository,
                           StageGenerator $stageGenerator, StageRepository $stageRepository,
                           PlayGenerator $playGenerator, PlayRepository $playRepository,
-                          TeamPointsGenerator $teamPointsGenerator
+                          TeamPointsGenerator $teamPointsGenerator, PlainPointStrategy $plainPointStrategy
     ): Response
     {
         $generator->generate();
@@ -63,6 +64,7 @@ class CompetitionController extends AbstractController
         $playGenerator->generate();
         $playRepository->setGenerator($playGenerator);
         $playRepository->addGeneratedRecords();
+        $teamPointsGenerator->setPointStrategy($plainPointStrategy);
         $teamPointsGenerator->generate();
         $this->getDoctrine()->getManager()->flush();
         return $this->render('competition/index.html.twig', [
