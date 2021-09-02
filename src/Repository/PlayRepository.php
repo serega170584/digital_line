@@ -63,7 +63,6 @@ class PlayRepository extends ServiceEntityRepository implements RepositoryInterf
         /**
          * @var Play $entity
          */
-        die('asd');
         $entity = $this->createEntityObject();
         $entity->setTeam(current($fields));
         next($fields);
@@ -74,6 +73,8 @@ class PlayRepository extends ServiceEntityRepository implements RepositoryInterf
         $entity->setScoredGoals(current($fields));
         next($fields);
         $entity->setLostGoals(current($fields));
+        var_dump(current($fields));
+        die('asd');
         $this->saveEntity($entity);
         return $entity;
     }
