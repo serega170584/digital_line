@@ -50,20 +50,21 @@ class CompetitionController extends AbstractController
     {
         $generator->generate();
         $groupRepository->setGenerator($generator);
+        $groupRepository->setTeamRepository($teamRepository);
         $groupRepository->addGeneratedRecords();
         $this->getDoctrine()->getManager()->flush();
-        $teamGenerator->generate();
-        $teamRepository->setGenerator($teamGenerator);
-        $teamRepository->addGeneratedRecords();
-        $this->getDoctrine()->getManager()->flush();
-        $stageGenerator->generate();
-        $stageRepository->setGenerator($stageGenerator);
-        $stageRepository->addGeneratedRecords();
-        $this->getDoctrine()->getManager()->flush();
-        $playGenerator->generate();
-        $playRepository->setGenerator($playGenerator);
-        $playRepository->addGeneratedRecords();
-        $this->getDoctrine()->getManager()->flush();
+//        $teamGenerator->generate();
+//        $teamRepository->setGenerator($teamGenerator);
+//        $teamRepository->addGeneratedRecords();
+//        $this->getDoctrine()->getManager()->flush();
+//        $stageGenerator->generate();
+//        $stageRepository->setGenerator($stageGenerator);
+//        $stageRepository->addGeneratedRecords();
+//        $this->getDoctrine()->getManager()->flush();
+//        $playGenerator->generate();
+//        $playRepository->setGenerator($playGenerator);
+//        $playRepository->addGeneratedRecords();
+//        $this->getDoctrine()->getManager()->flush();
         return $this->render('competition/index.html.twig', [
             'controller_name' => 'CompetitionController',
         ]);
