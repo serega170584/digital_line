@@ -3,7 +3,6 @@
 
 namespace App\Domain;
 
-use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -15,6 +14,11 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 trait RepositoryTrait
 {
+    /**
+     * @var Object[]
+     */
+    private $entities = [];
+
     /**
      * @return object
      */
@@ -47,8 +51,17 @@ trait RepositoryTrait
     {
         $records = $this->generator->getRecords();
         foreach ($records as $fields) {
-            $this->addEntity($fields);
+            $entity = $this->addEntity($fields);
+            $this->entities[] = $entity;
         }
         return $this;
+    }
+
+    /**
+     * @return Object[]
+     */
+    public function getEntities(): array
+    {
+        return $this->entities;
     }
 }

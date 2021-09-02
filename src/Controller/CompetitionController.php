@@ -51,15 +51,12 @@ class CompetitionController extends AbstractController
         $generator->generate();
         $groupRepository->setGenerator($generator);
         $groupRepository->addGeneratedRecords();
-        $this->getDoctrine()->getManager()->flush();
         $teamGenerator->generate();
         $teamRepository->setGenerator($teamGenerator);
         $teamRepository->addGeneratedRecords();
-        $this->getDoctrine()->getManager()->flush();
         $stageGenerator->generate();
         $stageRepository->setGenerator($stageGenerator);
         $stageRepository->addGeneratedRecords();
-        $this->getDoctrine()->getManager()->flush();
         $playGenerator->generate();
         $playRepository->setGenerator($playGenerator);
         $playRepository->addGeneratedRecords();

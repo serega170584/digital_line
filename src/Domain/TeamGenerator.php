@@ -21,7 +21,7 @@ class TeamGenerator extends Generator
 
     public function generate(): self
     {
-        $groups = $this->groupRepository->findAll();
+        $groups = $this->groupRepository->getEntities();
         $teams = [
             ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
             ['I', 'J', 'K', 'L', 'M', 'N', 'O', 'P']
