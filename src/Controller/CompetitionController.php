@@ -6,6 +6,7 @@ use App\Domain\Generators\GroupGenerator;
 use App\Domain\Generators\PlayGenerator;
 use App\Domain\Generators\StageGenerator;
 use App\Domain\Generators\TeamGenerator;
+use App\Domain\Generators\TeamPointsGenerator;
 use App\Repository\GroupRepository;
 use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
@@ -38,6 +39,7 @@ class CompetitionController extends AbstractController
      * @param StageRepository $stageRepository
      * @param PlayGenerator $playGenerator
      * @param PlayRepository $playRepository
+     * @param TeamPointsGenerator $teamPointsGenerator
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -45,7 +47,8 @@ class CompetitionController extends AbstractController
     public function table(GroupGenerator $generator, GroupRepository $groupRepository,
                           TeamGenerator $teamGenerator, TeamRepository $teamRepository,
                           StageGenerator $stageGenerator, StageRepository $stageRepository,
-                          PlayGenerator $playGenerator, PlayRepository $playRepository
+                          PlayGenerator $playGenerator, PlayRepository $playRepository,
+                          TeamPointsGenerator $teamPointsGenerator
     ): Response
     {
         $generator->generate();
@@ -60,6 +63,7 @@ class CompetitionController extends AbstractController
         $playGenerator->generate();
         $playRepository->setGenerator($playGenerator);
         $playRepository->addGeneratedRecords();
+        $teamPointsGenerator->generate();
         $this->getDoctrine()->getManager()->flush();
         return $this->render('competition/index.html.twig', [
             'controller_name' => 'CompetitionController',
