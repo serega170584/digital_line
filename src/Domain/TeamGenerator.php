@@ -29,7 +29,7 @@ class TeamGenerator extends Generator
         foreach ($groups as $group) {
             $groupTeams = current($teams);
             foreach ($groupTeams as $key => $team) {
-                $this->records = [$team, $group];
+                $this->records[] = [$team, $group];
             }
             next($teams);
         }

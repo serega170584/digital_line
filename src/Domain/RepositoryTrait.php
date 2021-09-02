@@ -35,6 +35,5 @@ trait RepositoryTrait
     {
         $entityManager = $this->getEntityManager();
         $entityManager->persist($entity);
-        $entityManager->flush();
     }
 }

@@ -43,6 +43,7 @@ class CompetitionController extends AbstractController
         $teamGenerator->generate();
         $teamRepository->setGenerator($teamGenerator);
         $teamRepository->addGeneratedRecords();
+        $this->getDoctrine()->getManager()->flush();
         return $this->render('competition/index.html.twig', [
             'controller_name' => 'CompetitionController',
         ]);
