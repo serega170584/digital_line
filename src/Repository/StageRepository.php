@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
-use App\Domain\StageGenerator;
+use App\Domain\Generators\StageGenerator;
 use App\Entity\Stage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;

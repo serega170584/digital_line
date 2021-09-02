@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Domain\GroupGenerator;
-use App\Domain\PlayGenerator;
-use App\Domain\StageGenerator;
-use App\Domain\TeamGenerator;
+use App\Domain\Generators\GroupGenerator;
+use App\Domain\Generators\PlayGenerator;
+use App\Domain\Generators\StageGenerator;
+use App\Domain\Generators\TeamGenerator;
 use App\Repository\GroupRepository;
 use App\Repository\PlayRepository;
 use App\Repository\StageRepository;

@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Domain\GroupGenerator;
+use App\Domain\Generators\GroupGenerator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
 use App\Entity\Group;

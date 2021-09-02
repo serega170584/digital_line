@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Domain\PlayGenerator;
+use App\Domain\Generators\PlayGenerator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
 use App\Entity\Play;

@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
-use App\Domain\TeamGenerator;
+use App\Domain\Generators\TeamGenerator;
 use App\Entity\Group;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
