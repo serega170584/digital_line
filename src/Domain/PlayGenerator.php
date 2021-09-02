@@ -28,7 +28,7 @@ class PlayGenerator extends Generator
 
     public function generate()
     {
-        $groups = $this->groupRepository->findAll();
+        $groups = $this->groupRepository->getEntities();
         $stage = current($this->stageRepository->getEntities());
         $goals = [];
         for ($i = 0; $i < self::GROUP_TEAMS_COUNT; ++$i) {
