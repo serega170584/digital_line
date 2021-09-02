@@ -4,9 +4,6 @@
 namespace App\Domain;
 
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-
 abstract class Generator
 {
     /**
