@@ -35,6 +35,11 @@ class Team
      */
     private $teamGroup;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $points;
+
     public function __construct()
     {
         $this->plays = new ArrayCollection();
@@ -95,6 +100,18 @@ class Team
     public function setTeamGroup(?Group $teamGroup): self
     {
         $this->teamGroup = $teamGroup;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(?int $points): self
+    {
+        $this->points = $points;
 
         return $this;
     }
