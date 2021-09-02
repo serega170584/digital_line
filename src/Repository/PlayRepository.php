@@ -6,6 +6,7 @@ use App\Domain\Generators\PlayGenerator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
 use App\Entity\Play;
+use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -64,7 +65,12 @@ class PlayRepository extends ServiceEntityRepository implements RepositoryInterf
          * @var Play $entity
          */
         $entity = $this->createEntityObject();
-        $entity->setTeam(current($fields));
+        /**
+         * @var Team $teamEntity
+         */
+        $teamEntity = current($fields);
+        $teamEntity->addPlay($entity);
+        $entity->setTeam($teamEntity);
         next($fields);
         $entity->setOpponent(current($fields));
         next($fields);
