@@ -26,7 +26,11 @@
                         <tr>
                             <td>{{ team.getName() }}</td>
                             {% for play in team.getPlays() %}
-                                <td>{{ play.getScoredGoals() }}:{{ play.getLostGoals() }}</td>
+                                {% if (play.getTeam().getId()=play.getOpponent().getId()) %}
+                                    <td>{{ play.getScoredGoals() }}:{{ play.getLostGoals() }}</td>
+                                {% else %}
+                                    <td style="color: black"></td>
+                                {% endif %}
                             {% endfor %}
                         </tr>
                         {# <tr> #}
