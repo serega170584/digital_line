@@ -56,7 +56,7 @@ class PlayGenerator extends Generator
                 ++$currentTeamIndex;
             }
         }
-//        var_dump($this->records);
+        var_dump($this->records);
         die('asd');
         return $this;
     }
