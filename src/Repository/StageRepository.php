@@ -82,4 +82,12 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
         $this->generator = $generator;
     }
 
+    /**
+     * @return Stage
+     */
+    public function findPreliminaryRound():Stage
+    {
+        return $this->findOneBy(['isPlayoff' => false]);
+    }
+
 }

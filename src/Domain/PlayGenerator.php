@@ -9,6 +9,7 @@ use App\Repository\StageRepository;
 
 class PlayGenerator extends Generator
 {
+    private const GROUP_TEAMS_COUNT = 8;
     /**
      * @var GroupRepository
      */
@@ -28,17 +29,31 @@ class PlayGenerator extends Generator
     public function generate()
     {
         $groups = $this->groupRepository->findAll();
-        $stages = $this->stageRepository->findOneBy(['isPlayoff' => false]);
+        $stage = $this->stageRepository->findPreliminaryRound();
+        $goals = [];
+        for ($i = 0; $i < self::GROUP_TEAMS_COUNT; ++$i) {
+            $goals[] = [1, 0];
+        }
         foreach ($groups as $group) {
             $teams = $group->getTeams();
             $opponentsTeams = $teams;
+            $groupGoals = $goals;
+            $currentTeamIndex = 0;
             foreach ($teams as $team) {
+                $groupGoals[$currentTeamIndex] = [0, 0];
+                if ($currentTeamIndex) {
+                    $groupGoals[$currentTeamIndex - 1] = [0, 1];
+                }
                 foreach ($opponentsTeams as $opponentTeam) {
-
+                    $playGoals = current($groupGoals);
+                    $teamGoals = current($playGoals);
+                    next($playGoals);
+                    $opponentGoals = current($playGoals);
+                    $this->records[] = [$team, $opponentTeam, $stage, $teamGoals, $opponentGoals];
+                    next($groupGoals);
                 }
             }
         }
-
         return $this;
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
+use App\Domain\PlayGenerator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
-use App\Domain\StageGenerator;
 use App\Entity\Play;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -21,7 +21,7 @@ class PlayRepository extends ServiceEntityRepository implements RepositoryInterf
     use RepositoryTrait;
 
     /**
-     * @var StageGenerator
+     * @var PlayGenerator
      */
     private $generator;
 
@@ -60,11 +60,28 @@ class PlayRepository extends ServiceEntityRepository implements RepositoryInterf
     */
     public function addEntity(array $fields)
     {
-        // TODO: Implement addEntity() method.
+        /**
+         * @var Play $entity
+         */
+        $entity = $this->createEntityObject();
+        $entity->setTeam(current($fields));
+        next($fields);
+        $entity->setOpponent(current($fields));
+        next($fields);
+        $entity->setStage(current($fields));
+        next($fields);
+        $entity->setScoredGoals(current($fields));
+        next($fields);
+        $entity->setLostGoals(current($fields));
+        $this->saveEntity($entity);
+        return $entity;
     }
 
-    public function addGeneratedRecords()
+    /**
+     * @param PlayGenerator $generator
+     */
+    public function setGenerator(PlayGenerator $generator): void
     {
-        // TODO: Implement addGeneratedRecords() method.
+        $this->generator = $generator;
     }
 }

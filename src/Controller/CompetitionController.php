@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Domain\GroupGenerator;
+use App\Domain\PlayGenerator;
 use App\Domain\StageGenerator;
 use App\Domain\TeamGenerator;
 use App\Repository\GroupRepository;
+use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,18 +36,18 @@ class CompetitionController extends AbstractController
      * @param TeamRepository $teamRepository
      * @param StageGenerator $stageGenerator
      * @param StageRepository $stageRepository
+     * @param PlayGenerator $playGenerator
+     * @param PlayRepository $playRepository
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function table(GroupGenerator $generator, GroupRepository $groupRepository,
                           TeamGenerator $teamGenerator, TeamRepository $teamRepository,
-                          StageGenerator $stageGenerator, StageRepository $stageRepository
+                          StageGenerator $stageGenerator, StageRepository $stageRepository,
+                          PlayGenerator $playGenerator, PlayRepository $playRepository
     ): Response
     {
-        $stage = $stageRepository->findOneBy(['isPlayoff' => false]);
-        var_dump($stage ? $stage->getName() : false);
-        die('asd');
         $generator->generate();
         $groupRepository->setGenerator($generator);
         $groupRepository->addGeneratedRecords();
@@ -57,6 +59,10 @@ class CompetitionController extends AbstractController
         $stageGenerator->generate();
         $stageRepository->setGenerator($stageGenerator);
         $stageRepository->addGeneratedRecords();
+        $this->getDoctrine()->getManager()->flush();
+        $playGenerator->generate();
+        $playRepository->setGenerator($playGenerator);
+        $playRepository->addGeneratedRecords();
         $this->getDoctrine()->getManager()->flush();
         return $this->render('competition/index.html.twig', [
             'controller_name' => 'CompetitionController',
