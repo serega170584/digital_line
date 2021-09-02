@@ -10,7 +10,6 @@ use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class CompetitionController extends AbstractController
 {
@@ -43,6 +42,9 @@ class CompetitionController extends AbstractController
                           StageGenerator $stageGenerator, StageRepository $stageRepository
     ): Response
     {
+        $stage = $stageRepository->findOneBy(['isPlayoff' => false]);
+        var_dump($stage ? $stage->setName() : false);
+        die('asd');
         $generator->generate();
         $groupRepository->setGenerator($generator);
         $groupRepository->addGeneratedRecords();
