@@ -6,7 +6,6 @@ use App\Domain\GroupGenerator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
 use App\Entity\Group;
-use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -24,10 +23,6 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
      * @var GroupGenerator
      */
     private $generator;
-    /**
-     * @var TeamRepository
-     */
-    private $teamRepository;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -76,12 +71,6 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
          */
         $entity = $this->createEntityObject();
         $entity->setName(current($fields));
-        /**
-         * @var Team $teamEntity
-         */
-        $teamEntity = $this->teamRepository->createEntityObject();
-        $teamEntity->setName('test');
-        $entity->addTeam($teamEntity);
         $this->saveEntity($entity);
         return $entity;
     }
@@ -92,13 +81,5 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
     public function setGenerator(GroupGenerator $generator): void
     {
         $this->generator = $generator;
-    }
-
-    /**
-     * @param TeamRepository $teamRepository
-     */
-    public function setTeamRepository(TeamRepository $teamRepository): void
-    {
-        $this->teamRepository = $teamRepository;
     }
 }

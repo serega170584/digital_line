@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
 use App\Domain\TeamGenerator;
+use App\Entity\Group;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -72,7 +73,12 @@ class TeamRepository extends ServiceEntityRepository implements RepositoryInterf
         $entity = $this->createEntityObject();
         $entity->setName(current($fields));
         next($fields);
-        $entity->setTeamGroup(current($fields));
+        /**
+         * @var Group $teamGroup
+         */
+        $teamGroup = current($fields);
+        $teamGroup->addTeam($entity);
+        $entity->setTeamGroup($teamGroup);
         $this->saveEntity($entity);
         return $entity;
     }
