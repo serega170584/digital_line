@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
+use App\Domain\StageGenerator;
 use App\Entity\Stage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,6 +18,11 @@ use Doctrine\Persistence\ManagerRegistry;
 class StageRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     use RepositoryTrait;
+
+    /**
+     * @var StageGenerator
+     */
+    private $generator;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -69,6 +75,11 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
         $entity->setIsPlayoff(current($fields));
         $this->saveEntity($entity);
         return $entity;
+    }
+
+    public function setGenerator(StageGenerator $generator)
+    {
+        $this->generator = $generator;
     }
 
 }

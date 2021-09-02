@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Domain\GroupGenerator;
+use App\Domain\StageGenerator;
 use App\Domain\TeamGenerator;
 use App\Repository\GroupRepository;
 use App\Repository\StageRepository;
@@ -31,11 +32,16 @@ class CompetitionController extends AbstractController
      * @param GroupRepository $groupRepository
      * @param TeamGenerator $teamGenerator
      * @param TeamRepository $teamRepository
+     * @param StageGenerator $stageGenerator
+     * @param StageRepository $stageRepository
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function table(GroupGenerator $generator, GroupRepository $groupRepository, TeamGenerator $teamGenerator, TeamRepository $teamRepository): Response
+    public function table(GroupGenerator $generator, GroupRepository $groupRepository,
+                          TeamGenerator $teamGenerator, TeamRepository $teamRepository,
+                          StageGenerator $stageGenerator, StageRepository $stageRepository
+    ): Response
     {
         $generator->generate();
         $groupRepository->setGenerator($generator);
@@ -44,6 +50,9 @@ class CompetitionController extends AbstractController
         $teamGenerator->generate();
         $teamRepository->setGenerator($teamGenerator);
         $teamRepository->addGeneratedRecords();
+        $stageGenerator->generate();
+        $stageRepository->setGenerator($stageGenerator);
+        $stageRepository->addGeneratedRecords();
         $this->getDoctrine()->getManager()->flush();
         return $this->render('competition/index.html.twig', [
             'controller_name' => 'CompetitionController',
