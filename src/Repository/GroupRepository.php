@@ -93,7 +93,7 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
     {
         return $this->createQueryBuilder('g')
             ->innerJoin(Team::class, 't', Join::WITH, 'g.id = t.teamGroup')
-            ->innerJoin(Play::class, 'p', Join::WITH, 'p.teamId = t.id')
+            ->innerJoin(Play::class, 'p', Join::WITH, 'p.team = t.id')
             ->orderBy('g.id', 'ASC')
             ->addOrderBy('t.points', 'DESC')
             ->getQuery()
