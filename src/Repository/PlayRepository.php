@@ -63,6 +63,7 @@ class PlayRepository extends ServiceEntityRepository implements RepositoryInterf
         /**
          * @var Play $entity
          */
+        die('asd');
         $entity = $this->createEntityObject();
         $entity->setTeam(current($fields));
         next($fields);
