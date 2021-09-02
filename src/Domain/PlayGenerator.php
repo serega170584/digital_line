@@ -45,6 +45,8 @@ class PlayGenerator extends Generator
                     $groupGoals[$currentTeamIndex - 1] = [0, 1];
                 }
                 foreach ($opponentsTeams as $opponentTeam) {
+                    var_dump($groupGoals);
+                    die('asd');
                     $playGoals = current($groupGoals);
                     $teamGoals = current($playGoals);
                     next($playGoals);
