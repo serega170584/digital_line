@@ -82,7 +82,7 @@ class CompetitionController extends AbstractController
     public function grid(GroupTournament $groupTournament): Response
     {
         return $this->render('grid/index.html.twig', [
-            'groups' => $groupTournament,
+            'groups' => $groupTournament->getUnits(),
         ]);
     }
 }
