@@ -4,21 +4,27 @@
 namespace App\Domain\Generators;
 
 
-use App\Entity\Play;
+use App\Domain\Strategies\PlainPointStrategy;
 use App\Entity\Team;
 use App\Repository\TeamRepository;
 
 class TeamPointsGenerator extends Generator
 {
+
     /**
      * @var TeamRepository
      */
     private $teamRepository;
+    /**
+     * @var PlainPointStrategy
+     */
+    private $plainPointStrategy;
 
-    public function __construct(TeamRepository $teamRepository)
+    public function __construct(TeamRepository $teamRepository, PlainPointStrategy $plainPointStrategy)
     {
         parent::__construct();
         $this->teamRepository = $teamRepository;
+        $this->plainPointStrategy = $plainPointStrategy;
     }
 
     /**
@@ -31,12 +37,7 @@ class TeamPointsGenerator extends Generator
             /**
              * @var Team $team
              */
-            $plays = $team->getPlays();
-            $points = 0;
-            foreach ($plays as $play) {
-                $points += $play->getScoredGoals();
-            }
-            $team->setPoints($points);
+            $team->setPoints($this->plainPointStrategy->calculate($team));
         }
         return $this;
     }
