@@ -81,7 +81,7 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
      */
     public function addGeneratedRecords(): self
     {
-        $records = $this->generator->generate();
+        $records = $this->generator->getRecords();
         foreach ($records as $fields) {
             $this->addEntity($fields);
         }
