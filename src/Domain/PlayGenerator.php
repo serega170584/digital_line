@@ -47,14 +47,16 @@ class PlayGenerator extends Generator
                 foreach ($opponentsTeams as $opponentTeam) {
                     $playGoals = current($groupGoals);
                     $teamGoals = current($playGoals);
-                    next($teamGoals);
-                    $opponentGoals = current($teamGoals);
+                    var_dump($teamGoals);
+                    next($playGoals);
+                    $opponentGoals = current($playGoals);
+                    var_dump($opponentGoals);
                     $this->records[] = [$team, $opponentTeam, $stage, $teamGoals, $opponentGoals];
                     next($groupGoals);
                 }
             }
         }
-        var_dump($this->records);
+//        var_dump($this->records);
         die('asd');
         return $this;
     }
