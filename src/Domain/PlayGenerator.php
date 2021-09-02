@@ -34,8 +34,6 @@ class PlayGenerator extends Generator
         for ($i = 0; $i < self::GROUP_TEAMS_COUNT; ++$i) {
             $goals[] = [1, 0];
         }
-        var_dump($goals);
-        die('asd');
         foreach ($groups as $group) {
             $teams = $group->getTeams();
             $opponentsTeams = $teams;
@@ -46,6 +44,7 @@ class PlayGenerator extends Generator
                 if ($currentTeamIndex) {
                     $groupGoals[$currentTeamIndex - 1] = [0, 1];
                 }
+                var_dump($opponentsTeams->count());
                 foreach ($opponentsTeams as $opponentTeam) {
                     $playGoals = current($groupGoals);
                     $teamGoals = current($playGoals);
