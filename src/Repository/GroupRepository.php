@@ -6,6 +6,7 @@ use App\Domain\Generators\GroupGenerator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
 use App\Entity\Group;
+use App\Entity\Play;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
@@ -92,6 +93,7 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
     {
         return $this->createQueryBuilder('g')
             ->innerJoin(Team::class, 't', Join::WITH, 'g.id = t.groupId')
+            ->innerJoin(Play::class, 'p', Join::WITH, 'p.teamId = t.id')
             ->orderBy('g.id', 'ASC')
             ->addOrderBy('t.points', 'DESC')
             ->getQuery()
