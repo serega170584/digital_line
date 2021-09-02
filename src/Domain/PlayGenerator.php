@@ -54,6 +54,8 @@ class PlayGenerator extends Generator
                 }
             }
         }
+        var_dump($this->records);
+        die('asd');
         return $this;
     }
 }
