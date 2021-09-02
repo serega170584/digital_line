@@ -32,12 +32,10 @@ class TeamPointsGenerator extends Generator
              * @var Team $team
              */
             $plays = $team->getPlays();
-            $points = $plays->map(function ($play) {
-                /**
-                 * @var Play $play
-                 */
-                return $play->getScoredGoals();
-            });
+            $points = 0;
+            foreach ($plays as $play) {
+                $points += $play->getScoredGoals();
+            }
             $team->setPoints($points);
         }
         return $this;
