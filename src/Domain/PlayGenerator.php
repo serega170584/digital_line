@@ -40,21 +40,20 @@ class PlayGenerator extends Generator
             $groupGoals = $goals;
             $currentTeamIndex = 0;
             foreach ($teams as $team) {
+                reset($groupGoals);
                 $groupGoals[$currentTeamIndex] = [0, 0];
                 if ($currentTeamIndex) {
                     $groupGoals[$currentTeamIndex - 1] = [0, 1];
                 }
-                var_dump($opponentsTeams->count());
                 foreach ($opponentsTeams as $opponentTeam) {
                     $playGoals = current($groupGoals);
                     $teamGoals = current($playGoals);
-                    var_dump($teamGoals);
                     next($playGoals);
                     $opponentGoals = current($playGoals);
-                    var_dump($opponentGoals);
                     $this->records[] = [$team, $opponentTeam, $stage, $teamGoals, $opponentGoals];
                     next($groupGoals);
                 }
+                ++$currentTeamIndex;
             }
         }
 //        var_dump($this->records);
