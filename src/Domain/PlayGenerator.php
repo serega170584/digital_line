@@ -34,7 +34,7 @@ class PlayGenerator extends Generator
         for ($i = 0; $i < self::GROUP_TEAMS_COUNT; ++$i) {
             $goals[] = [1, 0];
         }
-        var_dump($groups->count());
+        var_dump(count($groups));
         var_dump($stage->getName());
         foreach ($groups as $group) {
             $teams = $group->getTeams();
