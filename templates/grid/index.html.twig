@@ -27,7 +27,7 @@
                             <td>{{ team.getName() }}</td>
                             {% for play in team.getPlays() %}
                                 {% if (play.getTeam().getId()==play.getOpponent().getId()) %}
-                                    <td bgcolor="black"></td>
+                                    <td bgcolor="#000"></td>
                                 {% else %}
                                     <td>{{ play.getScoredGoals() }}:{{ play.getLostGoals() }}</td>
                                 {% endif %}
