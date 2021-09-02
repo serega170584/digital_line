@@ -81,8 +81,6 @@ class CompetitionController extends AbstractController
      */
     public function grid(GroupTournament $groupTournament): Response
     {
-        var_dump(current($groupTournament->getUnits())->getName());
-        die('asd');
         return $this->render('grid/index.html.twig', [
             'groups' => $groupTournament->getUnits(),
         ]);
