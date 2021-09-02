@@ -2,6 +2,9 @@
 
 namespace App\Repository;
 
+use App\Domain\RepositoryInterface;
+use App\Domain\RepositoryTrait;
+use App\Domain\StageGenerator;
 use App\Entity\Play;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -12,8 +15,16 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Play[]    findAll()
  * @method Play[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PlayRepository extends ServiceEntityRepository
+class PlayRepository extends ServiceEntityRepository implements RepositoryInterface
 {
+
+    use RepositoryTrait;
+
+    /**
+     * @var StageGenerator
+     */
+    private $generator;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Play::class);
@@ -47,4 +58,13 @@ class PlayRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function addEntity(array $fields)
+    {
+        // TODO: Implement addEntity() method.
+    }
+
+    public function addGeneratedRecords()
+    {
+        // TODO: Implement addGeneratedRecords() method.
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Domain\InitializedEntityInterface;
+use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
 use App\Entity\Stage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Stage[]    findAll()
  * @method Stage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class StageRepository extends ServiceEntityRepository
+class StageRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     use RepositoryTrait;
 
@@ -53,15 +53,21 @@ class StageRepository extends ServiceEntityRepository
     */
 
     /**
-     * @param mixed ...$attributes
-     * @return InitializedEntityInterface
+     * @param array $fields
+     * @return Stage
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function addEntity(...$attributes)
+    public function addEntity(array $fields)
     {
+        /**
+         * @var Stage $entity
+         */
         $entity = $this->createEntityObject();
-
+        $entity->setName(current($fields));
+        next($fields);
+        $entity->setIsPlayoff(current($fields));
+        $this->saveEntity($entity);
         return $entity;
     }
 

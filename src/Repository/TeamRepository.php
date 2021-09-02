@@ -78,20 +78,6 @@ class TeamRepository extends ServiceEntityRepository implements RepositoryInterf
     }
 
     /**
-     * @return $this
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function addGeneratedRecords(): self
-    {
-        $records = $this->generator->getRecords();
-        foreach ($records as $fields) {
-            $this->addEntity($fields);
-        }
-        return $this;
-    }
-
-    /**
      * @param TeamGenerator $generator
      */
     public function setGenerator(TeamGenerator $generator): void

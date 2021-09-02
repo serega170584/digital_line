@@ -3,6 +3,7 @@
 
 namespace App\Domain;
 
+use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -35,5 +36,19 @@ trait RepositoryTrait
     {
         $entityManager = $this->getEntityManager();
         $entityManager->persist($entity);
+    }
+
+    /**
+     * @return $this
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function addGeneratedRecords(): self
+    {
+        $records = $this->generator->getRecords();
+        foreach ($records as $fields) {
+            $this->addEntity($fields);
+        }
+        return $this;
     }
 }

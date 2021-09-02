@@ -76,19 +76,6 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
     }
 
     /**
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function addGeneratedRecords(): self
-    {
-        $records = $this->generator->getRecords();
-        foreach ($records as $fields) {
-            $this->addEntity($fields);
-        }
-        return $this;
-    }
-
-    /**
      * @param GroupGenerator $generator
      */
     public function setGenerator(GroupGenerator $generator): void
