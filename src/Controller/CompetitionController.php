@@ -44,7 +44,7 @@ class CompetitionController extends AbstractController
     ): Response
     {
         $stage = $stageRepository->findOneBy(['isPlayoff' => false]);
-        var_dump($stage ? $stage->setName() : false);
+        var_dump($stage ? $stage->getName() : false);
         die('asd');
         $generator->generate();
         $groupRepository->setGenerator($generator);
