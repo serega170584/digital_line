@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=TeamRepository::class)
+ * @ORM\Table(indexes={@ORM\Index(name="points_idx", columns={"points"})})
  */
 class Team
 {
