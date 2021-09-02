@@ -85,6 +85,7 @@ class TeamRepository extends ServiceEntityRepository implements RepositoryInterf
     public function addGeneratedRecords(): self
     {
         $records = $this->generator->getRecords();
+        var_dump(count($records));
         foreach ($records as $fields) {
             $this->addEntity($fields);
         }
