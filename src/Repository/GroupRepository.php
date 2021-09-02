@@ -6,7 +6,9 @@ use App\Domain\Generators\GroupGenerator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
 use App\Entity\Group;
+use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -89,7 +91,9 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
     public function findGroups()
     {
         return $this->createQueryBuilder('g')
+            ->innerJoin(Team::class, 't', Join::WITH, 'g.id = t.groupId')
             ->orderBy('g.id', 'ASC')
+            ->addOrderBy('t.points', 'DESC')
             ->getQuery()
             ->getResult();
     }
