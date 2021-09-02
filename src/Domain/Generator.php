@@ -10,18 +10,22 @@ use Doctrine\Common\Collections\ArrayCollection;
 abstract class Generator
 {
     /**
-     * @var ArrayCollection
+     * @var array
      */
     protected $records;
-    /**
-     * @var RepositoryInterface
-     */
-    protected $repository;
 
-    public function __construct(RepositoryInterface $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
+        $this->records = [];
     }
 
     abstract public function generate();
+
+    /**
+     * @return array
+     */
+    public function getRecords(): array
+    {
+        return $this->records;
+    }
 }

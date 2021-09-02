@@ -2,11 +2,11 @@
 
 namespace App\Repository;
 
+use App\Domain\GroupGenerator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
 use App\Entity\Group;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -18,6 +18,11 @@ use Doctrine\Persistence\ManagerRegistry;
 class GroupRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     use RepositoryTrait;
+
+    /**
+     * @var GroupGenerator
+     */
+    private $generator;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -52,13 +57,42 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
         ;
     }
     */
-    public function addEntity(ArrayCollection $fields)
+
+    /**
+     * @param array $fields
+     * @return Group
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function addEntity(array $fields)
     {
         /**
          * @var Group $entity
          */
         $entity = $this->createEntityObject();
-        $entity->setName($fields->current());
+        $entity->setName(current($fields));
         $this->saveEntity($entity);
+        return $entity;
+    }
+
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function addGeneratedRecords(): self
+    {
+        $records = $this->generator->generate();
+        foreach ($records as $fields) {
+            $this->addEntity($fields);
+        }
+        return $this;
+    }
+
+    /**
+     * @param GroupGenerator $generator
+     */
+    public function setGenerator(GroupGenerator $generator): void
+    {
+        $this->generator = $generator;
     }
 }
