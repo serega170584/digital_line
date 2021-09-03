@@ -126,13 +126,13 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
                 if ($play->getScoredGoals() > $play->getLostGoals()) {
                     $team = $play->getTeam();
                     $pointStageTeams = $stageTeams[$team->getPoints()] ?? [];
-                    if (!(in_array($team, $teams) && in_array($team, $pointStageTeams))) {
+                    if (!(in_array($team, $teams) || in_array($team, $pointStageTeams))) {
                         $stageTeams[$team->getPoints()][] = $team;
                     }
                 } else {
                     $team = $play->getOpponent();
                     $pointStageTeams = $stageTeams[$team->getPoints()] ?? [];
-                    if (!(in_array($team, $teams) && in_array($team, $pointStageTeams))) {
+                    if (!(in_array($team, $teams) || in_array($team, $pointStageTeams))) {
                         $stageTeams[$team->getPoints()][] = $team;
                     }
                 }
