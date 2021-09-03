@@ -19,28 +19,28 @@
 
     <div class="example-wrapper">
         {% for stage in stages %}
-        <td style="display: inline-block; list-style: none; padding-left: 0">
-            <li style="vertical-align: top;">
-                {{ stage.getName }}
-                <table style="list-style: none; display: block; padding-left: 0; margin-right: 40px">
-                    {% for play in stage.getPlays() %}
-            <li>
-                <table>
-                    <tr>
-                        <td>
-                            <ul>
-                                <li>{{ play.getTeam().getName() }}</li>
-                                <li>{{ play.getOpponent().getName() }}</li>
-                            </ul>
-                        </td>
-                        <td rowspan="2">{{ play.getScoredGoals() }} : {{ play.getLostGoals() }}</td>
-                    </tr>
-                </table>
-            </li>
-            {% endfor %}
+            <ul style="display: inline-block; list-style: none; padding-left: 0">
+                <li style="vertical-align: top;">
+                    {{ stage.getName }}
+                    <ul style="list-style: none; display: block; padding-left: 0; margin-right: 40px">
+                        {% for play in stage.getPlays() %}
+                            <li>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <ul>
+                                                <li>{{ play.getTeam().getName() }}</li>
+                                                <li>{{ play.getOpponent().getName() }}</li>
+                                            </ul>
+                                        </td>
+                                        <td rowspan="2">{{ play.getScoredGoals() }} : {{ play.getLostGoals() }}</td>
+                                    </tr>
+                                </table>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
             </ul>
-            </li>
-            </ul>
-            {% endfor %}
+        {% endfor %}
     </div>
 {% endblock %}
