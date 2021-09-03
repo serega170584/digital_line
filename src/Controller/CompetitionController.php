@@ -92,11 +92,24 @@ class CompetitionController extends AbstractController
      * @Route("/playOffGrid", name="playOffGrid")
      * @param PlayoffGenerator $playoffGenerator
      * @param PlayoffTournament $playoffTournament
+     * @param StageGenerator $stageGenerator
+     * @param StageRepository $stageRepository
+     * @param PlayRepository $playRepository
      * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function playOffGrid(PlayoffGenerator $playoffGenerator, PlayoffTournament $playoffTournament): Response
+    public function playOffGrid(PlayoffGenerator $playoffGenerator, PlayoffTournament $playoffTournament,
+                                StageGenerator $stageGenerator, StageRepository $stageRepository,
+                                PlayRepository $playRepository): Response
     {
+        $stageGenerator->generate();
+        $stageRepository->setGenerator($stageGenerator);
+        $stageRepository->addGeneratedRecords();
         $playoffGenerator->generate();
+        $playRepository->setGenerator($playoffGenerator);
+        $playRepository->addGeneratedRecords();
+        die('asd');
         return $this->render('grid/playoff.html.twig', [
             'units' => $playoffTournament->getUnits(),
         ]);

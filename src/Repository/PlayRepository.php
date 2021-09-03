@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Domain\Generators\Generator;
 use App\Domain\Generators\PlayGenerator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
@@ -22,7 +23,7 @@ class PlayRepository extends ServiceEntityRepository implements RepositoryInterf
     use RepositoryTrait;
 
     /**
-     * @var PlayGenerator
+     * @var Generator
      */
     private $generator;
 
@@ -84,9 +85,9 @@ class PlayRepository extends ServiceEntityRepository implements RepositoryInterf
     }
 
     /**
-     * @param PlayGenerator $generator
+     * @param Generator $generator
      */
-    public function setGenerator(PlayGenerator $generator): void
+    public function setGenerator(Generator $generator): void
     {
         $this->generator = $generator;
     }

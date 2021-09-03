@@ -26,7 +26,7 @@ class PlayGenerator extends Generator
         $this->stageRepository = $stageRepository;
     }
 
-    public function generate()
+    public function generate(): self
     {
         $groups = $this->groupRepository->getEntities();
         $stage = current($this->stageRepository->getEntities());

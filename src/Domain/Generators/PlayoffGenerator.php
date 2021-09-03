@@ -4,37 +4,56 @@
 namespace App\Domain\Generators;
 
 
+use App\Domain\Strategies\PlayoffGridStrategy;
 use App\Domain\Tournaments\GroupTournament;
-use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
 
 class PlayoffGenerator extends Generator
 {
     /**
-     * @var PlayRepository
+     * @var GroupTournament
      */
-    private $playRepository;
+    private $groupTournament;
+    /**
+     * @var PlayoffGridStrategy
+     */
+    private $playoffGridStrategy;
     /**
      * @var StageRepository
      */
     private $stageRepository;
-    /**
-     * @var GroupTournament
-     */
-    private $groupTournament;
 
-    public function __construct(PlayRepository $playRepository, StageRepository $stageRepository, GroupTournament $groupTournament)
+    public function __construct(GroupTournament $groupTournament, StageRepository $stageRepository)
     {
         parent::__construct();
-        $this->playRepository = $playRepository;
-        $this->stageRepository = $stageRepository;
         $this->groupTournament = $groupTournament;
+        $this->stageRepository = $stageRepository;
     }
 
-    public function generate()
+    public function generate(): self
     {
         $winners = $this->groupTournament->getWinners();
-        var_dump(count($winners));
-        die('asd');
+        $grid = $this->playoffGridStrategy->calculatePreliminaryRoundGrid($winners);
+        foreach ($this->stageRepository->getEntities() as $stage) {
+            $playWinners = [];
+            foreach ($grid as $play) {
+                $playWinner = array_shift($play);
+                $this->records[] = [$playWinner, array_shift($play), $stage, 1, 0];
+                $playWinners[] = $playWinner;
+            }
+            $grid = [];
+            while ($playWinners) {
+                $grid[] = [array_shift($playWinners), array_shift($playWinners)];
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @param PlayoffGridStrategy $playoffGridStrategy
+     */
+    public function setPlayoffGridStrategy(PlayoffGridStrategy $playoffGridStrategy): void
+    {
+        $this->playoffGridStrategy = $playoffGridStrategy;
     }
 }
