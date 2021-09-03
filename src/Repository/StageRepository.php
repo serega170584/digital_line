@@ -94,7 +94,7 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
         return $this->createQueryBuilder('s')
             ->innerJoin(Play::class, 'p', Join::WITH, 'p.stage = s.id')
             ->innerJoin(Team::class, 't', Join::WITH, 'p.team = t.id')
-            ->andWhere(['s.isPlayoff = 1'])
+            ->andWhere('s.isPlayoff = 1')
             ->orderBy('s.id', 'ASC')
             ->addOrderBy('p.id', 'ASC')
             ->getQuery()
