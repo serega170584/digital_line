@@ -9,6 +9,7 @@ use App\Domain\Generators\StageGenerator;
 use App\Domain\Generators\TeamGenerator;
 use App\Domain\Generators\TeamPointsGenerator;
 use App\Domain\Strategies\PlainPointStrategy;
+use App\Domain\Strategies\PreliminaryRoundPlayoffGridStrategy;
 use App\Domain\Tournaments\GroupTournament;
 use App\Domain\Tournaments\PlayoffTournament;
 use App\Repository\GroupRepository;
@@ -101,11 +102,12 @@ class CompetitionController extends AbstractController
      */
     public function playOffGrid(PlayoffGenerator $playoffGenerator, PlayoffTournament $playoffTournament,
                                 StageGenerator $stageGenerator, StageRepository $stageRepository,
-                                PlayRepository $playRepository): Response
+                                PlayRepository $playRepository, PreliminaryRoundPlayoffGridStrategy $preliminaryRoundPlayoffGridStrategy): Response
     {
         $stageGenerator->generate();
         $stageRepository->setGenerator($stageGenerator);
         $stageRepository->addGeneratedRecords();
+        $playoffGenerator->setPlayoffGridStrategy($preliminaryRoundPlayoffGridStrategy);
         $playoffGenerator->generate();
         $playRepository->setGenerator($playoffGenerator);
         $playRepository->addGeneratedRecords();
