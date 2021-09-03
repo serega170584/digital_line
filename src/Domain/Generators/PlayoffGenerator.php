@@ -34,7 +34,6 @@ class PlayoffGenerator extends Generator
     {
         $winners = $this->groupTournament->getWinners();
         $grid = $this->playoffGridStrategy->calculatePreliminaryRoundGrid($winners);
-        var_dump(count($this->stageRepository->getEntities()));
         foreach ($this->stageRepository->getEntities() as $stage) {
             $playWinners = [];
             foreach ($grid as $play) {
@@ -42,8 +41,6 @@ class PlayoffGenerator extends Generator
                 $this->records[] = [$playWinner, array_shift($play), $stage, 1, 0];
                 $playWinners[] = $playWinner;
             }
-            var_dump(count($playWinners));
-            var_dump(count($grid));
             $grid = [];
             while ($playWinners) {
                 $grid[] = [array_shift($playWinners), array_shift($playWinners)];

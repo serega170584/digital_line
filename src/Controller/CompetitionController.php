@@ -19,7 +19,6 @@ use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class CompetitionController extends AbstractController
 {
@@ -102,18 +101,22 @@ class CompetitionController extends AbstractController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function playOffGrid(PlayoffGenerator $playoffGenerator, PlayoffTournament $playoffTournament,
-                                PlayOffStageGenerator $playOffStageGenerator, StageRepository $stageRepository,
-                                PlayRepository $playRepository, PreliminaryRoundPlayoffGridStrategy $preliminaryRoundPlayoffGridStrategy): Response
+    public function playOffGrid(PlayoffGenerator $playoffGenerator, PlayOffStageGenerator $playOffStageGenerator,
+                                StageRepository $stageRepository, PlayRepository $playRepository,
+                                PreliminaryRoundPlayoffGridStrategy $preliminaryRoundPlayoffGridStrategy): Response
     {
-        $playOffStageGenerator->generate();
-        $stageRepository->setGenerator($playOffStageGenerator);
-        $stageRepository->addGeneratedRecords();
-        $playoffGenerator->setPlayoffGridStrategy($preliminaryRoundPlayoffGridStrategy);
-        $playoffGenerator->generate();
-        $playRepository->setGenerator($playoffGenerator);
-        $playRepository->addGeneratedRecords();
-        die('asd');
+var_dump($stageRepository->count(['isPlayOff'=>false]));
+die('asd');
+        if ($stageRepository->count()) {
+            $playOffStageGenerator->generate();
+            $stageRepository->setGenerator($playOffStageGenerator);
+            $stageRepository->addGeneratedRecords();
+            $playoffGenerator->setPlayoffGridStrategy($preliminaryRoundPlayoffGridStrategy);
+            $playoffGenerator->generate();
+            $playRepository->setGenerator($playoffGenerator);
+            $playRepository->addGeneratedRecords();
+            $this->getDoctrine()->getManager()->flush();
+        }
         return $this->render('grid/playoff.html.twig', [
             'units' => $playoffTournament->getUnits(),
         ]);
