@@ -134,11 +134,10 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
                         $stageTeams[$team->getPoints()][] = $team;
                     }
                 }
-                krsort($stageTeams);
-                var_dump(count($stageTeams));
-                $stageTeams = array_merge(...$stageTeams);
-                $teams = array_merge($teams, $stageTeams);
             }
+            krsort($stageTeams);
+            $stageTeams = array_merge(...$stageTeams);
+            $teams = array_merge($teams, $stageTeams);
         }
         return $teams;
     }
