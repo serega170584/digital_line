@@ -25,4 +25,5 @@ abstract class Tournament
 
     public abstract function getUnits();
 
+    public abstract function getWinners();
 }

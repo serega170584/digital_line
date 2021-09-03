@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Domain\Generators\GroupGenerator;
 use App\Domain\Generators\PlayGenerator;
+use App\Domain\Generators\PlayoffGenerator;
 use App\Domain\Generators\StageGenerator;
 use App\Domain\Generators\TeamGenerator;
 use App\Domain\Generators\TeamPointsGenerator;
 use App\Domain\Strategies\PlainPointStrategy;
 use App\Domain\Tournaments\GroupTournament;
+use App\Domain\Tournaments\PlayoffTournament;
 use App\Repository\GroupRepository;
 use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
@@ -83,6 +85,20 @@ class CompetitionController extends AbstractController
     {
         return $this->render('grid/index.html.twig', [
             'groups' => $groupTournament->getUnits(),
+        ]);
+    }
+
+    /**
+     * @Route("/playOffGrid", name="playOffGrid")
+     * @param PlayoffGenerator $playoffGenerator
+     * @param PlayoffTournament $playoffTournament
+     * @return Response
+     */
+    public function playOffGrid(PlayoffGenerator $playoffGenerator, PlayoffTournament $playoffTournament): Response
+    {
+        $playoffGenerator->generate();
+        return $this->render('grid/playoff.html.twig', [
+            'units' => $playoffTournament->getUnits(),
         ]);
     }
 }

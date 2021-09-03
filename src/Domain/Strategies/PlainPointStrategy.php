@@ -13,7 +13,7 @@ class PlainPointStrategy extends PointStrategy
      * @param Team $team
      * @return int
      */
-    public function calculate($team)
+    public function calculate(Team $team)
     {
         $plays = $team->getPlays();
         $points = 0;
