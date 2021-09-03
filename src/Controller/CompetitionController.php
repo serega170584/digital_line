@@ -59,7 +59,7 @@ class CompetitionController extends AbstractController
     ): Response
     {
         $play = current($groupRepository->findGroups());
-        var_dump($play->getName());
+        var_dump(count($play->getTeams()));
         die('asd');
         if ($groupRepository->count([])) {
             $generator->generate();
