@@ -95,6 +95,7 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
             ->innerJoin(Team::class, 't', Join::WITH, 'g.id = t.teamGroup')
             ->innerJoin(Play::class, 'p', Join::WITH, 'p.team = t.id')
             ->innerJoin(Team::class, 'o', Join::WITH, 'o.id=p.opponent')
+            ->andWhere('p.id =769')
             ->orderBy('g.id', 'ASC')
             ->addOrderBy('t.points', 'DESC')
             ->addOrderBy('o.points', 'DESC')
