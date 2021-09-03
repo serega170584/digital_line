@@ -95,18 +95,19 @@ class CompetitionController extends AbstractController
     /**
      * @Route("/playOffGrid", name="playOffGrid")
      * @param PlayoffGenerator $playoffGenerator
-     * @param PlayoffTournament $playoffTournament
      * @param PlayOffStageGenerator $playOffStageGenerator
      * @param StageRepository $stageRepository
      * @param PlayRepository $playRepository
+     * @param PlayoffTournament $playoffTournament
      * @param PreliminaryRoundPlayoffGridStrategy $preliminaryRoundPlayoffGridStrategy
+     * @param GroupTournament $groupTournament
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function playOffGrid(PlayoffGenerator $playoffGenerator, PlayOffStageGenerator $playOffStageGenerator,
                                 StageRepository $stageRepository, PlayRepository $playRepository, PlayoffTournament $playoffTournament,
-                                PreliminaryRoundPlayoffGridStrategy $preliminaryRoundPlayoffGridStrategy): Response
+                                PreliminaryRoundPlayoffGridStrategy $preliminaryRoundPlayoffGridStrategy, GroupTournament $groupTournament): Response
     {
         if (!$stageRepository->count(['isPlayoff' => true])) {
             $playOffStageGenerator->generate();
@@ -120,7 +121,8 @@ class CompetitionController extends AbstractController
         }
         return $this->render('grid/playoff.html.twig', [
             'stages' => $playoffTournament->getUnits(),
-            'resultTeams' => $stageRepository->getResultTeams()
+            'resultTeams' => $stageRepository->getResultTeams(),
+            'groups' => $groupTournament->getUnits(),
         ]);
     }
 }

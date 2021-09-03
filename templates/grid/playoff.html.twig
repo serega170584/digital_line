@@ -52,5 +52,30 @@
                 </ul>
             </li>
         </ul>
+        {% for group in groups %}
+            <div>
+                Group {{ group.getName() }}
+                <table>
+                    <tr>
+                        <td></td>
+                        {% for team in group.getTeams() %}
+                            <td>{{ team.getName() }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% for team in group.getTeams() %}
+                        <tr>
+                            <td>{{ team.getName() }}</td>
+                            {% for play in team.getPlays() %}
+                                {% if (play.getTeam().getId()==play.getOpponent().getId()) %}
+                                    <td bgcolor="#000"></td>
+                                {% else %}
+                                    <td>{{ play.getScoredGoals() }}:{{ play.getLostGoals() }}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
