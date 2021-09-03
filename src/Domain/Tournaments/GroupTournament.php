@@ -26,7 +26,7 @@ class GroupTournament extends Tournament
      */
     public function getUnits()
     {
-        $group= current($this->repository->findGroups());
+        $group = current($this->repository->findGroups());
         return $this->repository->findGroups();
     }
 
