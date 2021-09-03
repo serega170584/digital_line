@@ -19,7 +19,6 @@ use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class CompetitionController extends AbstractController
 {
@@ -58,7 +57,8 @@ class CompetitionController extends AbstractController
                           TeamPointsGenerator $teamPointsGenerator, PlainPointStrategy $plainPointStrategy
     ): Response
     {
-        var_dump(count($groupRepository->findGroups()));
+        $play = current($groupRepository->findGroups());
+        var_dump(current($play->getName()));
         die('asd');
         if ($groupRepository->count([])) {
             $generator->generate();
