@@ -135,6 +135,7 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
                     }
                 }
                 krsort($stageTeams);
+                var_dump($stageTeams);
                 $stageTeams = array_merge(...$stageTeams);
                 $teams = array_merge($teams, $stageTeams);
             }
