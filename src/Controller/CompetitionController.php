@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Domain\Generators\GroupGenerator;
 use App\Domain\Generators\PlayGenerator;
 use App\Domain\Generators\PlayoffGenerator;
+use App\Domain\Generators\PlayOffStageGenerator;
 use App\Domain\Generators\StageGenerator;
 use App\Domain\Generators\TeamGenerator;
 use App\Domain\Generators\TeamPointsGenerator;
@@ -93,19 +94,20 @@ class CompetitionController extends AbstractController
      * @Route("/playOffGrid", name="playOffGrid")
      * @param PlayoffGenerator $playoffGenerator
      * @param PlayoffTournament $playoffTournament
-     * @param StageGenerator $stageGenerator
+     * @param PlayOffStageGenerator $playOffStageGenerator
      * @param StageRepository $stageRepository
      * @param PlayRepository $playRepository
+     * @param PreliminaryRoundPlayoffGridStrategy $preliminaryRoundPlayoffGridStrategy
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function playOffGrid(PlayoffGenerator $playoffGenerator, PlayoffTournament $playoffTournament,
-                                StageGenerator $stageGenerator, StageRepository $stageRepository,
+                                PlayOffStageGenerator $playOffStageGenerator, StageRepository $stageRepository,
                                 PlayRepository $playRepository, PreliminaryRoundPlayoffGridStrategy $preliminaryRoundPlayoffGridStrategy): Response
     {
-        $stageGenerator->generate();
-        $stageRepository->setGenerator($stageGenerator);
+        $playOffStageGenerator->generate();
+        $stageRepository->setGenerator($playOffStageGenerator);
         $stageRepository->addGeneratedRecords();
         $playoffGenerator->setPlayoffGridStrategy($preliminaryRoundPlayoffGridStrategy);
         $playoffGenerator->generate();

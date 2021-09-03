@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Domain\Generators\Generator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
 use App\Domain\Generators\StageGenerator;
@@ -20,7 +21,7 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
     use RepositoryTrait;
 
     /**
-     * @var StageGenerator
+     * @var Generator
      */
     private $generator;
 
@@ -77,7 +78,7 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
         return $entity;
     }
 
-    public function setGenerator(StageGenerator $generator)
+    public function setGenerator(Generator $generator)
     {
         $this->generator = $generator;
     }
