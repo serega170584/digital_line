@@ -58,7 +58,7 @@ class CompetitionController extends AbstractController
                           TeamPointsGenerator $teamPointsGenerator, PlainPointStrategy $plainPointStrategy
     ): Response
     {
-        $groupRepository->findGroups();
+        var_dump(count($groupRepository->findGroups()));
         die('asd');
         if ($groupRepository->count([])) {
             $generator->generate();
