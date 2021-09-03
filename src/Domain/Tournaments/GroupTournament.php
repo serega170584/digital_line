@@ -36,7 +36,7 @@ class GroupTournament extends Tournament
     {
         $winners = [];
         foreach ($this->repository->findGroups() as $group) {
-            $groupWinners = array_slice($group->getTeams(), 0, self::WINNERS_COUNT);
+            $groupWinners = $group->getTeams()->slice(0, self::WINNERS_COUNT);
             $winners = array_merge($winners, $groupWinners);
         }
         return $winners;

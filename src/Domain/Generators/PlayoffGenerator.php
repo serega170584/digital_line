@@ -34,6 +34,7 @@ class PlayoffGenerator extends Generator
     public function generate()
     {
         $winners = $this->groupTournament->getWinners();
+        $winners->
         var_dump($winners);
         die('asd');
     }
