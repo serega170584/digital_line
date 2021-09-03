@@ -118,6 +118,7 @@ class CompetitionController extends AbstractController
             $playRepository->addGeneratedRecords();
             $this->getDoctrine()->getManager()->flush();
         }
+        die('asd');
         return $this->render('grid/playoff.html.twig', [
             'units' => $playoffTournament->getUnits(),
         ]);
