@@ -93,11 +93,11 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
     public function findGroups()
     {
         return $this->createQueryBuilder('g')
-            ->select(['g'])
+            ->select('g', 't')
             ->innerJoin(Team::class, 't', Join::WITH, 'g.id = t.teamGroup')
             ->innerJoin(Play::class, 'p', Join::WITH, 'p.team = t.id')
             ->innerJoin(Stage::class, 's', Join::WITH, 'p.stage = s.id')
-            ->where('s.isPlayoff=1')
+            ->where('s.isPlayoff=')
             ->orderBy('g.id', 'ASC')
             ->getQuery()
             ->getResult();
