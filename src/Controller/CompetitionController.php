@@ -106,7 +106,7 @@ class CompetitionController extends AbstractController
                                 StageRepository $stageRepository, PlayRepository $playRepository,
                                 PreliminaryRoundPlayoffGridStrategy $preliminaryRoundPlayoffGridStrategy): Response
     {
-var_dump($stageRepository->count(['isPlayOff'=>false]));
+var_dump($stageRepository->count(['isPlayoff'=>false]));
 die('asd');
         if ($stageRepository->count()) {
             $playOffStageGenerator->generate();
