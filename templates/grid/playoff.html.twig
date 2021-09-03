@@ -18,8 +18,8 @@
     </style>
 
     <div class="example-wrapper">
-        {% for stage in stages %}
-            <ul style="display: inline-block; list-style: none; padding-left: 0">
+        <ul style="display: inline-block; list-style: none; padding-left: 0">
+            {% for stage in stages %}
                 <li style="vertical-align: top;">
                     {{ stage.getName }}
                     <ul style="list-style: none; display: block; padding-left: 0; margin-right: 40px">
@@ -40,7 +40,12 @@
                         {% endfor %}
                     </ul>
                 </li>
-            </ul>
-        {% endfor %}
+            {% endfor %}
+            <li>
+                {% for team in resultTeams %}
+                    Team {{ team.getName()  }}
+                {% endfor %}
+            </li>
+        </ul>
     </div>
 {% endblock %}

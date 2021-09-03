@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Domain\Generators\Generator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
-use App\Entity\Group;
 use App\Entity\Play;
 use App\Entity\Stage;
 use App\Entity\Team;
@@ -87,7 +86,7 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
     }
 
     /**
-     * @return Group[]
+     * @return Stage[]
      */
     public function findPlayoffStages()
     {
@@ -99,5 +98,46 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
             ->addOrderBy('p.id', 'ASC')
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @return Stage[]
+     */
+    public function findResultStages()
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin(Play::class, 'p', Join::WITH, 'p.stage = s.id')
+            ->innerJoin(Team::class, 't', Join::WITH, 'p.team = t.id')
+            ->orderBy('s.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Team[]
+     */
+    public function getResultTeams()
+    {
+        $teams = [];
+        $stages = $this->findResultStages();
+        foreach ($stages as $stage) {
+            $stageTeams = [];
+            foreach ($stage->getPlays() as $play) {
+                if ($play->getScoredGoals() > $play->getLostGoals()) {
+                    $team = $play->getTeam();
+                    if (!in_array($team, $teams)) {
+                        $stageTeams[$team->getPoints()][] = $team;
+                    }
+                } else {
+                    $team = $play->getOpponent();
+                    if (!in_array($team, $teams)) {
+                        $stageTeams[$team->getPoints()][] = $team;
+                    }
+                }
+                krsort($stageTeams);
+                $teams = array_merge($teams, array_merge(...$stageTeams));
+            }
+        }
+        return $teams;
     }
 }
