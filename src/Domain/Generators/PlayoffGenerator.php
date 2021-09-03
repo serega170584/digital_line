@@ -41,6 +41,7 @@ class PlayoffGenerator extends Generator
                 $this->records[] = [$playWinner, array_shift($play), $stage, 1, 0];
                 $playWinners[] = $playWinner;
             }
+            var_dump(count($grid));
             $grid = [];
             while ($playWinners) {
                 $grid[] = [array_shift($playWinners), array_shift($playWinners)];
