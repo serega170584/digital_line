@@ -18,9 +18,9 @@
     </style>
 
     <div class="example-wrapper">
-        <ul style="display: inline-block; list-style: none; padding-left: 0">
+        <ul style="list-style: none; padding-left: 0">
             {% for stage in stages %}
-                <li style="vertical-align: top;">
+                <li style="vertical-align: top; display: inline-block">
                     {{ stage.getName }}
                     <ul style="list-style: none; display: block; padding-left: 0; margin-right: 40px">
                         {% for play in stage.getPlays() %}
@@ -41,7 +41,8 @@
                     </ul>
                 </li>
             {% endfor %}
-            <li>
+            <li style="display: inline-block">
+                <h2>Results</h2>
                 {% for team in resultTeams %}
                     Team {{ team.getName()  }}
                 {% endfor %}
