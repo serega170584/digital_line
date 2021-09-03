@@ -19,14 +19,14 @@
 
     <div class="example-wrapper">
         {% for stage in stages %}
-            <ul style="display: inline-block;">
-                <li style="vertical-align: top">
+            <ul style="display: inline-block; list-style: none">
+                <li style="vertical-align: top;">
                     {{ stage.getName }}
-                    <ul>
+                    <ul style="list-style: none">
                         {% for play in stage.getPlays() %}
-                            <ul>
+                            <ul style="display: inline-block; list-style: none">
                                 <li>
-                                    <ul>
+                                    <ul style="list-style: none">
                                         <li>{{ play.getTeam().getName() }}</li>
                                         <li>{{ play.getOpponent().getName() }}</li>
                                     </ul>
