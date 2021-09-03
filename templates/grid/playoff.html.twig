@@ -43,9 +43,13 @@
             {% endfor %}
             <li style="display: inline-block">
                 <h2>Results</h2>
-{#                {% for team in resultTeams %}#}
-{#                    Team {{ team.getName()  }}#}
-{#                {% endfor %}#}
+                <ul>
+                    {% for team in resultTeams %}
+                        <li>
+                            Team {{ team.getName() }}
+                        </li>
+                    {% endfor %}
+                </ul>
             </li>
         </ul>
     </div>
