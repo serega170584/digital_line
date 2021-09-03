@@ -24,15 +24,17 @@
                     {{ stage.getName }}
                     <ul style="list-style: none; display: block">
                         {% for play in stage.getPlays() %}
-                            <ul style="display: inline-block; list-style: none">
-                                <li>
-                                    <ul style="list-style: none">
-                                        <li>{{ play.getTeam().getName() }}</li>
-                                        <li>{{ play.getOpponent().getName() }}</li>
-                                    </ul>
-                                </li>
-                                <li>{{ play.getScoredGoals() }} : {{ play.getLostGoals() }}</li>
-                            </ul>
+                            <li>
+                                <ul style="display: inline-block; list-style: none">
+                                    <li>
+                                        <ul style="list-style: none">
+                                            <li>{{ play.getTeam().getName() }}</li>
+                                            <li>{{ play.getOpponent().getName() }}</li>
+                                        </ul>
+                                    </li>
+                                    <li>{{ play.getScoredGoals() }} : {{ play.getLostGoals() }}</li>
+                                </ul>
+                            </li>
                         {% endfor %}
                     </ul>
                 </li>
