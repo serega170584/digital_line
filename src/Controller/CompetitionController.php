@@ -58,21 +58,23 @@ class CompetitionController extends AbstractController
                           TeamPointsGenerator $teamPointsGenerator, PlainPointStrategy $plainPointStrategy
     ): Response
     {
-        $generator->generate();
-        $groupRepository->setGenerator($generator);
-        $groupRepository->addGeneratedRecords();
-        $teamGenerator->generate();
-        $teamRepository->setGenerator($teamGenerator);
-        $teamRepository->addGeneratedRecords();
-        $stageGenerator->generate();
-        $stageRepository->setGenerator($stageGenerator);
-        $stageRepository->addGeneratedRecords();
-        $playGenerator->generate();
-        $playRepository->setGenerator($playGenerator);
-        $playRepository->addGeneratedRecords();
-        $teamPointsGenerator->setPointStrategy($plainPointStrategy);
-        $teamPointsGenerator->generate();
-        $this->getDoctrine()->getManager()->flush();
+        if ($groupRepository->count([])) {
+            $generator->generate();
+            $groupRepository->setGenerator($generator);
+            $groupRepository->addGeneratedRecords();
+            $teamGenerator->generate();
+            $teamRepository->setGenerator($teamGenerator);
+            $teamRepository->addGeneratedRecords();
+            $stageGenerator->generate();
+            $stageRepository->setGenerator($stageGenerator);
+            $stageRepository->addGeneratedRecords();
+            $playGenerator->generate();
+            $playRepository->setGenerator($playGenerator);
+            $playRepository->addGeneratedRecords();
+            $teamPointsGenerator->setPointStrategy($plainPointStrategy);
+            $teamPointsGenerator->generate();
+            $this->getDoctrine()->getManager()->flush();
+        }
         return $this->render('competition/index.html.twig', [
             'controller_name' => 'CompetitionController',
         ]);
@@ -103,12 +105,12 @@ class CompetitionController extends AbstractController
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function playOffGrid(PlayoffGenerator $playoffGenerator, PlayOffStageGenerator $playOffStageGenerator,
-                                StageRepository $stageRepository, PlayRepository $playRepository,
+                                StageRepository $stageRepository, PlayRepository $playRepository, PlayoffTournament $playoffTournament,
                                 PreliminaryRoundPlayoffGridStrategy $preliminaryRoundPlayoffGridStrategy): Response
     {
-var_dump($stageRepository->count(['isPlayoff'=>true]));
-die('asd');
-        if ($stageRepository->count()) {
+        var_dump($stageRepository->count([]));
+        die('asd');
+        if (!$stageRepository->count(['isPlayoff'=>true])) {
             $playOffStageGenerator->generate();
             $stageRepository->setGenerator($playOffStageGenerator);
             $stageRepository->addGeneratedRecords();
