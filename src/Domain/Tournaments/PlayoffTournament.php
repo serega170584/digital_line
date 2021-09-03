@@ -8,6 +8,11 @@ use App\Repository\StageRepository;
 
 class PlayoffTournament extends Tournament
 {
+    /**
+     * @var StageRepository $repository
+     */
+    protected $repository;
+
     public function __construct(StageRepository $repository)
     {
         parent::__construct($repository);
@@ -15,7 +20,7 @@ class PlayoffTournament extends Tournament
 
     public function getUnits()
     {
-        return [];
+        return $this->repository->findPlayoffStages();
     }
 
     public function getWinners()

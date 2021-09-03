@@ -5,9 +5,12 @@ namespace App\Repository;
 use App\Domain\Generators\Generator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
-use App\Domain\Generators\StageGenerator;
+use App\Entity\Group;
+use App\Entity\Play;
 use App\Entity\Stage;
+use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -83,5 +86,18 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
         $this->generator = $generator;
     }
 
-
+    /**
+     * @return Group[]
+     */
+    public function findPlayoffStages()
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin(Play::class, 'p', Join::WITH, 'p.stage = s.id')
+            ->innerJoin(Team::class, 't', Join::WITH, 'p.team = t.id')
+            ->addWhere(['s.isPlayoff = 1'])
+            ->orderBy('s.id', 'ASC')
+            ->addOrderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

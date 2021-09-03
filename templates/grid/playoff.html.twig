@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompetitionController!{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+
+    <div class="example-wrapper">
+        {% for stage in stages %}
+            <ul style="display: inline-block">
+                <li>
+                    {{ stage.getName }}
+                    <ul>
+                        {% for play in stage.getPlays() %}
+                            <ul>
+                                <li>
+                                    <ul>
+                                        <li>{{ play.getTeam().getName() }}</li>
+                                        <li>{{ play.getOpponent().getName() }}</li>
+                                    </ul>
+                                </li>
+                                <li>{{ play.getScoredGoals() }} : {{ play.getLostGoals() }}</li>
+                            </ul>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        {% endfor %}
+    </div>
+{% endblock %}
