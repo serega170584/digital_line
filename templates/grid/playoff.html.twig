@@ -19,8 +19,8 @@
 
     <div class="example-wrapper">
         {% for stage in stages %}
-            <ul style="display: inline-block">
-                <li>
+            <ul style="display: inline-block;">
+                <li style="vertical-align: top">
                     {{ stage.getName }}
                     <ul>
                         {% for play in stage.getPlays() %}
