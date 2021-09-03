@@ -27,8 +27,6 @@ class GroupTournament extends Tournament
     public function getUnits()
     {
         $group= current($this->repository->findGroups());
-        var_dump(count($group->getTeams()));
-        die('asd');
         return $this->repository->findGroups();
     }
 
