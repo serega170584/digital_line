@@ -7,6 +7,7 @@ use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
 use App\Entity\Group;
 use App\Entity\Play;
+use App\Entity\Stage;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
@@ -94,11 +95,9 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
         return $this->createQueryBuilder('g')
             ->innerJoin(Team::class, 't', Join::WITH, 'g.id = t.teamGroup')
             ->innerJoin(Play::class, 'p', Join::WITH, 'p.team = t.id')
-            ->innerJoin(Team::class, 'o', Join::WITH, 'o.id=p.opponent')
-            ->andWhere('p.id =769')
+            ->innerJoin(Stage::class, 's', Join::WITH, 'p.stage = s.id')
+            ->where('s.isPlayoff=1')
             ->orderBy('g.id', 'ASC')
-            ->addOrderBy('t.points', 'DESC')
-            ->addOrderBy('o.points', 'DESC')
             ->getQuery()
             ->getResult();
     }
