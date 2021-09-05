@@ -113,6 +113,7 @@ class CompetitionController extends AbstractController
                                 PreliminaryRoundPlayoffGridStrategy $preliminaryRoundPlayoffGridStrategy, GroupTournament $groupTournament): Response
     {
         $stageRepository->findAll();
+        $stageRepository->findAll();
 //        if (!$stageRepository->count(['isPlayoff' => true])) {
 //            $playOffStageGenerator->generate();
 //            $stageRepository->setGenerator($playOffStageGenerator);
