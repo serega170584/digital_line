@@ -123,10 +123,11 @@ class CompetitionController extends AbstractController
 //            $playRepository->addGeneratedRecords();
 //            $this->getDoctrine()->getManager()->flush();
 //        }
-        return $this->render('grid/playoff.html.twig', [
-            'stages' => $playoffTournament->getUnits(),
-            'resultTeams' => $stageRepository->getResultTeams(),
-            'groups' => $groupTournament->getUnits(),
-        ]);
+        return $this->json(['']);
+//        return $this->render('grid/playoff.html.twig', [
+//            'stages' => $playoffTournament->getUnits(),
+//            'resultTeams' => $stageRepository->getResultTeams(),
+//            'groups' => $groupTournament->getUnits(),
+//        ]);
     }
 }
