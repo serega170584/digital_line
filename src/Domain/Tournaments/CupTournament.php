@@ -49,6 +49,5 @@ class CupTournament extends Tournament
         $this->groupTournament->setStages($groupStages);
         $this->groupTournament->setPlayoffStages($playoffStages);
         $this->groupTournament->build();
-        var_dump($groupStages->count());
     }
 }
