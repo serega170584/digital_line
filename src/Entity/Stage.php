@@ -30,7 +30,7 @@ class Stage
     private $isPlayoff;
 
     /**
-     * @ORM\OneToMany(targetEntity=Play::class, mappedBy="stage", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Play::class, mappedBy="stage", orphanRemoval=true, fetch="EAGER")
      */
     private $plays;
 
