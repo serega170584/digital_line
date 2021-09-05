@@ -4,8 +4,6 @@ namespace App\Repository;
 
 use App\Domain\Generators\GeneratorInterface;
 use App\Domain\Generators\PlayGeneratorInterface;
-use App\Domain\RepositoryInterface;
-use App\Domain\RepositoryTrait;
 use App\Entity\Play;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

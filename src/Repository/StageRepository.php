@@ -3,8 +3,6 @@
 namespace App\Repository;
 
 use App\Domain\Collections\StageArrayCollection;
-use App\Domain\Generators\GeneratorInterface;
-use App\Domain\RepositoryInterface;
 use App\Entity\Stage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;

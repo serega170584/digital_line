@@ -3,8 +3,6 @@
 namespace App\Repository;
 
 use App\Domain\Generators\GroupGeneratorInterface;
-use App\Domain\RepositoryInterface;
-use App\Domain\RepositoryTrait;
 use App\Entity\Group;
 use App\Entity\Play;
 use App\Entity\Stage;
