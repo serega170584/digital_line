@@ -4,25 +4,54 @@
 namespace App\Domain\Generators;
 
 
+use App\Entity\Stage;
+use App\Repository\RepositoryInterface;
+use Doctrine\ORM\EntityManager;
+
 abstract class Generator
 {
     /**
-     * @var array
+     * @var RepositoryInterface
      */
-    protected $records;
+    protected $repository;
+    /**
+     * @var EntityManager
+     */
+    protected $entityManager;
 
-    public function __construct()
+    public function __construct(RepositoryInterface $repository, EntityManager $entityManager)
     {
-        $this->records = [];
+        $this->repository = $repository;
+        $this->entityManager = $entityManager;
     }
 
-    abstract public function generate();
+    /**
+     * @return mixed
+     */
+    public function createEntityObject(): Stage
+    {
+        return $this->repository->createEntityObject();
+    }
 
     /**
-     * @return array
+     * @param Stage $entityObject
+     * @throws \Doctrine\ORM\ORMException
      */
-    public function getRecords(): array
+    public function persist($entityObject)
     {
-        return $this->records;
+        $this->entityManager->persist($entityObject);
+    }
+
+    abstract public function execute();
+
+    /**
+     * @return $this
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function flush(): self
+    {
+        $this->entityManager->flush();
+        return $this;
     }
 }

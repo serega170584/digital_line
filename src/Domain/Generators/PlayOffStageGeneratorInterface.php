@@ -4,10 +4,10 @@
 namespace App\Domain\Generators;
 
 
-class PlayOffStageGenerator extends Generator
+class PlayOffStageGeneratorInterface extends GeneratorInterface
 {
 
-    public function generate(): self
+    public function execute(): self
     {
         $this->records = [['1/4', true], ['1/2', true], ['Final', true]];
         return $this;

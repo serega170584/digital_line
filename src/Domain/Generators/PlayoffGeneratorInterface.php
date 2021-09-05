@@ -8,7 +8,7 @@ use App\Domain\Strategies\PlayoffGridStrategy;
 use App\Domain\Tournaments\GroupTournament;
 use App\Repository\StageRepository;
 
-class PlayoffGenerator extends Generator
+class PlayoffGeneratorInterface extends GeneratorInterface
 {
     /**
      * @var GroupTournament
@@ -30,7 +30,7 @@ class PlayoffGenerator extends Generator
         $this->stageRepository = $stageRepository;
     }
 
-    public function generate(): self
+    public function execute(): self
     {
         $winners = $this->groupTournament->getWinners();
         $grid = $this->playoffGridStrategy->calculatePreliminaryRoundGrid($winners);

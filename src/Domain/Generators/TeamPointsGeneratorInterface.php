@@ -8,7 +8,7 @@ use App\Domain\Strategies\PointStrategy;
 use App\Entity\Team;
 use App\Repository\TeamRepository;
 
-class TeamPointsGenerator extends Generator
+class TeamPointsGeneratorInterface extends GeneratorInterface
 {
 
     /**
@@ -29,7 +29,7 @@ class TeamPointsGenerator extends Generator
     /**
      * @return $this
      */
-    public function generate(): self
+    public function execute(): self
     {
         $teams = $this->teamRepository->getEntities();
         foreach ($teams as $team) {

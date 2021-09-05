@@ -4,12 +4,12 @@
 namespace App\Domain\Generators;
 
 
-class GroupGenerator extends Generator
+class GroupGeneratorInterface extends GeneratorInterface
 {
     /**
      * @return $this
      */
-    public function generate(): self
+    public function execute(): self
     {
         $this->records = [['A'], ['B']];
         return $this;

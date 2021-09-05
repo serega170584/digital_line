@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Domain\Generators\GroupGenerator;
+use App\Domain\Generators\GroupGeneratorInterface;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
 use App\Entity\Group;
@@ -24,7 +24,7 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
     use RepositoryTrait;
 
     /**
-     * @var GroupGenerator
+     * @var GroupGeneratorInterface
      */
     private $generator;
 
@@ -80,9 +80,9 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
     }
 
     /**
-     * @param GroupGenerator $generator
+     * @param GroupGeneratorInterface $generator
      */
-    public function setGenerator(GroupGenerator $generator): void
+    public function setGenerator(GroupGeneratorInterface $generator): void
     {
         $this->generator = $generator;
     }

@@ -6,7 +6,7 @@ namespace App\Domain\Generators;
 
 use App\Repository\GroupRepository;
 
-class TeamGenerator extends Generator
+class TeamGeneratorInterface extends GeneratorInterface
 {
     /**
      * @var GroupRepository
@@ -19,7 +19,7 @@ class TeamGenerator extends Generator
         $this->groupRepository = $groupRepository;
     }
 
-    public function generate(): self
+    public function execute(): self
     {
         $groups = $this->groupRepository->getEntities();
         $teams = [

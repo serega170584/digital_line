@@ -7,7 +7,7 @@ namespace App\Domain\Generators;
 use App\Repository\GroupRepository;
 use App\Repository\StageRepository;
 
-class PlayGenerator extends Generator
+class PlayGeneratorInterface extends GeneratorInterface
 {
     private const GROUP_TEAMS_COUNT = 8;
     /**
@@ -26,7 +26,7 @@ class PlayGenerator extends Generator
         $this->stageRepository = $stageRepository;
     }
 
-    public function generate(): self
+    public function execute(): self
     {
         $groups = $this->groupRepository->getEntities();
         $stage = current($this->stageRepository->getEntities());

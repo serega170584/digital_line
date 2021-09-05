@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-use App\Domain\Generators\GroupGenerator;
-use App\Domain\Generators\PlayGenerator;
-use App\Domain\Generators\PlayoffGenerator;
-use App\Domain\Generators\PlayOffStageGenerator;
-use App\Domain\Generators\StageGenerator;
-use App\Domain\Generators\TeamGenerator;
-use App\Domain\Generators\TeamPointsGenerator;
+use App\Domain\Generators\GroupGeneratorInterface;
+use App\Domain\Generators\PlayGeneratorInterface;
+use App\Domain\Generators\PlayoffGeneratorInterface;
+use App\Domain\Generators\PlayOffStageGeneratorInterface;
+use App\Domain\Generators\StageGeneratorInterface;
+use App\Domain\Generators\TeamGeneratorInterface;
+use App\Domain\Generators\TeamPointsGeneratorInterface;
 use App\Domain\Strategies\PlainPointStrategy;
 use App\Domain\Strategies\PreliminaryRoundPlayoffGridStrategy;
 use App\Domain\Tournaments\CupTournament;
@@ -36,47 +36,51 @@ class CompetitionController extends AbstractController
         ]);
     }
 
+    public function generate(StageRepository $stageRepository){
+
+    }
+
     /**
      * @Route("/table", name="table")
-     * @param GroupGenerator $generator
+     * @param GroupGeneratorInterface $generator
      * @param GroupRepository $groupRepository
-     * @param TeamGenerator $teamGenerator
+     * @param TeamGeneratorInterface $teamGenerator
      * @param TeamRepository $teamRepository
-     * @param StageGenerator $stageGenerator
+     * @param StageGeneratorInterface $stageGenerator
      * @param StageRepository $stageRepository
-     * @param PlayGenerator $playGenerator
+     * @param PlayGeneratorInterface $playGenerator
      * @param PlayRepository $playRepository
-     * @param TeamPointsGenerator $teamPointsGenerator
+     * @param TeamPointsGeneratorInterface $teamPointsGenerator
      * @param PlainPointStrategy $plainPointStrategy
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function table(GroupGenerator $generator, GroupRepository $groupRepository,
-                          TeamGenerator $teamGenerator, TeamRepository $teamRepository,
-                          StageGenerator $stageGenerator, StageRepository $stageRepository,
-                          PlayGenerator $playGenerator, PlayRepository $playRepository,
-                          TeamPointsGenerator $teamPointsGenerator, PlainPointStrategy $plainPointStrategy
+    public function table(GroupGeneratorInterface $generator, GroupRepository $groupRepository,
+                          TeamGeneratorInterface $teamGenerator, TeamRepository $teamRepository,
+                          StageGeneratorInterface $stageGenerator, StageRepository $stageRepository,
+                          PlayGeneratorInterface $playGenerator, PlayRepository $playRepository,
+                          TeamPointsGeneratorInterface $teamPointsGenerator, PlainPointStrategy $plainPointStrategy
     ): Response
     {
         $play = current($groupRepository->findGroups());
 //        var_dump($play->getName());
 //        die('asd');
         if (!$groupRepository->count([])) {
-            $generator->generate();
+            $generator->execute();
             $groupRepository->setGenerator($generator);
             $groupRepository->addGeneratedRecords();
-            $teamGenerator->generate();
+            $teamGenerator->execute();
             $teamRepository->setGenerator($teamGenerator);
             $teamRepository->addGeneratedRecords();
-            $stageGenerator->generate();
+            $stageGenerator->execute();
             $stageRepository->setGenerator($stageGenerator);
             $stageRepository->addGeneratedRecords();
-            $playGenerator->generate();
+            $playGenerator->execute();
             $playRepository->setGenerator($playGenerator);
             $playRepository->addGeneratedRecords();
             $teamPointsGenerator->setPointStrategy($plainPointStrategy);
-            $teamPointsGenerator->generate();
+            $teamPointsGenerator->execute();
             $this->getDoctrine()->getManager()->flush();
         }
         return $this->render('competition/index.html.twig', [

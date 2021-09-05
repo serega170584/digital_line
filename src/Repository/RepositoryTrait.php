@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Domain;
+namespace App\Repository;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,18 +15,10 @@ use Doctrine\ORM\EntityManagerInterface;
 trait RepositoryTrait
 {
     /**
-     * @var Object[]
+     * @return mixed
      */
-    private $entities = [];
-
-    /**
-     * @return object
-     */
-    public function createEntityObject()
+    function createEntityObject()
     {
-        /**
-         * @var object $entity
-         */
         $entity = new $this->_entityName();
         return $entity;
     }
@@ -52,16 +44,8 @@ trait RepositoryTrait
         $records = $this->generator->getRecords();
         foreach ($records as $fields) {
             $entity = $this->addEntity($fields);
-            $this->entities[] = $entity;
         }
         return $this;
     }
 
-    /**
-     * @return Object[]
-     */
-    public function getEntities(): array
-    {
-        return $this->entities;
-    }
 }

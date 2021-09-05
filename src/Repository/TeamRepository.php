@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
-use App\Domain\Generators\TeamGenerator;
+use App\Domain\Generators\TeamGeneratorInterface;
 use App\Entity\Group;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -21,7 +21,7 @@ class TeamRepository extends ServiceEntityRepository implements RepositoryInterf
     use RepositoryTrait;
 
     /**
-     * @var TeamGenerator
+     * @var TeamGeneratorInterface
      */
     private $generator;
 
@@ -84,9 +84,9 @@ class TeamRepository extends ServiceEntityRepository implements RepositoryInterf
     }
 
     /**
-     * @param TeamGenerator $generator
+     * @param TeamGeneratorInterface $generator
      */
-    public function setGenerator(TeamGenerator $generator): void
+    public function setGenerator(TeamGeneratorInterface $generator): void
     {
         $this->generator = $generator;
     }

@@ -2,16 +2,11 @@
 
 namespace App\Repository;
 
-use App\Domain\collections\StageArrayCollection;
-use App\Domain\Generators\Generator;
+use App\Domain\Collections\StageArrayCollection;
+use App\Domain\Generators\GeneratorInterface;
 use App\Domain\RepositoryInterface;
-use App\Domain\RepositoryTrait;
-use App\Entity\Play;
 use App\Entity\Stage;
-use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,13 +14,14 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Stage|null findOneBy(array $criteria, array $orderBy = null)
  * @method Stage[]    findAll()
  * @method Stage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Stage createEntityObject()
  */
 class StageRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     use RepositoryTrait;
 
     /**
-     * @var Generator
+     * @var GeneratorInterface
      */
     private $generator;
 
@@ -94,67 +90,8 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
         return $entity;
     }
 
-    public function setGenerator(Generator $generator)
+    public function setGenerator(GeneratorInterface $generator)
     {
         $this->generator = $generator;
-    }
-
-    /**
-     * @return Stage[]
-     */
-    public function findPlayoffStages()
-    {
-        return $this->createQueryBuilder('s')
-            ->innerJoin(Play::class, 'p', Join::WITH, 'p.stage = s.id')
-            ->innerJoin(Team::class, 't', Join::WITH, 'p.team = t.id')
-            ->andWhere('s.isPlayoff = 1')
-            ->orderBy('s.id', 'ASC')
-            ->addOrderBy('p.id', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * @return Stage[]
-     */
-    public function findResultStages()
-    {
-        return $this->createQueryBuilder('s')
-            ->innerJoin(Play::class, 'p', Join::WITH, 'p.stage = s.id')
-            ->innerJoin(Team::class, 't', Join::WITH, 'p.team = t.id')
-            ->orderBy('s.id', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * @return Team[]
-     */
-    public function getResultTeams()
-    {
-        $teams = [];
-        $stages = $this->findResultStages();
-        foreach ($stages as $stage) {
-            $stageTeams = [];
-            foreach ($stage->getPlays() as $play) {
-                if ($play->getScoredGoals() > $play->getLostGoals()) {
-                    $team = $play->getTeam();
-                    $pointStageTeams = $stageTeams[$team->getPoints()] ?? [];
-                    if (!(in_array($team, $teams) || in_array($team, $pointStageTeams))) {
-                        $stageTeams[$team->getPoints()][] = $team;
-                    }
-                } else {
-                    $team = $play->getOpponent();
-                    $pointStageTeams = $stageTeams[$team->getPoints()] ?? [];
-                    if (!(in_array($team, $teams) || in_array($team, $pointStageTeams))) {
-                        $stageTeams[$team->getPoints()][] = $team;
-                    }
-                }
-            }
-            krsort($stageTeams);
-            $stageTeams = array_merge(...$stageTeams);
-            $teams = array_merge($teams, $stageTeams);
-        }
-        return $teams;
     }
 }
