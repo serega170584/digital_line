@@ -38,7 +38,7 @@ class CompetitionController extends AbstractController
     }
 
     /**
-     * @Route("/competition", name="competition")
+     * @Route("/generate", name="generate")
      * @param StageGenerator $stageGenerator
      * @throws \Doctrine\ORM\ORMException
      */
