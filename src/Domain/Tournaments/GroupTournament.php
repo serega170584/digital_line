@@ -49,10 +49,8 @@ class GroupTournament extends Tournament
          * @var Stage $stage
          */
         $stage = $this->playoffStages->matching(Criteria::create()
-            ->orderBy([self::ID => Criteria::ASC]));
-        /**
-         * @var Play $play
-         */
+            ->orderBy([self::ID => Criteria::ASC]))
+            ->current();
         $play = $stage->getPlays()->current();
         var_dump($play->getTeam()->getTeamGroup()->getId());
         var_dump($play->getOpponent()->getTeamGroup()->getId());
