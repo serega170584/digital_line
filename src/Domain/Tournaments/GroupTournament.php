@@ -11,15 +11,10 @@ use App\Repository\GroupRepository;
 class GroupTournament extends Tournament
 {
     const WINNERS_COUNT = 4;
-    /**
-     * @var GroupRepository $repository
-     */
-    protected $repository;
 
-    public function __construct(GroupRepository $repository)
-    {
-        parent::__construct($repository);
-    }
+
+
+
 
     /**
      * @return Group[]
@@ -41,5 +36,10 @@ class GroupTournament extends Tournament
             $winners = array_merge($winners, $groupWinners);
         }
         return $winners;
+    }
+
+    public function build()
+    {
+        // TODO: Implement build() method.
     }
 }

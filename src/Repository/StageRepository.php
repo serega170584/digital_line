@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Domain\collections\StageArrayCollection;
 use App\Domain\Generators\Generator;
 use App\Domain\RepositoryInterface;
 use App\Domain\RepositoryTrait;
@@ -9,6 +10,7 @@ use App\Entity\Play;
 use App\Entity\Stage;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -60,6 +62,18 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
         ;
     }
     */
+
+    /**
+     * @return StageArrayCollection
+     */
+    public function findAllArrayCollection(): StageArrayCollection
+    {
+        $collection = new StageArrayCollection();
+        foreach ($this->findAll() as $stage) {
+            $collection->add($stage);
+        }
+        return $collection;
+    }
 
     /**
      * @param array $fields
