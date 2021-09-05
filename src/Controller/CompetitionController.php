@@ -113,16 +113,16 @@ class CompetitionController extends AbstractController
                                 PreliminaryRoundPlayoffGridStrategy $preliminaryRoundPlayoffGridStrategy, GroupTournament $groupTournament): Response
     {
         $stageRepository->findAll();
-        if (!$stageRepository->count(['isPlayoff' => true])) {
-            $playOffStageGenerator->generate();
-            $stageRepository->setGenerator($playOffStageGenerator);
-            $stageRepository->addGeneratedRecords();
-            $playoffGenerator->setPlayoffGridStrategy($preliminaryRoundPlayoffGridStrategy);
-            $playoffGenerator->generate();
-            $playRepository->setGenerator($playoffGenerator);
-            $playRepository->addGeneratedRecords();
-            $this->getDoctrine()->getManager()->flush();
-        }
+//        if (!$stageRepository->count(['isPlayoff' => true])) {
+//            $playOffStageGenerator->generate();
+//            $stageRepository->setGenerator($playOffStageGenerator);
+//            $stageRepository->addGeneratedRecords();
+//            $playoffGenerator->setPlayoffGridStrategy($preliminaryRoundPlayoffGridStrategy);
+//            $playoffGenerator->generate();
+//            $playRepository->setGenerator($playoffGenerator);
+//            $playRepository->addGeneratedRecords();
+//            $this->getDoctrine()->getManager()->flush();
+//        }
         return $this->render('grid/playoff.html.twig', [
             'stages' => $playoffTournament->getUnits(),
             'resultTeams' => $stageRepository->getResultTeams(),
