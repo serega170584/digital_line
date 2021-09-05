@@ -31,7 +31,7 @@ class Team
     private $plays;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="teams")
+     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="teams", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $teamGroup;

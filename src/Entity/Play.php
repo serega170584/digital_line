@@ -18,13 +18,13 @@ class Play
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="plays")
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="plays", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $team;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="plays")
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="plays", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $opponent;
