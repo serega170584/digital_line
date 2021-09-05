@@ -6,6 +6,7 @@ use App\Domain\Generators\GroupGeneratorInterface;
 use App\Domain\Generators\PlayGeneratorInterface;
 use App\Domain\Generators\PlayoffGeneratorInterface;
 use App\Domain\Generators\PlayOffStageGeneratorInterface;
+use App\Domain\Generators\StageGenerator;
 use App\Domain\Generators\StageGeneratorInterface;
 use App\Domain\Generators\TeamGeneratorInterface;
 use App\Domain\Generators\TeamPointsGeneratorInterface;
@@ -36,8 +37,16 @@ class CompetitionController extends AbstractController
         ]);
     }
 
-    public function generate(StageRepository $stageRepository){
-
+    /**
+     * @Route("/competition", name="competition")
+     * @param StageGenerator $stageGenerator
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function generate(StageGenerator $stageGenerator){
+        $stageGenerator->execute();
+        return $this->render('competition/index.html.twig', [
+            'controller_name' => 'CompetitionController',
+        ]);
     }
 
     /**
