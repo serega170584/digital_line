@@ -61,7 +61,7 @@ class CompetitionController extends AbstractController
         $play = current($groupRepository->findGroups());
 //        var_dump($play->getName());
 //        die('asd');
-        if ($groupRepository->count([])) {
+        if (!$groupRepository->count([])) {
             $generator->generate();
             $groupRepository->setGenerator($generator);
             $groupRepository->addGeneratedRecords();
