@@ -13,11 +13,6 @@ class PlayoffTournament extends Tournament
      */
     protected $repository;
 
-    public function __construct(StageRepository $repository)
-    {
-        parent::__construct($repository);
-    }
-
     public function getUnits()
     {
         return $this->repository->findPlayoffStages();

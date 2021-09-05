@@ -6,15 +6,10 @@ namespace App\Domain\Tournaments;
 
 use App\Entity\Group;
 use App\Entity\Team;
-use App\Repository\GroupRepository;
 
 class GroupTournament extends Tournament
 {
     const WINNERS_COUNT = 4;
-
-
-
-
 
     /**
      * @return Group[]
