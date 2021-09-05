@@ -9,6 +9,8 @@ use Doctrine\Common\Collections\Criteria;
 
 class StageArrayCollection extends ArrayCollection
 {
+    const IS_PLAYOFF = 'isPlayoff';
+
     /**
      * @return StageArrayCollection|\Doctrine\Common\Collections\Collection
      */
@@ -26,6 +28,6 @@ class StageArrayCollection extends ArrayCollection
     {
         return $this->matching(Criteria::create()
             ->where(Criteria::expr()
-                ->eq('isPlayoff', false)));
+                ->eq(self::IS_PLAYOFF, false)));
     }
 }

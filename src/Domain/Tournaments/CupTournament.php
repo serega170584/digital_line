@@ -43,6 +43,11 @@ class CupTournament extends Tournament
         $stages = $this->stageRepository
             ->findAllArrayCollection();
         $groupStages = $stages->findIsGroup();
+        $this->groupTournament->setStages($groupStages);
+        $this->groupTournament->build();
+        $playoffStages = $stages->findIsPlayoff();
+        $this->playoffTournament->setStages($playoffStages);
+        $this->playoffTournament->build();
         var_dump($groupStages->count());
     }
 }
