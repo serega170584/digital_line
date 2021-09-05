@@ -27,4 +27,9 @@ class PlayoffTournament extends Tournament
     {
         // TODO: Implement getWinners() method.
     }
+
+    public function build()
+    {
+        // TODO: Implement build() method.
+    }
 }
