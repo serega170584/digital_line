@@ -6,7 +6,7 @@ namespace App\Domain\Generators;
 
 use App\Repository\GroupRepository;
 
-class TeamGeneratorInterface extends GeneratorInterface
+class TeamGeneratorInterface
 {
     /**
      * @var GroupRepository

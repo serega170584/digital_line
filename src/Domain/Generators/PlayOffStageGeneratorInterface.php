@@ -4,7 +4,7 @@
 namespace App\Domain\Generators;
 
 
-class PlayOffStageGeneratorInterface extends GeneratorInterface
+class PlayOffStageGeneratorInterface
 {
 
     public function execute(): self

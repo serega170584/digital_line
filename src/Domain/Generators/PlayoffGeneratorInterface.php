@@ -8,7 +8,7 @@ use App\Domain\Strategies\PlayoffGridStrategy;
 use App\Domain\Tournaments\GroupTournament;
 use App\Repository\StageRepository;
 
-class PlayoffGeneratorInterface extends GeneratorInterface
+class PlayoffGeneratorInterface
 {
     /**
      * @var GroupTournament

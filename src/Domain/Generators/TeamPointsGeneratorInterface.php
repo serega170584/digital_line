@@ -8,7 +8,7 @@ use App\Domain\Strategies\PointStrategy;
 use App\Entity\Team;
 use App\Repository\TeamRepository;
 
-class TeamPointsGeneratorInterface extends GeneratorInterface
+class TeamPointsGeneratorInterface
 {
 
     /**

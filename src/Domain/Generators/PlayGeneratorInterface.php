@@ -7,7 +7,7 @@ namespace App\Domain\Generators;
 use App\Repository\GroupRepository;
 use App\Repository\StageRepository;
 
-class PlayGeneratorInterface extends GeneratorInterface
+class PlayGeneratorInterface
 {
     private const GROUP_TEAMS_COUNT = 8;
     /**

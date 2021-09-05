@@ -4,7 +4,7 @@
 namespace App\Domain\Generators;
 
 
-class GroupGeneratorInterface extends GeneratorInterface
+class GroupGeneratorInterface
 {
     /**
      * @return $this

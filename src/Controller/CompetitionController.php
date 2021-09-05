@@ -4,24 +4,19 @@ namespace App\Controller;
 
 use App\Domain\Generators\GroupGeneratorInterface;
 use App\Domain\Generators\PlayGeneratorInterface;
-use App\Domain\Generators\PlayoffGeneratorInterface;
-use App\Domain\Generators\PlayOffStageGeneratorInterface;
 use App\Domain\Generators\StageGenerator;
 use App\Domain\Generators\StageGeneratorInterface;
 use App\Domain\Generators\TeamGeneratorInterface;
 use App\Domain\Generators\TeamPointsGeneratorInterface;
 use App\Domain\Strategies\PlainPointStrategy;
-use App\Domain\Strategies\PreliminaryRoundPlayoffGridStrategy;
 use App\Domain\Tournaments\CupTournament;
 use App\Domain\Tournaments\GroupTournament;
-use App\Domain\Tournaments\PlayoffTournament;
 use App\Repository\GroupRepository;
 use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class CompetitionController extends AbstractController
 {
@@ -42,7 +37,8 @@ class CompetitionController extends AbstractController
      * @param StageGenerator $stageGenerator
      * @throws \Doctrine\ORM\ORMException
      */
-    public function generate(StageGenerator $stageGenerator){
+    public function generate(StageGenerator $stageGenerator)
+    {
         $stageGenerator->execute();
         return $this->render('competition/index.html.twig', [
             'controller_name' => 'CompetitionController',
@@ -55,7 +51,6 @@ class CompetitionController extends AbstractController
      * @param GroupRepository $groupRepository
      * @param TeamGeneratorInterface $teamGenerator
      * @param TeamRepository $teamRepository
-     * @param StageGeneratorInterface $stageGenerator
      * @param StageRepository $stageRepository
      * @param PlayGeneratorInterface $playGenerator
      * @param PlayRepository $playRepository
@@ -67,7 +62,7 @@ class CompetitionController extends AbstractController
      */
     public function table(GroupGeneratorInterface $generator, GroupRepository $groupRepository,
                           TeamGeneratorInterface $teamGenerator, TeamRepository $teamRepository,
-                          StageGeneratorInterface $stageGenerator, StageRepository $stageRepository,
+                          StageRepository $stageRepository,
                           PlayGeneratorInterface $playGenerator, PlayRepository $playRepository,
                           TeamPointsGeneratorInterface $teamPointsGenerator, PlainPointStrategy $plainPointStrategy
     ): Response
