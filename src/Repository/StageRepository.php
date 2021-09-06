@@ -6,6 +6,7 @@ use App\Domain\Collections\StageArrayCollection;
 use App\Entity\Stage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Laminas\Code\Generator\GeneratorInterface;
 
 /**
  * @method Stage|null find($id, $lockMode = null, $lockVersion = null)
