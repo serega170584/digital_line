@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Repository;
+namespace App\Domain\Repository;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
