@@ -47,7 +47,7 @@
                     {% set count = 1 %}
                     {% for team in cupTournament.getPlayoffTournament().getTable() %}
                         <li>
-                            {{ count }} {{ team.getName }}
+                            {{ count }}. {{ team.getName }}
                         </li>
                         {% set count = count + 1 %}
                     {% endfor %}
