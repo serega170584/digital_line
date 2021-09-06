@@ -65,7 +65,7 @@
                     {% for team in group.getTeams() %}
                         <tr>
                             <td>{{ team.getName() }}</td>
-                            {% for play in cupTournament.findTeamGroupPlays(team.getId()) %}
+                            {% for play in cupTournament.findTeamGroupPlays(team) %}
                                 {% if (play.getTeam().getId()==play.getOpponent().getId()) %}
                                     <td bgcolor="#000"></td>
                                 {% else %}
