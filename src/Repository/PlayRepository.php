@@ -2,8 +2,7 @@
 
 namespace App\Repository;
 
-use App\Domain\Generator\GeneratorInterface;
-use App\Domain\Generator\PlayGeneratorInterface;
+use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Play;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
