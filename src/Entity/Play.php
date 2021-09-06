@@ -45,6 +45,11 @@ class Play
      */
     private $lostGoals;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $stageOrder;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +111,18 @@ class Play
     public function setLostGoals(int $lostGoals): self
     {
         $this->lostGoals = $lostGoals;
+
+        return $this;
+    }
+
+    public function getStageOrder(): ?int
+    {
+        return $this->stageOrder;
+    }
+
+    public function setStageOrder(int $stageOrder): self
+    {
+        $this->stageOrder = $stageOrder;
 
         return $this;
     }
