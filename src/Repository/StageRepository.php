@@ -65,10 +65,7 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
      */
     public function findAllArrayCollection(): StageArrayCollection
     {
-        $collection = new StageArrayCollection();
-        foreach ($this->findAll() as $stage) {
-            $collection->add($stage);
-        }
+        $collection = new StageArrayCollection($this->findAll());
         return $collection;
     }
 }

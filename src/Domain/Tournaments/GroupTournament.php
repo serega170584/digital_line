@@ -13,7 +13,6 @@ use Doctrine\Common\Collections\Criteria;
 
 class GroupTournament implements TournamentInterface
 {
-    const WINNERS_COUNT = 4;
     const ID = 'id';
     const TEAM = 'team';
     const OPPONENT = 'opponent';
@@ -30,20 +29,6 @@ class GroupTournament implements TournamentInterface
      * @var Stage
      */
     private $stage;
-
-    /**
-     * @return Team[]
-     */
-    public function getWinners()
-    {
-        $winners = [];
-        foreach ($this->repository->findGroups() as $group) {
-            $groupWinners = $group->getTeams()->slice(0, self::WINNERS_COUNT);
-            $winners = array_merge($winners, $groupWinners);
-        }
-        return $winners;
-    }
-
 
     public function build()
     {

@@ -13,16 +13,10 @@ class PlayoffTournament implements TournamentInterface
      * @var StageRepository $repository
      */
     protected $repository;
-
-    public function getUnits()
-    {
-        return $this->repository->findPlayoffStages();
-    }
-
-    public function getWinners()
-    {
-        // TODO: Implement getWinners() method.
-    }
+    /**
+     * @var StageArrayCollection
+     */
+    private $stages;
 
     public function build()
     {
@@ -34,6 +28,6 @@ class PlayoffTournament implements TournamentInterface
      */
     public function setStages(StageArrayCollection $stages): void
     {
-        $this->stage = $stages;
+        $this->stages = $stages;
     }
 }
