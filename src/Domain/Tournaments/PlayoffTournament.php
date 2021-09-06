@@ -83,6 +83,7 @@ class PlayoffTournament implements TournamentInterface
                     self::POINTS => Criteria::DESC,
                 ])
             );
+            var_dump($stageWinners->count());
             $teams = new ArrayCollection(array_merge($teams->toArray(), $stageWinners->toArray()));
         }
         $this->table = $teams;
