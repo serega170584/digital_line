@@ -34,7 +34,7 @@ class Stage
     private $plays;
 
     /**
-     * @var Play[]
+     * @var Collection
      */
     private $orderedPlays;
 
@@ -103,7 +103,7 @@ class Stage
     }
 
     /**
-     * @param Play[] $orderedPlays
+     * @param Collection $orderedPlays
      */
     public function setOrderedPlays(Collection $orderedPlays): void
     {
@@ -112,7 +112,7 @@ class Stage
 
     /**
      *
-     * @return Play[]
+     * @return Collection
      */
     public function getOrderedPlays(): Collection
     {
