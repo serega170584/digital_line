@@ -24,7 +24,7 @@ class PlayGenerator extends Generator
     public function execute(): self
     {
         $this->inflateGroup(0, self::GROUP_TEAMS_COUNT);
-        $this->inflateGroup(self::GROUP_TEAMS_COUNT, self::GROUP_TEAMS_COUNT * 2 - 1);
+        $this->inflateGroup(self::GROUP_TEAMS_COUNT, self::GROUP_TEAMS_COUNT * 2);
         return $this;
     }
 
@@ -34,8 +34,8 @@ class PlayGenerator extends Generator
         $stage = current($stages);
         $teams = $this->teams;
         $points = self::WINNER_POINTS_COUNT;
-        for ($i = 0; $i < $fromTeamIndex; ++$i) {
-            for ($j = 0; $j < $toTeamIndex; ++$j) {
+        for ($i = $fromTeamIndex; $i < $toTeamIndex; ++$i) {
+            for ($j = $fromTeamIndex; $j < $toTeamIndex; ++$j) {
                 $entityObject = $this->createEntityObject();
                 $entityObject->setTeam($teams[$i]);
                 $entityObject->setOpponent($teams[$j]);
