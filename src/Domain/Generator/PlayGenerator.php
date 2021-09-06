@@ -88,6 +88,7 @@ class PlayGenerator extends Generator
         }
         $stage = next($this->stages);
         while ($stage) {
+            var_dump($stage->getId());
             $playOrder = 0;
             $teams = $this->orderedTeams;
             $teamsCount = count($teams);
