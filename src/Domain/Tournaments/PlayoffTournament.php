@@ -9,7 +9,6 @@ use App\Entity\Stage;
 use App\Entity\Team;
 use App\Repository\StageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 
 class PlayoffTournament implements TournamentInterface
@@ -70,12 +69,16 @@ class PlayoffTournament implements TournamentInterface
                 self::ID => Criteria::DESC,
             ])
         );
+        $stageLosers = new ArrayCollection();
         foreach ($stages as $stage) {
             $stageWinners = new ArrayCollection();
+            $stageLosers = new ArrayCollection();
             foreach ($stage->getPlays() as $play) {
                 $team = $play->getTeam();
                 $opponent = $play->getOpponent();
                 $stageWinner = ($play->getScoredGoals() > $play->getLostGoals()) ? $team : $opponent;
+                $stageLoser = ($play->getScoredGoals() < $play->getLostGoals()) ? $team : $opponent;
+                $stageLosers->add($stageLoser);
                 if (!$teams->contains($stageWinner)) {
                     $stageWinners->add($stageWinner);
                 }
@@ -87,6 +90,7 @@ class PlayoffTournament implements TournamentInterface
             );
             $teams = new ArrayCollection(array_merge($teams->toArray(), $stageWinners->toArray()));
         }
+        $teams = new ArrayCollection(array_merge($teams->toArray(), $stageLosers->toArray()));
         $this->table = $teams;
     }
 
