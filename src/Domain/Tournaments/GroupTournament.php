@@ -4,11 +4,11 @@
 namespace App\Domain\Tournaments;
 
 
-use App\Domain\Collections\StageArrayCollection;
-use App\Entity\Group;
+use App\Domain\Collection\StageArrayCollection;
 use App\Entity\Play;
 use App\Entity\Stage;
 use App\Entity\Team;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 
 class GroupTournament extends Tournament
@@ -20,15 +20,10 @@ class GroupTournament extends Tournament
      * @var StageArrayCollection
      */
     private $playoffStages;
-
     /**
-     * @return Group[]
+     * @var ArrayCollection
      */
-    public function getUnits()
-    {
-        $group = current($this->repository->findGroups());
-        return $this->repository->findGroups();
-    }
+    private $groups;
 
     /**
      * @return Team[]
@@ -50,10 +45,12 @@ class GroupTournament extends Tournament
          */
         $stage = $this->playoffStages->matching(Criteria::create()
             ->orderBy([self::ID => Criteria::ASC]))
-            ->current();
-        $play = $stage->getPlays()->current();
-        var_dump($play->getTeam()->getTeamGroup()->getId());
-        var_dump($play->getOpponent()->getTeamGroup()->getId());
+            ->first();
+        /**
+         * @var Play $play
+         */
+        $play = $stage->getPlays()->first();
+        $this->groups = new ArrayCollection([$play->getTeam(), $play->getOpponent()]);
     }
 
     /**
@@ -62,5 +59,13 @@ class GroupTournament extends Tournament
     public function setPlayoffStages(StageArrayCollection $playoffStages): void
     {
         $this->playoffStages = $playoffStages;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getGroups(): ArrayCollection
+    {
+        return $this->groups;
     }
 }

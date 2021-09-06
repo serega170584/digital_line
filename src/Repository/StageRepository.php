@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Domain\Collections\StageArrayCollection;
+use App\Domain\Collection\StageArrayCollection;
 use App\Domain\Generator\Generator;
 use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Repository\RepositoryTrait;

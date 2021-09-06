@@ -4,7 +4,7 @@
 namespace App\Domain\Tournaments;
 
 
-use App\Domain\Collections\StageArrayCollection;
+use App\Domain\Collection\StageArrayCollection;
 
 abstract class Tournament
 {

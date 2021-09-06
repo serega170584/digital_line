@@ -33,14 +33,17 @@ class CompetitionController extends AbstractController
     /**
      * @Route("/generate", name="generate")
      * @param CompetitionGenerator $competitionGenerator
+     * @param CupTournament $cupTournament
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      */
-    public function generate(CompetitionGenerator $competitionGenerator)
+    public function generate(CompetitionGenerator $competitionGenerator,
+                             CupTournament $cupTournament)
     {
         $competitionGenerator->execute();
-        return $this->render('competition/index.html.twig', [
-            'controller_name' => 'CompetitionController',
+        $cupTournament->build();
+        return $this->render('grid/index.html.twig', [
+            'cup_tournament' => $cupTournament,
         ]);
     }
 

@@ -50,4 +50,12 @@ class CupTournament extends Tournament
         $this->groupTournament->setPlayoffStages($playoffStages);
         $this->groupTournament->build();
     }
+
+    /**
+     * @return GroupTournament
+     */
+    public function getGroupTournament(): GroupTournament
+    {
+        return $this->groupTournament;
+    }
 }

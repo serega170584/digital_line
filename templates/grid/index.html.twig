@@ -18,29 +18,63 @@
     </style>
 
     <div class="example-wrapper">
-        {% for group in groups %}
+        <ul style="list-style: none; padding-left: 0">
+{#            {% for group in cupTournament->getGroupTournament()->getGroups() %}#}
+{#                <li style="vertical-align: top; display: inline-block">#}
+{#                    {{ stage.getName }}#}
+{#                    <ul style="list-style: none; display: block; padding-left: 0; margin-right: 40px">#}
+{#                        {% for play in stage.getPlays() %}#}
+{#                            <li>#}
+{#                                <table>#}
+{#                                    <tr>#}
+{#                                        <td>#}
+{#                                            <ul style="list-style: none; display: block; padding-left: 0">#}
+{#                                                <li>{{ play.getTeam().getName() }}</li>#}
+{#                                                <li>{{ play.getOpponent().getName() }}</li>#}
+{#                                            </ul>#}
+{#                                        </td>#}
+{#                                        <td rowspan="2">{{ play.getScoredGoals() }} : {{ play.getLostGoals() }}</td>#}
+{#                                    </tr>#}
+{#                                </table>#}
+{#                            </li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+                </li>
+            {% endfor %}
+            <li style="display: inline-block">
+{#                <h2>Results</h2>#}
+{#                <ul style="list-style: none;">#}
+{#                    {% for team in resultTeams %}#}
+{#                        <li>#}
+{#                            Team {{ team.getName() }}#}
+{#                        </li>#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+            </li>
+        </ul>
+        {% for group in cupTournament->getGroupTournament()->getGroups() %}
             <div>
                 Group {{ group.getName() }}
-                <table>
-                    <tr>
-                        <td></td>
-                    {% for team in group.getTeams() %}
-                        <td>{{ team.getName() }}</td>
-                    {% endfor %}
-                    </tr>
-                    {% for team in group.getTeams() %}
-                        <tr>
-                            <td>{{ team.getName() }}</td>
-                            {% for play in team.getPlays() %}
-                                {% if (play.getTeam().getId()==play.getOpponent().getId()) %}
-                                    <td bgcolor="#000"></td>
-                                {% else %}
-                                    <td>{{ play.getScoredGoals() }}:{{ play.getLostGoals() }}</td>
-                                {% endif %}
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                </table>
+{#                <table>#}
+{#                    <tr>#}
+{#                        <td></td>#}
+{#                        {% for team in group.getTeams() %}#}
+{#                            <td>{{ team.getName() }}</td>#}
+{#                        {% endfor %}#}
+{#                    </tr>#}
+{#                    {% for team in group.getTeams() %}#}
+{#                        <tr>#}
+{#                            <td>{{ team.getName() }}</td>#}
+{#                            {% for play in team.getPlays() %}#}
+{#                                {% if (play.getTeam().getId()==play.getOpponent().getId()) %}#}
+{#                                    <td bgcolor="#000"></td>#}
+{#                                {% else %}#}
+{#                                    <td>{{ play.getScoredGoals() }}:{{ play.getLostGoals() }}</td>#}
+{#                                {% endif %}#}
+{#                            {% endfor %}#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                </table>#}
             </div>
         {% endfor %}
     </div>
