@@ -34,8 +34,8 @@ class PlayGenerator extends Generator
         $stage = current($stages);
         $teams = $this->teams;
         $points = self::WINNER_POINTS_COUNT;
-        for ($i = 0; $i < self::GROUP_TEAMS_COUNT; ++$i) {
-            for ($j = 0; $j < self::GROUP_TEAMS_COUNT; ++$j) {
+        for ($i = 0; $i < $fromTeamIndex; ++$i) {
+            for ($j = 0; $j < $toTeamIndex; ++$j) {
                 $entityObject = $this->createEntityObject();
                 $entityObject->setTeam($teams[$i]);
                 $entityObject->setOpponent($teams[$j]);
@@ -52,6 +52,9 @@ class PlayGenerator extends Generator
                 $entityObject->setStage($stage);
                 $this->persist($entityObject);
             }
+            /**
+             * @var Team $team
+             */
             $team = $teams[$i];
             $team->setPoints($points);
             $this->persist($team);
