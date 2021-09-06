@@ -76,8 +76,7 @@ class PlayGenerator extends Generator
 
     private function inflatePlayoff(): self
     {
-        $stages = $this->stages;
-        $stage = next($stages);
+        next($this->stages);
         $teams = $this->teams;
         $groupTeams = array_slice($teams, 0, self::WINNERS_COUNT);
         $opponents = array_reverse(array_slice($teams, self::GROUP_TEAMS_COUNT, self::WINNERS_COUNT));
@@ -87,7 +86,7 @@ class PlayGenerator extends Generator
             $this->inflatePlayoffPlay($groupTeams[$i], $opponents[$i], $i, self::WINNERS_COUNT, $shift);
             $shift += ($i % 2);
         }
-        $stage = next($stages);
+        $stage = next($this->stages);
         while ($stage) {
             $playOrder = 0;
             $teams = $this->orderedTeams;
@@ -119,7 +118,7 @@ class PlayGenerator extends Generator
         $entityObject->setScoredGoals(1);
         $entityObject->setLostGoals(0);
         $stageOrder = ($playOrder % 2) * $teamsCount / 2 + $shift;
-        $orderedTeams[$stageOrder] = $team;
+        $this->orderedTeams[$stageOrder] = $team;
         $entityObject->setStageOrder($stageOrder + 1);
         $entityObject->setStage($stage);
         $this->persist($entityObject);
