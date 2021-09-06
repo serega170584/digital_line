@@ -20,32 +20,36 @@
     <div class="example-wrapper">
         <ul style="list-style: none; padding-left: 0">
             {% for stage in cupTournament.getPlayoffTournament().getStages() %}
-                <li style="vertical-align: top; display: inline-block">
-                    {{ stage.getName }}
-                    <ul style="list-style: none; display: block; padding-left: 0; margin-right: 40px">
-                        {% for play in stage.getOrderedPlays() %}
+            <li style="vertical-align: top; display: inline-block">
+                {{ stage.getName }}
+                <ul style="list-style: none; display: block; padding-left: 0; margin-right: 40px">
+                    {% for play in stage.getOrderedPlays() %}
+                        <li>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <ul style="list-style: none; display: block; padding-left: 0">
+                                            <li>{{ play.getTeam().getName() }}</li>
+                                            <li>{{ play.getOpponent().getName() }}</li>
+                                        </ul>
+                                    </td>
+                                    <td rowspan="2">{{ play.getScoredGoals() }} : {{ play.getLostGoals() }}</td>
+                                </tr>
+                            </table>
+                        </li>
+                    {% endfor %}
+                    <li style="display: inline-block">
+                        <h2>Results</h2>
+                        <ul style="list-style: none;">
+                            {% for team in cupTournament.getPlayoffTournament().getTable() %}
                             <li>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <ul style="list-style: none; display: block; padding-left: 0">
-                                                <li>{{ play.getTeam().getName() }}</li>
-                                                <li>{{ play.getOpponent().getName() }}</li>
-                                            </ul>
-                                        </td>
-                                        <td rowspan="2">{{ play.getScoredGoals() }} : {{ play.getLostGoals() }}</td>
-                                    </tr>
-                                </table>
+                                {{ team.getName }}
                             </li>
-                        {% endfor %}
-                        {# <li style="display: inline-block"> #}
-                        {# <h2>Results</h2> #}
-                        {# <ul style="list-style: none;"> #}
-                        {# {% for team in resultTeams %} #}
-                        {# <li> #}
-                        {# </li> #}
-                    </ul>
-                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </li>
             {% endfor %}
         </ul>
         {% for group in cupTournament.getGroupTournament().getGroups() %}
