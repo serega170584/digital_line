@@ -9,6 +9,7 @@ use App\Entity\Stage;
 use App\Entity\Team;
 use App\Repository\StageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 
 class PlayoffTournament implements TournamentInterface
@@ -92,7 +93,7 @@ class PlayoffTournament implements TournamentInterface
     /**
      * @return Team[]
      */
-    public function getTable(): array
+    public function getTable(): Collection
     {
         return $this->table;
     }
