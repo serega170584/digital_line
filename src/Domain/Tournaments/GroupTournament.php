@@ -50,7 +50,10 @@ class GroupTournament extends Tournament
          * @var Play $play
          */
         $play = $stage->getPlays()->first();
-        $this->groups = new ArrayCollection([$play->getTeam(), $play->getOpponent()]);
+        $this->groups = new ArrayCollection([
+            $play->getTeam()->getTeamGroup(),
+            $play->getOpponent()->getTeamGroup()
+        ]);
     }
 
     /**
