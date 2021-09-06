@@ -68,7 +68,7 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
      */
     public function findAllArrayCollection(): StageArrayCollection
     {
-        $collection = new StageArrayCollection($this->findBy([self::ID => Criteria::ASC]));
+        $collection = new StageArrayCollection($this->findAll());
         return $collection;
     }
 }
