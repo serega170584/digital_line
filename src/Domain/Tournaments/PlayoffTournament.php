@@ -42,6 +42,7 @@ class PlayoffTournament implements TournamentInterface
             );
             $stage->setOrderedPlays($plays);
         }
+        $this->buildTable();
     }
 
     /**
@@ -68,7 +69,6 @@ class PlayoffTournament implements TournamentInterface
                 self::ID => Criteria::DESC,
             ])
         );
-        var_dump($this->stages->count());
         foreach ($stages as $stage) {
             $stageWinners = new ArrayCollection();
             foreach ($stage->getPlays() as $play) {
@@ -84,7 +84,6 @@ class PlayoffTournament implements TournamentInterface
                     self::POINTS => Criteria::DESC,
                 ])
             );
-            var_dump($stageWinners->count());
             $teams = new ArrayCollection(array_merge($teams->toArray(), $stageWinners->toArray()));
         }
         $this->table = $teams;
