@@ -15,6 +15,8 @@ class GroupTournament implements TournamentInterface
 {
     const WINNERS_COUNT = 4;
     const ID = 'id';
+    const TEAM = 'team';
+    const OPPONENT = 'opponent';
 
     /**
      * @var StageArrayCollection
@@ -92,7 +94,11 @@ class GroupTournament implements TournamentInterface
     public function findTeamPlays(Team $team)
     {
         return $this->stage->getPlays()->matching(Criteria::create()
-            ->where(Criteria::expr()->eq('team', $team))
-            ->orderBy([self::ID => Criteria::ASC]));
+            ->where(Criteria::expr()->eq(self::TEAM, $team))
+            ->orderBy([
+                self::TEAM => Criteria::ASC,
+                self::OPPONENT => Criteria::ASC
+            ])
+        );
     }
 }
