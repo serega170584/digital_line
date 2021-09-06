@@ -11,6 +11,8 @@ class PlayGenerator extends Generator
 {
     private const GROUP_TEAMS_COUNT = 8;
     private const WINNER_POINTS_COUNT = 7;
+    private const WINNERS_COUNT = 4;
+    private const DEFAULT_STAGE_ORDER = 1;
     /**
      * @var Stage[]
      */
@@ -25,6 +27,7 @@ class PlayGenerator extends Generator
     {
         $this->inflateGroup(0, self::GROUP_TEAMS_COUNT);
         $this->inflateGroup(self::GROUP_TEAMS_COUNT, self::GROUP_TEAMS_COUNT * 2);
+        $this->inflatePlayoff();
         return $this;
     }
 
@@ -59,6 +62,28 @@ class PlayGenerator extends Generator
             $team->setPoints($points);
             $this->persist($team);
             --$points;
+        }
+        return $this;
+    }
+
+    public function inflatePlayoff(): self
+    {
+        $teams = $this->teams;
+        $groupTeams = array_slice($teams, 0, self::WINNERS_COUNT);
+        $opponents = array_reverse(array_slice($teams, self::GROUP_TEAMS_COUNT, self::GROUP_TEAMS_COUNT));
+        $orderedTeams = [];
+        $shift = 0;
+        for ($i = 0; $i < self::WINNERS_COUNT; ++$i) {
+            $entityObject = $this->createEntityObject();
+            $entityObject->setTeam($groupTeams[$i]);
+            $entityObject->setOpponent($opponents[$i]);
+            $entityObject->setScoredGoals(1);
+            $entityObject->setLostGoals(0);
+            $stageOrder = ($i % 2) * self::WINNERS_COUNT + $shift;
+            $orderedTeams[$stageOrder] = $groupTeams[$i];
+            $entityObject->setStageOrder($stageOrder + 1);
+            $this->persist($entityObject);
+            ++$shift;
         }
         return $this;
     }
