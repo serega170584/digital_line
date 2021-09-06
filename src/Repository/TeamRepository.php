@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Domain\Generators\TeamGeneratorInterface;
+use App\Domain\Generator\TeamGeneratorInterface;
 use App\Entity\Group;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Domain\Generators\GroupGeneratorInterface;
+use App\Domain\Generator\GroupGeneratorInterface;
 use App\Entity\Group;
 use App\Entity\Play;
 use App\Entity\Stage;

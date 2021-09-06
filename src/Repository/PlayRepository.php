@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Domain\Generators\GeneratorInterface;
-use App\Domain\Generators\PlayGeneratorInterface;
+use App\Domain\Generator\GeneratorInterface;
+use App\Domain\Generator\PlayGeneratorInterface;
 use App\Entity\Play;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

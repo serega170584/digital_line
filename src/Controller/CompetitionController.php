@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Domain\Generators\GroupGeneratorInterface;
-use App\Domain\Generators\PlayGeneratorInterface;
-use App\Domain\Generators\StageGenerator;
-use App\Domain\Generators\TeamGeneratorInterface;
-use App\Domain\Generators\TeamPointsGeneratorInterface;
+use App\Domain\Generator\GroupGeneratorInterface;
+use App\Domain\Generator\PlayGeneratorInterface;
+use App\Domain\Generator\StageGenerator;
+use App\Domain\Generator\TeamGeneratorInterface;
+use App\Domain\Generator\TeamPointsGeneratorInterface;
 use App\Domain\Strategies\PlainPointStrategy;
 use App\Domain\Tournaments\CupTournament;
 use App\Domain\Tournaments\GroupTournament;

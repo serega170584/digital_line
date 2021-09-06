@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Domain\Generators;
+namespace App\Domain\Generator;
 
 
 class GroupGeneratorInterface
