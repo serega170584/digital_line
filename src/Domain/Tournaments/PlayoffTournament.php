@@ -90,6 +90,11 @@ class PlayoffTournament implements TournamentInterface
             );
             $teams = new ArrayCollection(array_merge($teams->toArray(), $stageWinners->toArray()));
         }
+        $stageLosers = $stageLosers->matching(Criteria::create()
+            ->orderBy([
+                self::POINTS => Criteria::DESC,
+            ])
+        );
         $teams = new ArrayCollection(array_merge($teams->toArray(), $stageLosers->toArray()));
         $this->table = $teams;
     }
