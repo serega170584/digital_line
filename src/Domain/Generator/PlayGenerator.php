@@ -83,12 +83,12 @@ class PlayGenerator extends Generator
             $entityObject->setOpponent($opponents[$i]);
             $entityObject->setScoredGoals(1);
             $entityObject->setLostGoals(0);
-            $stageOrder = ($i % 2) * self::WINNERS_COUNT + $shift;
+            $stageOrder = ($i % 2) * self::WINNERS_COUNT / 2 + $shift;
+            $shift += ($i % 2);
             $orderedTeams[$stageOrder] = $groupTeams[$i];
             $entityObject->setStageOrder($stageOrder + 1);
             $entityObject->setStage($stage);
             $this->persist($entityObject);
-            ++$shift;
         }
         return $this;
     }
