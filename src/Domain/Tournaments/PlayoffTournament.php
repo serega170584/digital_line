@@ -68,6 +68,7 @@ class PlayoffTournament implements TournamentInterface
                 self::ID => Criteria::DESC,
             ])
         );
+        var_dump($this->stages->count());
         foreach ($stages as $stage) {
             $stageWinners = new ArrayCollection();
             foreach ($stage->getPlays() as $play) {
