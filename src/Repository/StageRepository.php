@@ -71,28 +71,4 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
         }
         return $collection;
     }
-
-    /**
-     * @param array $fields
-     * @return Stage
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function addEntity(array $fields)
-    {
-        /**
-         * @var Stage $entity
-         */
-        $entity = $this->createEntityObject();
-        $entity->setName(current($fields));
-        next($fields);
-        $entity->setIsPlayoff(current($fields));
-        $this->saveEntity($entity);
-        return $entity;
-    }
-
-    public function setGenerator(GeneratorInterface $generator)
-    {
-        $this->generator = $generator;
-    }
 }

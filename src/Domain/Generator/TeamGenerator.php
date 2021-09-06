@@ -5,6 +5,7 @@ namespace App\Domain\Generator;
 
 
 use App\Entity\Group;
+use App\Entity\Team;
 
 class TeamGenerator extends Generator
 {
@@ -13,6 +14,10 @@ class TeamGenerator extends Generator
      * @var Group[]
      */
     private $groups;
+    /**
+     * @var Team[]
+     */
+    private $teams;
 
     public function execute(): self
     {
@@ -27,6 +32,7 @@ class TeamGenerator extends Generator
                 $entityObject = $this->createEntityObject();
                 $entityObject->setName($name);
                 $entityObject->setTeamGroup($group);
+                $this->teams[] = $entityObject;
                 $this->persist($entityObject);
             }
             next($teams);
@@ -40,5 +46,13 @@ class TeamGenerator extends Generator
     public function setGroups(array $groups): void
     {
         $this->groups = $groups;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTeams(): array
+    {
+        return $this->teams;
     }
 }

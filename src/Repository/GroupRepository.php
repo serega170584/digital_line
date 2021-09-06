@@ -62,45 +62,4 @@ class GroupRepository extends ServiceEntityRepository implements RepositoryInter
         ;
     }
     */
-
-    /**
-     * @param array $fields
-     * @return Group
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function addEntity(array $fields)
-    {
-        /**
-         * @var Group $entity
-         */
-        $entity = $this->createEntityObject();
-        $entity->setName(current($fields));
-        $this->saveEntity($entity);
-        return $entity;
-    }
-
-    /**
-     * @param GroupGeneratorInterface $generator
-     */
-    public function setGenerator(GroupGeneratorInterface $generator): void
-    {
-        $this->generator = $generator;
-    }
-
-    /**
-     * @return Group[]
-     */
-    public function findGroups()
-    {
-        return $this->createQueryBuilder('g')
-            ->select('g')
-            ->innerJoin(Team::class, 't', Join::WITH, 'g.id = t.teamGroup')
-            ->innerJoin(Play::class, 'p', Join::WITH, 'p.team = t.id')
-            ->innerJoin(Stage::class, 's', Join::WITH, 'p.stage = s.id')
-            ->where('s.isPlayoff=1')
-            ->orderBy('g.id', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
 }

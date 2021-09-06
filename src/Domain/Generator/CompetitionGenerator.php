@@ -5,6 +5,7 @@ namespace App\Domain\Generator;
 
 
 use App\Repository\GroupRepository;
+use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,6 +36,14 @@ class CompetitionGenerator extends Generator
      * @var TeamRepository
      */
     private $teamRepository;
+    /**
+     * @var PlayGenerator
+     */
+    private $playGenerator;
+    /**
+     * @var PlayRepository
+     */
+    private $playRepository;
 
     /**
      * CompetitionGenerator constructor.
@@ -45,11 +54,14 @@ class CompetitionGenerator extends Generator
      * @param GroupRepository $groupRepository
      * @param TeamGenerator $teamGenerator
      * @param TeamRepository $teamRepository
+     * @param PlayGenerator $playGenerator
+     * @param PlayRepository $playRepository
      */
     public function __construct(EntityManagerInterface $entityManager,
                                 StageGenerator $stageGenerator, StageRepository $stageRepository,
                                 GroupGenerator $groupGenerator, GroupRepository $groupRepository,
-                                TeamGenerator $teamGenerator, TeamRepository $teamRepository
+                                TeamGenerator $teamGenerator, TeamRepository $teamRepository,
+                                PlayGenerator $playGenerator, PlayRepository $playRepository
     )
     {
         parent::__construct($entityManager);
@@ -59,6 +71,8 @@ class CompetitionGenerator extends Generator
         $this->groupRepository = $groupRepository;
         $this->teamGenerator = $teamGenerator;
         $this->teamRepository = $teamRepository;
+        $this->playGenerator = $playGenerator;
+        $this->playRepository = $playRepository;
     }
 
     /**
@@ -77,6 +91,10 @@ class CompetitionGenerator extends Generator
             $teamGenerator->setRepository($this->teamRepository);
             $teamGenerator->setGroups($groupGenerator->getGroups());
             $teamGenerator->execute();
+            $playGenerator = $this->playGenerator;
+            $playGenerator->setStages($stageGenerator->getStages());
+            $playGenerator->setTeams($teamGenerator->getTeams());
+            $playGenerator->execute();
             $this->flush();
         }
         return $this;
