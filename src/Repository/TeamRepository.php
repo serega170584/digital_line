@@ -2,10 +2,10 @@
 
 namespace App\Repository;
 
+use App\Domain\Generator\Generator;
 use App\Domain\Generator\TeamGeneratorInterface;
 use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Repository\RepositoryTrait;
-use App\Entity\Group;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,13 +15,14 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Team|null findOneBy(array $criteria, array $orderBy = null)
  * @method Team[]    findAll()
  * @method Team[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Team createEntityObject()
  */
 class TeamRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     use RepositoryTrait;
 
     /**
-     * @var TeamGeneratorInterface
+     * @var Generator
      */
     private $generator;
 

@@ -6,6 +6,7 @@ namespace App\Domain\Generator;
 
 use App\Repository\GroupRepository;
 use App\Repository\StageRepository;
+use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CompetitionGenerator extends Generator
@@ -26,6 +27,14 @@ class CompetitionGenerator extends Generator
      * @var GroupRepository
      */
     private $groupRepository;
+    /**
+     * @var TeamGenerator
+     */
+    private $teamGenerator;
+    /**
+     * @var TeamRepository
+     */
+    private $teamRepository;
 
     /**
      * CompetitionGenerator constructor.
@@ -34,10 +43,13 @@ class CompetitionGenerator extends Generator
      * @param StageRepository $stageRepository
      * @param GroupGenerator $groupGenerator
      * @param GroupRepository $groupRepository
+     * @param TeamGenerator $teamGenerator
+     * @param TeamRepository $teamRepository
      */
     public function __construct(EntityManagerInterface $entityManager,
                                 StageGenerator $stageGenerator, StageRepository $stageRepository,
-                                GroupGenerator $groupGenerator, GroupRepository $groupRepository
+                                GroupGenerator $groupGenerator, GroupRepository $groupRepository,
+                                TeamGenerator $teamGenerator, TeamRepository $teamRepository
     )
     {
         parent::__construct($entityManager);
@@ -45,6 +57,8 @@ class CompetitionGenerator extends Generator
         $this->stageRepository = $stageRepository;
         $this->groupGenerator = $groupGenerator;
         $this->groupRepository = $groupRepository;
+        $this->teamGenerator = $teamGenerator;
+        $this->teamRepository = $teamRepository;
     }
 
     /**
@@ -59,6 +73,10 @@ class CompetitionGenerator extends Generator
             $groupGenerator = $this->groupGenerator;
             $groupGenerator->setRepository($this->groupRepository);
             $groupGenerator->execute();
+            $teamGenerator = $this->teamGenerator;
+            $teamGenerator->setRepository($this->teamRepository);
+            $teamGenerator->setGroups($groupGenerator->getGroups());
+            $teamGenerator->execute();
             $this->flush();
         }
         return $this;

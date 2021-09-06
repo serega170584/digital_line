@@ -7,6 +7,7 @@ namespace App\Domain\Generator;
 use App\Domain\Repository\RepositoryInterface;
 use App\Entity\Group;
 use App\Entity\Stage;
+use App\Entity\Team;
 use Doctrine\ORM\EntityManagerInterface;
 
 abstract class Generator
@@ -26,7 +27,7 @@ abstract class Generator
     }
 
     /**
-     * @return Stage|Group
+     * @return Stage|Group|Team
      */
     public function createEntityObject()
     {

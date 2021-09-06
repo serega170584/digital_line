@@ -4,8 +4,15 @@
 namespace App\Domain\Generator;
 
 
+use App\Entity\Group;
+
 class GroupGenerator extends Generator
 {
+    /**
+     * @var Group[]
+     */
+    private $groups;
+
     /**
      * @return $this
      * @throws \Doctrine\ORM\ORMException
@@ -17,7 +24,16 @@ class GroupGenerator extends Generator
             $entityObject = $this->createEntityObject();
             $entityObject->setName($name);
             $this->persist($entityObject);
+            $this->groups[] = $entityObject;
         }
         return $this;
+    }
+
+    /**
+     * @return Group[]
+     */
+    public function getGroups(): array
+    {
+        return $this->groups;
     }
 }
