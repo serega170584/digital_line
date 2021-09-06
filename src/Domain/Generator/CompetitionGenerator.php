@@ -50,15 +50,17 @@ class CompetitionGenerator extends Generator
     /**
      * @throws \Doctrine\ORM\ORMException
      */
-    public function execute()
+    public function execute(): self
     {
-        $stageGenerator = $this->stageGenerator;
-        $stageGenerator->setRepository($this->stageRepository);
-        $stageGenerator->execute();
-        $groupGenerator = $this->groupGenerator;
-        $groupGenerator->setRepository($this->groupRepository);
-        $groupGenerator->execute();
-        $this->flush();
+        if (!$this->stageRepository->count([])) {
+            $stageGenerator = $this->stageGenerator;
+            $stageGenerator->setRepository($this->stageRepository);
+            $stageGenerator->execute();
+            $groupGenerator = $this->groupGenerator;
+            $groupGenerator->setRepository($this->groupRepository);
+            $groupGenerator->execute();
+            $this->flush();
+        }
         return $this;
     }
 }
