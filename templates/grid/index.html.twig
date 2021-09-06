@@ -63,6 +63,7 @@
                         {% for team in group.getTeams() %}
                             <td>{{ team.getName() }}</td>
                         {% endfor %}
+                        <td></td>
                     </tr>
                     {% for team in group.getTeams() %}
                         <tr>
@@ -74,6 +75,7 @@
                                     <td>{{ play.getScoredGoals() }}:{{ play.getLostGoals() }}</td>
                                 {% endif %}
                             {% endfor %}
+                            <td>{{ team.getPoints() }}</td>
                         </tr>
                     {% endfor %}
                 </table>
