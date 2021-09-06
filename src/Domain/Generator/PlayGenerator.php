@@ -111,9 +111,10 @@ class PlayGenerator extends Generator
     private function inflatePlayoffPlay($team, $opponent, $playOrder, $teamsCount, $shift): self
     {
         $stage = current($this->stages);
-        var_dump($stage->getName());
         $entityObject = $this->createEntityObject();
         $entityObject->setTeam($team);
+        var_dump($team->getName());
+        var_dump($opponent->getName());
         $entityObject->setOpponent($opponent);
         $entityObject->setScoredGoals(1);
         $entityObject->setLostGoals(0);
