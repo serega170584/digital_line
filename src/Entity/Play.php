@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=PlayRepository::class)
  * @ORM\Table(name="play", uniqueConstraints={
- *      @ORM\UniqueConstraint(name="team_opponent_idx", columns={"team_id", "opponent_id"})
+ *      @ORM\UniqueConstraint(name="team_opponent_idx", columns={"team_id", "opponent_id", "stage_id"})
  * }, indexes={@ORM\Index(name="stage_order_id_idx", columns={"stage_order"})})
  */
 class Play
