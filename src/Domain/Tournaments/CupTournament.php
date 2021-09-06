@@ -4,6 +4,8 @@
 namespace App\Domain\Tournaments;
 
 
+use App\Entity\Play;
+use App\Entity\Team;
 use App\Repository\StageRepository;
 
 class CupTournament implements TournamentInterface
@@ -57,5 +59,14 @@ class CupTournament implements TournamentInterface
     public function getGroupTournament(): GroupTournament
     {
         return $this->groupTournament;
+    }
+
+    /**
+     * @param Team $team
+     * @return Play[]
+     */
+    public function findTeamGroupPlays(Team $team)
+    {
+        return $this->getGroupTournament()->findTeamPlays($team);
     }
 }

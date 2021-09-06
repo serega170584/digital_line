@@ -89,7 +89,7 @@ class GroupTournament implements TournamentInterface
 
     /**
      * @param Team $team
-     * @return mixed
+     * @return Play[]
      */
     public function findTeamPlays(Team $team)
     {
