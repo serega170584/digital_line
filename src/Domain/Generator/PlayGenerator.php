@@ -90,7 +90,7 @@ class PlayGenerator extends Generator
         while ($stage) {
             $playOrder = 0;
             $teams = $this->orderedTeams;
-            $winnersCount = count($teams);
+            $winnersCount = count($teams) / 2;
             $this->orderedTeams = [];
             ksort($teams);
             $pair = array_slice($teams, $playOrder * 2, self::PAIR_COUNT);
