@@ -98,7 +98,8 @@ class PlayGenerator extends Generator
             $opponent = $pair[1];
             $shift = 0;
             while ($pair) {
-                var_dump($pair);
+                var_dump($pair[0]->getName());
+                var_dump($pair[1]->getName());
                 $this->inflatePlayoffPlay($team, $opponent, $playOrder, $teamsCount, $shift);
                 ++$playOrder;
                 $shift += ($playOrder % 2);
