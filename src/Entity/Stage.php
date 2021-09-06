@@ -105,12 +105,13 @@ class Stage
     /**
      * @param Play[] $orderedPlays
      */
-    public function setOrderedPlays(array $orderedPlays): void
+    public function setOrderedPlays(Collection $orderedPlays): void
     {
         $this->orderedPlays = $orderedPlays;
     }
 
     /**
+     *
      * @return Play[]
      */
     public function getOrderedPlays(): array
