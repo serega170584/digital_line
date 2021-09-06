@@ -31,7 +31,7 @@ class Stage
 
     /**
      * @ORM\OneToMany(targetEntity=Play::class, mappedBy="stage", orphanRemoval=true, fetch="EAGER")
-     * @ORM\OrderBy({"stageOrder" = "ASC"})
+     * @ORM\OrderBy({"stageOrder111" = "ASC"})
      */
     private $plays;
 
