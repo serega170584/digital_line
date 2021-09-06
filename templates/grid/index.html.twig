@@ -19,7 +19,7 @@
 
     <div class="example-wrapper">
         <ul style="list-style: none; padding-left: 0">
-            {% for group in cupTournament.getPlayoffTournament().getStages() %}
+            {% for stage in cupTournament.getPlayoffTournament().getStages() %}
                  <li style="vertical-align: top; display: inline-block">
                  {{ stage.getName }}
                 {# <ul style="list-style: none; display: block; padding-left: 0; margin-right: 40px"> #}
