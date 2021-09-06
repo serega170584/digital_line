@@ -98,6 +98,7 @@ class PlayGenerator extends Generator
             $opponent = $pair[1];
             $shift = 0;
             while ($pair) {
+                var_dump($pair);
                 $this->inflatePlayoffPlay($team, $opponent, $playOrder, $teamsCount, $shift);
                 ++$playOrder;
                 $shift += ($playOrder % 2);
@@ -113,8 +114,6 @@ class PlayGenerator extends Generator
         $stage = current($this->stages);
         $entityObject = $this->createEntityObject();
         $entityObject->setTeam($team);
-        var_dump($team->getName());
-        var_dump($opponent->getName());
         $entityObject->setOpponent($opponent);
         $entityObject->setScoredGoals(1);
         $entityObject->setLostGoals(0);
