@@ -88,6 +88,7 @@ class PlayGenerator extends Generator
             $shift += ($i % 2);
         }
         $stage = next($stages);
+        var_dump(!$stage);
         while ($stage) {
             $playOrder = 0;
             $teams = $this->orderedTeams;
