@@ -5,6 +5,7 @@ namespace App\Domain\Generator;
 
 
 use App\Domain\Repository\RepositoryInterface;
+use App\Entity\Group;
 use App\Entity\Stage;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -25,9 +26,9 @@ abstract class Generator
     }
 
     /**
-     * @return mixed
+     * @return Stage|Group
      */
-    public function createEntityObject(): Stage
+    public function createEntityObject()
     {
         return $this->repository->createEntityObject();
     }

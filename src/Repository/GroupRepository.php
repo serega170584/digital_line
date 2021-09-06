@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Domain\Generator\GroupGeneratorInterface;
+use App\Domain\Generator\Generator;
 use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Group;
@@ -18,13 +18,14 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Group|null findOneBy(array $criteria, array $orderBy = null)
  * @method Group[]    findAll()
  * @method Group[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Group createEntityObject()
  */
 class GroupRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     use RepositoryTrait;
 
     /**
-     * @var GroupGeneratorInterface
+     * @var Generator
      */
     private $generator;
 
