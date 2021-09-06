@@ -42,8 +42,8 @@
             </li>
             {% endfor %}
             <li style="vertical-align: top; display: inline-block">
-                <h2>Results</h2>
                 <ul style="list-style: none;">
+                    <li>Results</li>
                     {% for team in cupTournament.getPlayoffTournament().getTable() %}
                         <li>
                             {{ team.getName }}
