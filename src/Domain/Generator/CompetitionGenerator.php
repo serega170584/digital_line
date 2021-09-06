@@ -92,6 +92,7 @@ class CompetitionGenerator extends Generator
             $teamGenerator->setGroups($groupGenerator->getGroups());
             $teamGenerator->execute();
             $playGenerator = $this->playGenerator;
+            $playGenerator->setRepository($this->playRepository);
             $playGenerator->setStages($stageGenerator->getStages());
             $playGenerator->setTeams($teamGenerator->getTeams());
             $playGenerator->execute();

@@ -49,6 +49,7 @@ class PlayGenerator extends Generator
                     $entityObject->setScoredGoals(1);
                     $entityObject->setLostGoals(0);
                 }
+                $entityObject->setStage($stage);
                 $this->persist($entityObject);
             }
             $team = $teams[$i];
