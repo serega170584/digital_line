@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
+use App\Domain\Generator\CompetitionGenerator;
 use App\Domain\Generator\GroupGeneratorInterface;
 use App\Domain\Generator\PlayGeneratorInterface;
-use App\Domain\Generator\StageGenerator;
 use App\Domain\Generator\TeamGeneratorInterface;
 use App\Domain\Generator\TeamPointsGeneratorInterface;
 use App\Domain\Strategies\PlainPointStrategy;
@@ -34,15 +34,13 @@ class CompetitionController extends AbstractController
 
     /**
      * @Route("/generate", name="generate")
-     * @param StageGenerator $stageGenerator
-     * @param StageRepository $stageRepository
+     * @param CompetitionGenerator $competitionGenerator
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      */
-    public function generate(StageGenerator $stageGenerator, StageRepository $stageRepository)
+    public function generate(CompetitionGenerator $competitionGenerator)
     {
-        $stageGenerator->setRepository($stageRepository);
-        $stageGenerator->execute();
+        $competitionGenerator->execute();
         return $this->render('competition/index.html.twig', [
             'controller_name' => 'CompetitionController',
         ]);
