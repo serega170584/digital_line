@@ -59,7 +59,7 @@
                     <tr>
                         <td></td>
                         {% for team in group.getTeams() %}
-                            <td>{{ team.getName() }}</td>
+                            <td>{{ team.getName() }} {{ cupTournament.getGroupTournament().findTeamPlays(team).first().getName() }}</td>
                         {% endfor %}
                     </tr>
 {#                    {% for team in group.getTeams() %}#}

@@ -6,7 +6,7 @@ namespace App\Domain\Tournaments;
 
 use App\Repository\StageRepository;
 
-class CupTournament extends Tournament
+class CupTournament implements TournamentInterface
 {
     /**
      * @var StageRepository
@@ -45,8 +45,8 @@ class CupTournament extends Tournament
         $playoffStages = $stages->findIsPlayoff();
         $this->playoffTournament->setStages($playoffStages);
         $this->playoffTournament->build();
-        $groupStages = $stages->findIsGroup();
-        $this->groupTournament->setStages($groupStages);
+        $groupStage = $stages->findIsGroup()->first();
+        $this->groupTournament->setStage($groupStage);
         $this->groupTournament->setPlayoffStages($playoffStages);
         $this->groupTournament->build();
     }

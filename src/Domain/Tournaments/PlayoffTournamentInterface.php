@@ -4,9 +4,10 @@
 namespace App\Domain\Tournaments;
 
 
+use App\Domain\Collection\StageArrayCollection;
 use App\Repository\StageRepository;
 
-class PlayoffTournament extends Tournament
+class PlayoffTournament implements TournamentInterface
 {
     /**
      * @var StageRepository $repository
@@ -26,5 +27,13 @@ class PlayoffTournament extends Tournament
     public function build()
     {
         // TODO: Implement build() method.
+    }
+
+    /**
+     * @param StageArrayCollection $stages
+     */
+    public function setStages(StageArrayCollection $stages): void
+    {
+        $this->stage = $stages;
     }
 }

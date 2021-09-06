@@ -11,7 +11,7 @@ use App\Entity\Team;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 
-class GroupTournament extends Tournament
+class GroupTournament implements TournamentInterface
 {
     const WINNERS_COUNT = 4;
     const ID = 'id';
@@ -24,6 +24,10 @@ class GroupTournament extends Tournament
      * @var ArrayCollection
      */
     private $groups;
+    /**
+     * @var Stage
+     */
+    private $stage;
 
     /**
      * @return Team[]
@@ -37,6 +41,7 @@ class GroupTournament extends Tournament
         }
         return $winners;
     }
+
 
     public function build()
     {
@@ -70,5 +75,24 @@ class GroupTournament extends Tournament
     public function getGroups(): ArrayCollection
     {
         return $this->groups;
+    }
+
+    /**
+     * @param Stage $stage
+     */
+    public function setStage(Stage $stage): void
+    {
+        $this->stage = $stage;
+    }
+
+    /**
+     * @param Team $team
+     * @return mixed
+     */
+    public function findTeamPlays(Team $team)
+    {
+        return $this->stage->getPlays()->matching(Criteria::create()
+            ->where(Criteria::expr()->eq('team', $team))
+            ->orderBy([self::ID => Criteria::ASC]));
     }
 }
