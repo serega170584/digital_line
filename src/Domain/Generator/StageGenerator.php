@@ -27,7 +27,6 @@ class StageGenerator extends Generator
             $entityObject->setIsPlayoff($record[1]);
             $this->persist($entityObject);
         }
-        $this->flush();
         return $this;
     }
 }

@@ -34,5 +34,6 @@ class CompetitionGenerator extends Generator
         $stageGenerator = $this->stageGenerator;
         $stageGenerator->setRepository($this->stageRepository);
         $stageGenerator->execute();
+        $this->flush();
     }
 }
