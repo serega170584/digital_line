@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Domain\Generator\CompetitionGenerator;
-use App\Domain\Generator\GroupGeneratorInterface;
 use App\Domain\Generator\PlayGeneratorInterface;
-use App\Domain\Generator\TeamGeneratorInterface;
 use App\Domain\Generator\TeamPointsGeneratorInterface;
 use App\Domain\Strategies\PlainPointStrategy;
 use App\Domain\Tournaments\CupTournament;
