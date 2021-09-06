@@ -19,9 +19,8 @@ abstract class Generator
      */
     protected $entityManager;
 
-    public function __construct(RepositoryInterface $repository, EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager)
     {
-        $this->repository = $repository;
         $this->entityManager = $entityManager;
     }
 
@@ -53,5 +52,13 @@ abstract class Generator
     {
         $this->entityManager->flush();
         return $this;
+    }
+
+    /**
+     * @param RepositoryInterface $repository
+     */
+    public function setRepository(RepositoryInterface $repository): void
+    {
+        $this->repository = $repository;
     }
 }

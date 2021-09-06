@@ -16,7 +16,6 @@ use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class CompetitionController extends AbstractController
 {
@@ -35,10 +34,13 @@ class CompetitionController extends AbstractController
     /**
      * @Route("/generate", name="generate")
      * @param StageGenerator $stageGenerator
+     * @param StageRepository $stageRepository
+     * @return Response
      * @throws \Doctrine\ORM\ORMException
      */
-    public function generate(StageGenerator $stageGenerator)
+    public function generate(StageGenerator $stageGenerator, StageRepository $stageRepository)
     {
+        $stageGenerator->setRepository($stageRepository);
         $stageGenerator->execute();
         return $this->render('competition/index.html.twig', [
             'controller_name' => 'CompetitionController',
