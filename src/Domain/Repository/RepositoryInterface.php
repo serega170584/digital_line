@@ -12,5 +12,5 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 interface RepositoryInterface
 {
-    public function createEntityObject(array $fields);
+    public function createEntityObject();
 }
