@@ -43,7 +43,7 @@ class CompetitionController extends AbstractController
         $competitionGenerator->execute();
         $cupTournament->build();
         return $this->render('grid/index.html.twig', [
-            'cup_tournament' => $cupTournament,
+            'cupTournament' => $cupTournament,
         ]);
     }
 
