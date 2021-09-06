@@ -87,4 +87,12 @@ class PlayoffTournament implements TournamentInterface
         }
         $this->table = $teams;
     }
+
+    /**
+     * @return Team[]
+     */
+    public function getTable(): array
+    {
+        return $this->table;
+    }
 }
