@@ -114,7 +114,7 @@ class Stage
      *
      * @return Play[]
      */
-    public function getOrderedPlays(): array
+    public function getOrderedPlays(): Collection
     {
         return $this->orderedPlays;
     }
