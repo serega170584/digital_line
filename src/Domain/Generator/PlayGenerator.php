@@ -104,7 +104,7 @@ class PlayGenerator extends Generator
                 $shift += ($playOrder % 2);
                 $pair = array_slice($teams, $playOrder * 2, self::PAIR_COUNT);
             }
-            next($stages);
+            $stage = next($this->stages);
         }
         return $this;
     }
