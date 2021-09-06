@@ -88,13 +88,13 @@ class PlayGenerator extends Generator
             $shift += ($i % 2);
         }
         $stage = next($stages);
-        var_dump(!$stage);
         while ($stage) {
             $playOrder = 0;
             $teams = $this->orderedTeams;
             $teamsCount = count($teams);
             $this->orderedTeams = [];
             ksort($teams);
+            var_dump(count($teams));
             $pair = array_slice($teams, $playOrder * 2, self::PAIR_COUNT);
             $team = $pair[0];
             $opponent = $pair[1];
