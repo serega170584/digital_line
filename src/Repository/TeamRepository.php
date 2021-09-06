@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Domain\Generator\TeamGeneratorInterface;
+use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Group;
 use App\Entity\Team;

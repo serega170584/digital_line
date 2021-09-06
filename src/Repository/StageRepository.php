@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Domain\Collections\StageArrayCollection;
 use App\Domain\Generator\Generator;
+use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Stage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
