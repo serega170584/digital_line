@@ -88,7 +88,6 @@ class PlayGenerator extends Generator
         }
         $stage = next($this->stages);
         while ($stage) {
-            var_dump($stage->getName());
             $playOrder = 0;
             $teams = $this->orderedTeams;
             $teamsCount = count($teams);
@@ -112,6 +111,7 @@ class PlayGenerator extends Generator
     private function inflatePlayoffPlay($team, $opponent, $playOrder, $teamsCount, $shift): self
     {
         $stage = current($this->stages);
+        var_dump($stage->getName());
         $entityObject = $this->createEntityObject();
         $entityObject->setTeam($team);
         $entityObject->setOpponent($opponent);
