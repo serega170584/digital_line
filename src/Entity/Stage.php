@@ -2,10 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\StageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=StageRepository::class)
@@ -33,6 +31,11 @@ class Stage
      * @ORM\OneToMany(targetEntity=Play::class, mappedBy="stage", orphanRemoval=true, fetch="EAGER")
      */
     private $plays;
+
+    /**
+     * @var Play[]
+     */
+    private $orderedPlays;
 
     public function __construct()
     {
@@ -96,5 +99,21 @@ class Stage
         }
 
         return $this;
+    }
+
+    /**
+     * @param Play[] $orderedPlays
+     */
+    public function setOrderedPlays(array $orderedPlays): void
+    {
+        $this->orderedPlays = $orderedPlays;
+    }
+
+    /**
+     * @return Play[]
+     */
+    public function getOrderedPlays(): array
+    {
+        return $this->orderedPlays;
     }
 }

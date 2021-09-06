@@ -5,7 +5,9 @@ namespace App\Domain\Tournaments;
 
 
 use App\Domain\Collection\StageArrayCollection;
+use App\Entity\Stage;
 use App\Repository\StageRepository;
+use Doctrine\Common\Collections\Criteria;
 
 class PlayoffTournament implements TournamentInterface
 {
@@ -14,13 +16,23 @@ class PlayoffTournament implements TournamentInterface
      */
     protected $repository;
     /**
-     * @var StageArrayCollection
+     * @var StageArrayCollection|Stage[]
      */
     private $stages;
 
     public function build()
     {
-        // TODO: Implement build() method.
+        foreach ($this->stages as $stage) {
+            /**
+             * @var Stage $stage
+             */
+            $plays = $stage->getPlays()->matching(Criteria::create()
+                ->orderBy([
+                    'stageOrder' => Criteria::ASC,
+                ])
+            );
+            $stage->setOrderedPlays($plays);
+        }
     }
 
     /**
@@ -29,5 +41,13 @@ class PlayoffTournament implements TournamentInterface
     public function setStages(StageArrayCollection $stages): void
     {
         $this->stages = $stages;
+    }
+
+    /**
+     * @return StageArrayCollection|Stage[]
+     */
+    public function getStages()
+    {
+        return $this->stages;
     }
 }

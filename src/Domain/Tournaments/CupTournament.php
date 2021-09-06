@@ -30,16 +30,6 @@ class CupTournament implements TournamentInterface
         $this->stageRepository = $stageRepository;
     }
 
-    public function getUnits()
-    {
-        return [];
-    }
-
-    public function getWinners()
-    {
-        return [];
-    }
-
     public function build()
     {
         $stages = $this->stageRepository
@@ -68,5 +58,13 @@ class CupTournament implements TournamentInterface
     public function findTeamGroupPlays(Team $team)
     {
         return $this->getGroupTournament()->findTeamPlays($team);
+    }
+
+    /**
+     * @return PlayoffTournament
+     */
+    public function getPlayoffTournament(): PlayoffTournament
+    {
+        return $this->playoffTournament;
     }
 }
