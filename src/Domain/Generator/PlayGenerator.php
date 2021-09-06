@@ -23,8 +23,8 @@ class PlayGenerator extends Generator
 
     public function execute(): self
     {
-        $this->inflateGroup(0, self::WINNER_POINTS_COUNT);
-        $this->inflateGroup(self::WINNER_POINTS_COUNT, self::WINNER_POINTS_COUNT * 2 - 1);
+        $this->inflateGroup(0, self::GROUP_TEAMS_COUNT);
+        $this->inflateGroup(self::GROUP_TEAMS_COUNT, self::GROUP_TEAMS_COUNT * 2 - 1);
         return $this;
     }
 
