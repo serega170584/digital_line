@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Domain\Generators\GroupGeneratorInterface;
 use App\Domain\Generators\PlayGeneratorInterface;
 use App\Domain\Generators\StageGenerator;
-use App\Domain\Generators\StageGeneratorInterface;
 use App\Domain\Generators\TeamGeneratorInterface;
 use App\Domain\Generators\TeamPointsGeneratorInterface;
 use App\Domain\Strategies\PlainPointStrategy;
@@ -17,6 +16,7 @@ use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CompetitionController extends AbstractController
 {
