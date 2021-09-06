@@ -8,6 +8,7 @@ use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Stage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -20,6 +21,8 @@ use Doctrine\Persistence\ManagerRegistry;
 class StageRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     use RepositoryTrait;
+
+    const ID = 'id';
 
     /**
      * @var Generator
@@ -65,7 +68,7 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
      */
     public function findAllArrayCollection(): StageArrayCollection
     {
-        $collection = new StageArrayCollection($this->findAll());
+        $collection = new StageArrayCollection($this->findBy([self::ID => Criteria::ASC]));
         return $collection;
     }
 }
