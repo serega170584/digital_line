@@ -93,7 +93,6 @@ class PlayGenerator extends Generator
             $teamsCount = count($teams);
             $this->orderedTeams = [];
             ksort($teams);
-            var_dump(count($teams));
             $pair = array_slice($teams, $playOrder * 2, self::PAIR_COUNT);
             $team = $pair[0];
             $opponent = $pair[1];
