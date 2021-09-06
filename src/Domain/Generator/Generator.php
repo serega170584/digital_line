@@ -4,8 +4,8 @@
 namespace App\Domain\Generator;
 
 
+use App\Domain\Repository\RepositoryInterface;
 use App\Entity\Stage;
-use App\Repository\RepositoryInterface;
 use Doctrine\ORM\EntityManager;
 
 abstract class Generator
