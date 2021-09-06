@@ -3,10 +3,11 @@
 namespace App\Repository;
 
 use App\Domain\Collections\StageArrayCollection;
+use App\Domain\Generator\Generator;
+use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Stage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Laminas\Code\Generator\GeneratorInterface;
 
 /**
  * @method Stage|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,7 +21,7 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
     use RepositoryTrait;
 
     /**
-     * @var GeneratorInterface
+     * @var Generator
      */
     private $generator;
 
