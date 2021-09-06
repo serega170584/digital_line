@@ -38,19 +38,19 @@
                             </table>
                         </li>
                     {% endfor %}
-                    <li style="display: inline-block">
-                        <h2>Results</h2>
-                        <ul style="list-style: none;">
-                            {% for team in cupTournament.getPlayoffTournament().getTable() %}
-                            <li>
-                                {{ team.getName }}
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </li>
                 </ul>
             </li>
             {% endfor %}
+            <li style="display: inline-block">
+                <h2>Results</h2>
+                <ul style="list-style: none;">
+                    {% for team in cupTournament.getPlayoffTournament().getTable() %}
+                        <li>
+                            {{ team.getName }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
         </ul>
         {% for group in cupTournament.getGroupTournament().getGroups() %}
             <div>
