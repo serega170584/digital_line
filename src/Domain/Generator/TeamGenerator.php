@@ -21,17 +21,6 @@ class TeamGenerator extends Generator
     private $teams;
 
     /**
-     * @var TeamRepository
-     */
-    private $repository;
-
-    public function __construct(?EntityManagerInterface $entityManager)
-    {
-        parent::__construct($entityManager);
-        $this->repository = $entityManager->getRepository(Team::class);
-    }
-
-    /**
      * @return $this
      * @throws \Doctrine\ORM\ORMException
      */

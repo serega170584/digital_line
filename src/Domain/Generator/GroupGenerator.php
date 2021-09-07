@@ -14,16 +14,6 @@ class GroupGenerator extends Generator
      * @var Group[]
      */
     private $groups;
-    /**
-     * @var GroupRepository
-     */
-    private $repository;
-
-    public function __construct(?EntityManagerInterface $entityManager)
-    {
-        parent::__construct($entityManager);
-        $this->repository = $entityManager->getRepository(Group::class);
-    }
 
     /**
      * @return $this

@@ -20,13 +20,9 @@ class DigitalLineFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $stageGenerator = new StageGenerator(null);
-        $stageGenerator->setManager($manager);
         $groupGenerator = new GroupGenerator(null);
-        $groupGenerator->setManager($manager);
         $teamGenerator = new TeamGenerator(null);
-        $teamGenerator->setManager($manager);
         $playGenerator = new PlayGenerator(null);
-        $playGenerator->setManager($manager);
         /**
          * @var ObjectManager|EntityManagerInterface $manager
          */

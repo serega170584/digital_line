@@ -15,20 +15,9 @@ class StageGenerator extends Generator
     use GeneratorTrait;
 
     /**
-     * @var StageRepository
-     */
-    private $repository;
-
-    /**
      * @var Stage[]
      */
     private $stages;
-
-    public function __construct(?EntityManagerInterface $entityManager)
-    {
-        parent::__construct($entityManager);
-        $this->repository = $entityManager->getRepository(Stage::class);
-    }
 
     /**
      * @return $this

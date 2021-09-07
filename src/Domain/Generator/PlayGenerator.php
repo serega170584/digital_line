@@ -5,7 +5,6 @@ namespace App\Domain\Generator;
 use App\Entity\Play;
 use App\Entity\Stage;
 use App\Entity\Team;
-use App\Repository\PlayRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class PlayGenerator extends Generator
@@ -31,17 +30,6 @@ class PlayGenerator extends Generator
      * @var Team[] $teams
      */
     private $teams;
-
-    /**
-     * @var PlayRepository
-     */
-    private $repository;
-
-    public function __construct(?EntityManagerInterface $entityManager)
-    {
-        parent::__construct($entityManager);
-        $this->repository = $entityManager->getRepository(Play::class);
-    }
 
     /**
      * @return $this

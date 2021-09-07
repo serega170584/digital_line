@@ -3,11 +3,17 @@
 namespace App\Controller;
 
 use App\Domain\Generator\CompetitionGenerator;
+use App\Domain\Generator\GroupGenerator;
+use App\Domain\Generator\PlayGenerator;
+use App\Domain\Generator\StageGenerator;
+use App\Domain\Generator\TeamGenerator;
 use App\Domain\Tournaments\CupTournament;
-use App\Repository\StageRepository;
+use App\Entity\Group;
+use App\Entity\Play;
+use App\Entity\Stage;
+use App\Entity\Team;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class CompetitionController extends AbstractController
 {
@@ -27,12 +33,24 @@ class CompetitionController extends AbstractController
     /**
      * @Route("/generation", name="generation")
      * @param CompetitionGenerator $competitionGenerator
-     * @param StageRepository $stageRepository
+     * @param StageGenerator $stageGenerator
+     * @param GroupGenerator $groupGenerator
+     * @param PlayGenerator $playGenerator
+     * @param TeamGenerator $teamGenerator
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      */
-    public function generation(CompetitionGenerator $competitionGenerator)
+    public function generation(CompetitionGenerator $competitionGenerator,
+                               StageGenerator $stageGenerator,
+                               GroupGenerator $groupGenerator,
+                               PlayGenerator $playGenerator,
+                               TeamGenerator $teamGenerator
+    )
     {
+        $competitionGenerator->setStageGenerator($stageGenerator);
+        $competitionGenerator->setGroupGenerator($groupGenerator);
+        $competitionGenerator->setPlayGenerator($playGenerator);
+        $competitionGenerator->setTeamGenerator($teamGenerator);
         $competitionGenerator->execute();
         return $this->redirect('/competition');
     }
