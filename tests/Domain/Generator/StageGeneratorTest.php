@@ -41,5 +41,14 @@ class StageGeneratorTest extends KernelTestCase
         $this->assertEqualsCanonicalizing($names, [
             'Preliminary round',
         ]);
+        $stages = $stageRepository->findBy([self::IS_PLAYOFF => true], [self::ID => Criteria::ASC]);
+        $names = array_map(function (Stage $group) {
+            return $group->getName();
+        }, $stages);
+        $this->assertEqualsCanonicalizing($names, [
+            '1/4',
+            '1/2',
+            'Final'
+        ]);
     }
 }
