@@ -43,7 +43,8 @@ class PlayGeneratorTest extends KernelTestCase
         reset($stages);
         $groupStages = array_unique(array_map(function (Stage $stage) {
             $res = false;
-            if (!($stage->getIsPlayoff())) {
+            $isPlayoff = $stage->getIsPlayoff();
+            if (!$isPlayoff) {
                 $res = $stage;
             }
             return $res;
