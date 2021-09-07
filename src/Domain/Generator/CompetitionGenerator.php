@@ -4,10 +4,7 @@
 namespace App\Domain\Generator;
 
 
-use App\Repository\GroupRepository;
-use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
-use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CompetitionGenerator extends Generator
@@ -30,6 +27,10 @@ class CompetitionGenerator extends Generator
      * @var PlayGenerator
      */
     private $playGenerator;
+    /**
+     * @var StageRepository
+     */
+    private $stageRepository;
 
     /**
      * CompetitionGenerator constructor.
@@ -38,12 +39,14 @@ class CompetitionGenerator extends Generator
      * @param GroupGenerator $groupGenerator
      * @param TeamGenerator $teamGenerator
      * @param PlayGenerator $playGenerator
+     * @param StageRepository $stageRepository
      */
     public function __construct(EntityManagerInterface $entityManager,
                                 StageGenerator $stageGenerator,
                                 GroupGenerator $groupGenerator,
                                 TeamGenerator $teamGenerator,
-                                PlayGenerator $playGenerator
+                                PlayGenerator $playGenerator,
+                                StageRepository $stageRepository
     )
     {
         parent::__construct($entityManager);
@@ -51,6 +54,7 @@ class CompetitionGenerator extends Generator
         $this->groupGenerator = $groupGenerator;
         $this->teamGenerator = $teamGenerator;
         $this->playGenerator = $playGenerator;
+        $this->stageRepository = $stageRepository;
     }
 
     public function isEmpty(): bool
