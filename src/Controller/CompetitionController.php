@@ -3,13 +3,7 @@
 namespace App\Controller;
 
 use App\Domain\Generator\CompetitionGenerator;
-use App\Domain\Generator\TeamPointsGeneratorInterface;
 use App\Domain\Tournaments\CupTournament;
-use App\Domain\Tournaments\GroupTournament;
-use App\Repository\GroupRepository;
-use App\Repository\PlayRepository;
-use App\Repository\StageRepository;
-use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
