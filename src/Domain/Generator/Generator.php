@@ -4,16 +4,16 @@
 namespace App\Domain\Generator;
 
 use App\Entity\Stage;
-use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 abstract class Generator
 {
     /**
-     * @var ObjectManager
+     * @var EntityManagerInterface
      */
     protected $entityManager;
 
-    public function __construct(ObjectManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }

@@ -4,7 +4,7 @@ namespace App\Domain\Generator;
 
 use App\Entity\Group;
 use App\Repository\GroupRepository;
-use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class GroupGenerator extends Generator
 {
@@ -19,7 +19,7 @@ class GroupGenerator extends Generator
      */
     private $repository;
 
-    public function __construct(ObjectManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct($entityManager);
         $this->repository = $entityManager->getRepository(GroupRepository::class);
