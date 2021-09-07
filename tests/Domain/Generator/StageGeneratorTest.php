@@ -4,6 +4,7 @@ namespace App\Tests\Service;
 
 
 use App\Entity\Group;
+use App\Entity\Stage;
 use App\Repository\StageRepository;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -24,7 +25,7 @@ class StageGeneratorTest extends KernelTestCase
          * @var Stage[] $stages
          */
         $stages = $stageRepository->findBy([], [self::ID => Criteria::ASC]);
-        $names = array_map(function (Group $group) {
+        $names = array_map(function (Stage $group) {
             return $group->getName();
         }, $stages);
         $this->assertEqualsCanonicalizing($names, [
