@@ -33,6 +33,8 @@ class PlayGeneratorTest extends KernelTestCase
         $stageTeamCounts[] = $stage->getPlays()->count();
         $stage = current($stages);
         $stageTeamCounts[] = $stage->getPlays()->count();
+        var_dump($stageTeamCounts);
+        die('asd');
         $this->assertEqualsCanonicalizing($stageTeamCounts, [135, 4, 2, 1]);
     }
 }
