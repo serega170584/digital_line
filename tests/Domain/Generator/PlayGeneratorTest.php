@@ -60,14 +60,14 @@ class PlayGeneratorTest extends KernelTestCase
         $teams = $teamRepository->findAll();
         array_map(function (Team $team) use ($groupStage) {
             $groupPlaysCount = $groupStage->getPlays()->matching(Criteria::create()
-                ->where(Criteria::expr()->eq(TEAM, $team)))
+                ->where(Criteria::expr()->eq(self::TEAM, $team)))
                 ->count();
             $this->assertEquals(8, $groupPlaysCount);
         }, $teams);
 
         array_map(function (Team $team) use ($groupStage) {
             $groupPlaysCount = $groupStage->getPlays()->matching(Criteria::create()
-                ->where(Criteria::expr()->eq(OPPONENT, $team)))
+                ->where(Criteria::expr()->eq(self::OPPONENT, $team)))
                 ->count();
             $this->assertEquals(8, $groupPlaysCount);
         }, $teams);
