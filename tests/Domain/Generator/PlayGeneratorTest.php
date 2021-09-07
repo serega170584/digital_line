@@ -3,6 +3,7 @@
 namespace App\Tests\Service;
 
 
+use App\Entity\Play;
 use App\Entity\Stage;
 use App\Entity\Team;
 use App\Repository\PlayRepository;
@@ -71,5 +72,24 @@ class PlayGeneratorTest extends KernelTestCase
                 ->count();
             $this->assertEquals(8, $groupPlaysCount);
         }, $teams);
+
+        $playoffStages = $stages->matching(Criteria::create()
+            ->where(Criteria::expr()->eq(self::IS_PLAYOFF, false))
+            ->orderBy(['id' => Criteria::ASC]));
+
+        /**
+         * @var Stage $stage
+         */
+        $stage = $playoffStages->current();
+        $names = $stage->getPlays()->map(function (Play $play) {
+            return $play->getTeam()->getName();
+        });
+        $this->assertEquals([
+            'A', 'B', 'C', 'D'
+        ], $names);
+
+        $this->assertEquals([
+            'L', 'J', 'K', 'I'
+        ], $names);
     }
 }
