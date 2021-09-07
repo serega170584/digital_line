@@ -4,11 +4,9 @@ namespace App\Repository;
 
 use App\Domain\Collection\StageArrayCollection;
 use App\Domain\Generator\Generator;
-use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Stage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,9 +14,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Stage|null findOneBy(array $criteria, array $orderBy = null)
  * @method Stage[]    findAll()
  * @method Stage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- * @method Stage createEntityObject()
  */
-class StageRepository extends ServiceEntityRepository implements RepositoryInterface
+class StageRepository extends ServiceEntityRepository
 {
     use RepositoryTrait;
 

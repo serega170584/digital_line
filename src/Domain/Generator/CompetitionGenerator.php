@@ -4,10 +4,7 @@
 namespace App\Domain\Generator;
 
 
-use App\Repository\GroupRepository;
-use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
-use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CompetitionGenerator extends Generator

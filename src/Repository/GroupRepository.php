@@ -3,14 +3,9 @@
 namespace App\Repository;
 
 use App\Domain\Generator\Generator;
-use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Group;
-use App\Entity\Play;
-use App\Entity\Stage;
-use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -20,14 +15,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Group[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  * @method Group createEntityObject()
  */
-class GroupRepository extends ServiceEntityRepository implements RepositoryInterface
+class GroupRepository extends ServiceEntityRepository
 {
     use RepositoryTrait;
-
-    /**
-     * @var Generator
-     */
-    private $generator;
 
     public function __construct(ManagerRegistry $registry)
     {

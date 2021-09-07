@@ -4,7 +4,6 @@
 namespace App\Domain\Generator;
 
 
-use App\Entity\Group;
 use App\Entity\Stage;
 
 /**
