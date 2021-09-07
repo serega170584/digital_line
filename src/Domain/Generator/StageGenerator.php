@@ -18,10 +18,10 @@ class StageGenerator extends Generator
      */
     private $repository;
 
-    public function __construct(EntityManagerInterface $entityManager, StageRepository $stageRepository)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct($entityManager);
-        $this->repository = $stageRepository;
+        $this->repository = $entityManager->getRepository(StageRepository::class);
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Domain\Generator;
 
+use App\Entity\Team;
 use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -14,9 +15,9 @@ class TeamGenerator extends Generator
      */
     private $repository;
 
-    public function __construct(EntityManagerInterface $entityManager, TeamRepository $teamRepository)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct($entityManager);
-        $this->repository = $teamRepository;
+        $this->repository = $entityManager->getRepository(Team::class);
     }
 }

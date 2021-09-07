@@ -45,8 +45,7 @@ class CompetitionGenerator extends Generator
                                 StageGenerator $stageGenerator,
                                 GroupGenerator $groupGenerator,
                                 TeamGenerator $teamGenerator,
-                                PlayGenerator $playGenerator,
-                                StageRepository $stageRepository
+                                PlayGenerator $playGenerator
     )
     {
         parent::__construct($entityManager);
@@ -54,7 +53,7 @@ class CompetitionGenerator extends Generator
         $this->groupGenerator = $groupGenerator;
         $this->teamGenerator = $teamGenerator;
         $this->playGenerator = $playGenerator;
-        $this->stageRepository = $stageRepository;
+        $this->stageRepository = $this->entityManager->getRepository(StageRepository::class);
     }
 
     public function isEmpty(): bool

@@ -19,10 +19,10 @@ class GroupGenerator extends Generator
      */
     private $repository;
 
-    public function __construct(EntityManagerInterface $entityManager, GroupRepository $groupRepository)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct($entityManager);
-        $this->repository = $groupRepository;
+        $this->repository = $entityManager->getRepository(GroupRepository::class);
     }
 
     /**
