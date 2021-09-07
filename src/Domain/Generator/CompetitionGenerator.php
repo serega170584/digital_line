@@ -25,25 +25,13 @@ class CompetitionGenerator extends Generator
      */
     private $groupGenerator;
     /**
-     * @var GroupRepository
-     */
-    private $groupRepository;
-    /**
      * @var TeamGenerator
      */
     private $teamGenerator;
     /**
-     * @var TeamRepository
-     */
-    private $teamRepository;
-    /**
      * @var PlayGenerator
      */
     private $playGenerator;
-    /**
-     * @var PlayRepository
-     */
-    private $playRepository;
 
     /**
      * CompetitionGenerator constructor.
@@ -51,14 +39,11 @@ class CompetitionGenerator extends Generator
      * @param StageGenerator $stageGenerator
      * @param StageRepository $stageRepository
      * @param GroupGenerator $groupGenerator
-     * @param GroupRepository $groupRepository
      * @param TeamGenerator $teamGenerator
-     * @param TeamRepository $teamRepository
      * @param PlayGenerator $playGenerator
-     * @param PlayRepository $playRepository
      */
     public function __construct(EntityManagerInterface $entityManager,
-                                StageGenerator $stageGenerator,
+                                StageGenerator $stageGenerator, StageRepository $stageRepository,
                                 GroupGenerator $groupGenerator,
                                 TeamGenerator $teamGenerator,
                                 PlayGenerator $playGenerator
@@ -66,6 +51,7 @@ class CompetitionGenerator extends Generator
     {
         parent::__construct($entityManager);
         $this->stageGenerator = $stageGenerator;
+        $this->stageRepository = $stageRepository;
         $this->groupGenerator = $groupGenerator;
         $this->teamGenerator = $teamGenerator;
         $this->playGenerator = $playGenerator;
