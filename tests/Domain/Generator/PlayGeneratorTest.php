@@ -41,7 +41,7 @@ class PlayGeneratorTest extends KernelTestCase
         $this->assertEqualsCanonicalizing($stageTeamCounts, [128, 4, 2, 1]);
 
         reset($stages);
-        $groupStages = array_unique(array_map(function (Stage $stage) {
+        $groupStages = array_unique(array_map(function ($stage) {
             $res = !($stage->getIsPlayoff()) ? $stage : false;
             return $res;
         }, $stages));
