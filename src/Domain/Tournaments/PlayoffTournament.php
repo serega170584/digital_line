@@ -99,9 +99,9 @@ class PlayoffTournament implements TournamentInterface
     }
 
     /**
-     * @return Team[]|ArrayCollection
+     * @return Team[]
      */
-    public function getTable(): ArrayCollection
+    public function getTable(): array
     {
         return $this->table;
     }
