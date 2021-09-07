@@ -6,7 +6,6 @@ use App\Domain\Generator\CompetitionGenerator;
 use App\Domain\Tournaments\CupTournament;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class CompetitionController extends AbstractController
 {
@@ -20,7 +19,7 @@ class CompetitionController extends AbstractController
                                 CupTournament $cupTournament)
     {
         $cupTournament->build();
-        return $this->render('grid/index.html.twig', [
+        return $this->render('grid/competition.html.twig', [
             'cupTournament' => $cupTournament,
         ]);
     }
@@ -35,5 +34,14 @@ class CompetitionController extends AbstractController
     {
         $competitionGenerator->execute();
         return $this->redirect('/competition');
+    }
+
+    /**
+     * @Route("/startPage", name="startPage")
+     * @return Response
+     */
+    public function startPage()
+    {
+        return $this->render('grid/index.html.twig');
     }
 }
