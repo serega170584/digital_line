@@ -85,5 +85,14 @@ class TeamGeneratorTest extends KernelTestCase
             'I', 'J', 'K', 'L',
             'M', 'N', 'O', 'P'
         ]);
+        $points = $group->getTeams()->matching(Criteria::create()
+            ->orderBy([self::POINTS => Criteria::DESC]))
+            ->map(function (Team $team) {
+                return $team->getPoints();
+            });
+        $this->assertEquals($points->toArray(), [
+            7, 6, 5, 4,
+            3, 2, 1, 0,
+        ]);
     }
 }
