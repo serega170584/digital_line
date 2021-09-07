@@ -4,9 +4,16 @@
 namespace App\Domain\Generator;
 
 
+use App\Entity\Play;
 use App\Entity\Stage;
 use App\Entity\Team;
 
+/**
+ * Trait PlayGeneratorTrait
+ * @package App\Domain\Generator
+ * @method Play createEntityObject()
+ * @method persist($entityObject)
+ */
 trait PlayGeneratorTrait
 {
     /**

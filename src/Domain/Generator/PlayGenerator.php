@@ -3,9 +3,6 @@
 
 namespace App\Domain\Generator;
 
-
-use App\Entity\Stage;
-use App\Entity\Team;
 use App\Repository\PlayRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
