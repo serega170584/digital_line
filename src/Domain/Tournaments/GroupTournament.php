@@ -107,7 +107,9 @@ class GroupTournament implements TournamentInterface
             )->slice(self::WINNERS_COUNT);
         });
         $losers = $losers->toArray();
+        var_dump($losers->count());
         $losers = new ArrayCollection(array_merge(...$losers));
+        var_dump($losers->count());
         $losers = $losers->matching(Criteria::create()
             ->orderBy([
                 self::POINTS => Criteria::DESC,
