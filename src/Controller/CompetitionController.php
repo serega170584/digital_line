@@ -33,7 +33,6 @@ class CompetitionController extends AbstractController
      */
     public function generation(CompetitionGenerator $competitionGenerator, StageRepository $stageRepository)
     {
-        $competitionGenerator->setStageRepository($stageRepository);
         $competitionGenerator->execute();
         return $this->redirect('/competition');
     }
