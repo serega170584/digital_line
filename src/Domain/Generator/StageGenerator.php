@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Domain\Generator;
 
 use App\Repository\StageRepository;

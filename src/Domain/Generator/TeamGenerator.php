@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Domain\Generator;
-
 
 use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;

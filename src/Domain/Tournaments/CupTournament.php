@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Domain\Tournaments;
-
 
 use App\Entity\Play;
 use App\Entity\Team;

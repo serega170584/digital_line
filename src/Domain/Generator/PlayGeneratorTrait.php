@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Domain\Generator;
-
 
 use App\Entity\Play;
 use App\Entity\Stage;

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Domain\Tournaments;
-
 
 use App\Domain\Collection\StageArrayCollection;
 use App\Entity\Stage;
