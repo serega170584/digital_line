@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class StageGeneratorTest extends KernelTestCase
 {
+    const ID = 'id';
+
     public function testGenerate()
     {
         self::bootKernel();
