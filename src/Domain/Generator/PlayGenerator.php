@@ -37,7 +37,7 @@ class PlayGenerator extends Generator
      */
     private $repository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(?EntityManagerInterface $entityManager)
     {
         parent::__construct($entityManager);
         $this->repository = $entityManager->getRepository(Play::class);
