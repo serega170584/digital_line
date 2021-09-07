@@ -3,7 +3,6 @@
 namespace App\Tests\Service;
 
 
-use App\Entity\Group;
 use App\Entity\Stage;
 use App\Repository\StageRepository;
 use Doctrine\Common\Collections\Criteria;
@@ -12,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class StageGeneratorTest extends KernelTestCase
 {
     const ID = 'id';
+    const IS_PLAYOFF = 'is_playoff';
 
     public function testGenerate()
     {
@@ -33,6 +33,16 @@ class StageGeneratorTest extends KernelTestCase
             '1/4',
             '1/2',
             'Final'
+        ]);
+        $groupStages = $stageRepository->findBy([self::IS_PLAYOFF => false], [self::ID => Criteria::ASC]);
+        $stages = array_map(function (Stage $group) {
+            return $group->getName();
+        }, $stages);
+        $names = array_map(function (Stage $group) {
+            return $group->getName();
+        }, $stages);
+        $this->assertEqualsCanonicalizing($names, [
+            'Preliminary round',
         ]);
     }
 }
