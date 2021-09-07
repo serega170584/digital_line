@@ -19,6 +19,7 @@ class DigitalLineFixtures extends Fixture
          * @var ObjectManager|EntityManagerInterface $manager
          */
         $generator = new CompetitionGenerator(null);
+        $generator->setManager($manager);
         $generator->execute();
     }
 }
