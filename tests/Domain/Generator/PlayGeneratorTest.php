@@ -17,6 +17,7 @@ class PlayGeneratorTest extends KernelTestCase
          * @var PlayRepository $playRepository
          */
         $playRepository = $container->get(PlayRepository::class);
+        $this->assertEqualsCanonicalizing($playRepository->count([]), 135);
         $stageTeamCounts = [];
         /**
          * @var StageRepository $stageRepository
