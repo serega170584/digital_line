@@ -22,11 +22,6 @@ abstract class Generator
     }
 
     /**
-     * @return Stage|Group|Team|Play
-     */
-    abstract public function createEntityObject();
-
-    /**
      * @param Stage $entityObject
      * @throws \Doctrine\ORM\ORMException
      */
