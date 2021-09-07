@@ -3,9 +3,15 @@
 namespace App\Tests\Service;
 
 
+use App\Entity\Stage;
+use App\Entity\Team;
 use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
+use App\Repository\TeamRepository;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+
+const TEAM = 'team';
 
 class PlayGeneratorTest extends KernelTestCase
 {
@@ -17,7 +23,7 @@ class PlayGeneratorTest extends KernelTestCase
          * @var PlayRepository $playRepository
          */
         $playRepository = $container->get(PlayRepository::class);
-        $this->assertEqualsCanonicalizing($playRepository->count([]), 135);
+        $this->assertEquals($playRepository->count([]), 135);
         $stageTeamCounts = [];
         /**
          * @var StageRepository $stageRepository
@@ -33,5 +39,27 @@ class PlayGeneratorTest extends KernelTestCase
         $stage = next($stages);
         $stageTeamCounts[] = $stage->getPlays()->count();
         $this->assertEqualsCanonicalizing($stageTeamCounts, [128, 4, 2, 1]);
+
+        reset($stages);
+        $groupStages = array_unique(array_map(function (Stage $stage) {
+            $stage = !($stage->getIsPlayoff()) ? $stage : false;
+            return $stage;
+        }, $stages));
+
+        /**
+         * @var Stage $groupStage
+         */
+        $groupStage = current($groupStages);
+        /**
+         * @var TeamRepository $teamRepository
+         */
+        $teamRepository = $container->get(TeamRepository::class);
+        $teams = $teamRepository->findAll();
+        array_map(function (Team $team) use ($groupStage) {
+            $groupPlaysCount = $groupStage->getPlays()->matching(Criteria::create()
+                ->where(Criteria::expr()->eq(TEAM, $team)))
+                ->count();
+            $this->assertEquals(8, $groupPlaysCount);
+        }, $teams);
     }
 }
