@@ -86,10 +86,10 @@ class PlayGeneratorTest extends KernelTestCase
         });
         $this->assertEquals([
             'A', 'B', 'C', 'D'
-        ], $names);
+        ], $names->toArray());
 
         $this->assertEquals([
             'L', 'J', 'K', 'I'
-        ], $names);
+        ], $names->toArray());
     }
 }
