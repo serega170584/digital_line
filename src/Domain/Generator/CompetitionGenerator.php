@@ -58,21 +58,17 @@ class CompetitionGenerator extends Generator
      * @param PlayRepository $playRepository
      */
     public function __construct(EntityManagerInterface $entityManager,
-                                StageGenerator $stageGenerator, StageRepository $stageRepository,
-                                GroupGenerator $groupGenerator, GroupRepository $groupRepository,
-                                TeamGenerator $teamGenerator, TeamRepository $teamRepository,
-                                PlayGenerator $playGenerator, PlayRepository $playRepository
+                                StageGenerator $stageGenerator,
+                                GroupGenerator $groupGenerator,
+                                TeamGenerator $teamGenerator,
+                                PlayGenerator $playGenerator
     )
     {
         parent::__construct($entityManager);
         $this->stageGenerator = $stageGenerator;
-        $this->stageRepository = $stageRepository;
         $this->groupGenerator = $groupGenerator;
-        $this->groupRepository = $groupRepository;
         $this->teamGenerator = $teamGenerator;
-        $this->teamRepository = $teamRepository;
         $this->playGenerator = $playGenerator;
-        $this->playRepository = $playRepository;
     }
 
     /**
