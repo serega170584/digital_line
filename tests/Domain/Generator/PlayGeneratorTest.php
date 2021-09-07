@@ -84,7 +84,7 @@ class PlayGeneratorTest extends KernelTestCase
         $names = $stage->getPlays()->map(function (Play $play) {
             return $play->getTeam()->getName();
         });
-        $this->assertEquals([
+        $this->assertEqualsCanonicalizing([
             'A', 'B', 'C', 'D'
         ], $names->toArray());
 
