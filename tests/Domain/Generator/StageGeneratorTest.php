@@ -34,10 +34,7 @@ class StageGeneratorTest extends KernelTestCase
             '1/2',
             'Final'
         ]);
-        $groupStages = $stageRepository->findBy([self::IS_PLAYOFF => false], [self::ID => Criteria::ASC]);
-        $stages = array_map(function (Stage $group) {
-            return $group->getName();
-        }, $stages);
+        $stages = $stageRepository->findBy([self::IS_PLAYOFF => false], [self::ID => Criteria::ASC]);
         $names = array_map(function (Stage $group) {
             return $group->getName();
         }, $stages);
