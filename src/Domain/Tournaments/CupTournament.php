@@ -22,6 +22,10 @@ class CupTournament implements TournamentInterface
      * @var PlayoffTournament
      */
     private $playoffTournament;
+    /**
+     * @var Team[]
+     */
+    private $table;
 
     public function __construct(StageRepository $stageRepository, GroupTournament $groupTournament, PlayoffTournament $playoffTournament)
     {
@@ -41,6 +45,7 @@ class CupTournament implements TournamentInterface
         $this->groupTournament->setStage($groupStage);
         $this->groupTournament->setPlayoffStages($playoffStages);
         $this->groupTournament->build();
+        $this->buildTable();
     }
 
     /**
@@ -66,5 +71,23 @@ class CupTournament implements TournamentInterface
     public function getPlayoffTournament(): PlayoffTournament
     {
         return $this->playoffTournament;
+    }
+
+    /**
+     * @return $this
+     */
+    public function buildTable(): self
+    {
+        $this->table = array_merge($this->playoffTournament->getTable(),
+            $this->groupTournament->getTable());
+        return $this;
+    }
+
+    /**
+     * @return Team[]
+     */
+    public function getTable(): array
+    {
+        return $this->table;
     }
 }

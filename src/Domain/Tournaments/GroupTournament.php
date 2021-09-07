@@ -36,7 +36,7 @@ class GroupTournament implements TournamentInterface
     /**
      * @var ArrayCollection
      */
-    private $losers;
+    private $table;
 
     public function build()
     {
@@ -54,7 +54,7 @@ class GroupTournament implements TournamentInterface
             $play->getTeam()->getTeamGroup(),
             $play->getOpponent()->getTeamGroup()
         ]);
-        $this->buildLosers();
+        $this->buildTable();
     }
 
     /**
@@ -99,7 +99,7 @@ class GroupTournament implements TournamentInterface
     /**
      * @return $this
      */
-    private function buildLosers(): self
+    private function buildTable(): self
     {
         $losers = $this->groups->map(function (Group $group) {
             $group->getTeams()->matching(Criteria::create()
@@ -115,15 +115,15 @@ class GroupTournament implements TournamentInterface
                 POINTS => Criteria::DESC,
                 self::ID => Criteria::ASC
             ]));
-        $this->losers = $losers;
+        $this->table = $losers;
         return $this;
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getLosers(): ArrayCollection
+    public function getTable(): ArrayCollection
     {
-        return $this->losers;
+        return $this->table;
     }
 }

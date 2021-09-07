@@ -100,7 +100,7 @@ class PlayoffTournament implements TournamentInterface
     }
 
     /**
-     * @return Team[]
+     * @return Team[]|ArrayCollection
      */
     public function getTable(): ArrayCollection
     {
