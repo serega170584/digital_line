@@ -23,13 +23,9 @@ class GroupGeneratorTest extends KernelTestCase
          * @var Group[] $groups
          */
         $groups = $groupRepository->findBy([],[self::ID => Criteria::ASC]);
-        var_dump(count($groups));
         $names = array_map(function (Group $group) {
             return $group->getName();
         }, $groups);
-        var_dump($names);
-        die('asd');
         $this->assertEquals($names, ['A', 'B']);
-        $this->assertEquals(['A', 'B'], $names);
     }
 }
