@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Domain\Collection\StageArrayCollection;
-use App\Domain\Generator\Generator;
 use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Stage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -20,11 +19,6 @@ class StageRepository extends ServiceEntityRepository
     use RepositoryTrait;
 
     const ID = 'id';
-
-    /**
-     * @var Generator
-     */
-    private $generator;
 
     public function __construct(ManagerRegistry $registry)
     {

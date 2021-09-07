@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Play;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

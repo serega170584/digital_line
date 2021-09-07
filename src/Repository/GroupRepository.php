@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Domain\Generator\Generator;
 use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Group;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
