@@ -22,7 +22,7 @@ class GroupGeneratorTest extends KernelTestCase
         /**
          * @var Group[] $groups
          */
-        $groups = $groupRepository->findBy([self::ID => Criteria::ASC]);
+        $groups = $groupRepository->findAll();
         var_dump(count($groups));
         $names = array_map(function (Group $group) {
             return $group->getName();
