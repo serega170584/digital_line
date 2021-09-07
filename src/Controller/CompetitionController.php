@@ -31,7 +31,7 @@ class CompetitionController extends AbstractController
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      */
-    public function generation(CompetitionGenerator $competitionGenerator, StageRepository $stageRepository)
+    public function generation(CompetitionGenerator $competitionGenerator)
     {
         $competitionGenerator->execute();
         return $this->redirect('/competition');
