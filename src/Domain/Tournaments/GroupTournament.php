@@ -12,15 +12,13 @@ use App\Entity\Team;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 
-const POINTS = 'points';
-
 class GroupTournament implements TournamentInterface
 {
     const ID = 'id';
     const TEAM = 'team';
     const OPPONENT = 'opponent';
     const WINNERS_COUNT = 4;
-
+    const POINTS = 'points';
     /**
      * @var StageArrayCollection
      */
@@ -34,7 +32,7 @@ class GroupTournament implements TournamentInterface
      */
     private $stage;
     /**
-     * @var ArrayCollection
+     * @var Team[]
      */
     private $table;
 
@@ -104,19 +102,18 @@ class GroupTournament implements TournamentInterface
         $losers = $this->groups->map(function (Group $group) {
             return $group->getTeams()->matching(Criteria::create()
                 ->orderBy([
-                    POINTS => Criteria::DESC,
+                    self::POINTS => Criteria::DESC,
                 ])
             )->slice(self::WINNERS_COUNT);
         });
         $losers = $losers->toArray();
         $losers = new ArrayCollection(array_merge(...$losers));
-        var_dump($losers->count());
         $losers = $losers->matching(Criteria::create()
             ->orderBy([
-                POINTS => Criteria::DESC,
+                self::POINTS => Criteria::DESC,
                 self::ID => Criteria::ASC
             ]));
-        $this->table = $losers;
+        $this->table = $losers->toArray();
         return $this;
     }
 
