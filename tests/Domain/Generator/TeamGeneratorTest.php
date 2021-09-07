@@ -7,6 +7,7 @@ use App\Entity\Group;
 use App\Entity\Team;
 use App\Repository\GroupRepository;
 use App\Repository\TeamRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -48,10 +49,13 @@ class TeamGeneratorTest extends KernelTestCase
          * @var Group $group
          */
         $group = current($groupRepository->findBy([self::NAME => 'A'], [self::ID => Criteria::ASC]));
-        $names = array_map(function (Team $team) {
+        /**
+         * @var ArrayCollection $names
+         */
+        $names = $group->getTeams()->map(function (Team $team) {
             return $team->getName();
-        }, $group->getTeams());
-        $this->assertEqualsCanonicalizing($names, [
+        });
+        $this->assertEqualsCanonicalizing($names->toArray(), [
             'A', 'B', 'C', 'D',
             'E', 'F', 'G', 'H',
         ]);
@@ -60,10 +64,13 @@ class TeamGeneratorTest extends KernelTestCase
          * @var Group $group
          */
         $group = current($groupRepository->findBy([self::NAME => 'B'], [self::ID => Criteria::ASC]));
-        $names = array_map(function (Team $team) {
+        /**
+         * @var ArrayCollection $names
+         */
+        $names = $group->getTeams()->map(function (Team $team) {
             return $team->getName();
-        }, $group->getTeams());
-        $this->assertEqualsCanonicalizing($names, [
+        });
+        $this->assertEqualsCanonicalizing($names->toArray(), [
             'I', 'J', 'K', 'L',
             'M', 'N', 'O', 'P'
         ]);
