@@ -64,17 +64,13 @@ class CompetitionGenerator extends Generator
     {
         if (!$this->stageRepository->count([])) {
             $stageGenerator = $this->stageGenerator;
-            $stageGenerator->setRepository($this->stageRepository);
             $stageGenerator->execute();
             $groupGenerator = $this->groupGenerator;
-            $groupGenerator->setRepository($this->groupRepository);
             $groupGenerator->execute();
             $teamGenerator = $this->teamGenerator;
-            $teamGenerator->setRepository($this->teamRepository);
             $teamGenerator->setGroups($groupGenerator->getGroups());
             $teamGenerator->execute();
             $playGenerator = $this->playGenerator;
-            $playGenerator->setRepository($this->playRepository);
             $playGenerator->setStages($stageGenerator->getStages());
             $playGenerator->setTeams($teamGenerator->getTeams());
             $playGenerator->execute();
