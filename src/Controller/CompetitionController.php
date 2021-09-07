@@ -8,12 +8,9 @@ use App\Domain\Generator\PlayGenerator;
 use App\Domain\Generator\StageGenerator;
 use App\Domain\Generator\TeamGenerator;
 use App\Domain\Tournaments\CupTournament;
-use App\Entity\Group;
-use App\Entity\Play;
-use App\Entity\Stage;
-use App\Entity\Team;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CompetitionController extends AbstractController
 {
