@@ -4,7 +4,7 @@ namespace App\Domain\Generator;
 
 use App\Entity\Team;
 use App\Repository\TeamRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
 
 class TeamGenerator extends Generator
 {
@@ -15,7 +15,7 @@ class TeamGenerator extends Generator
      */
     private $repository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(ObjectManager $entityManager)
     {
         parent::__construct($entityManager);
         $this->repository = $entityManager->getRepository(Team::class);
