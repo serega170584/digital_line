@@ -86,6 +86,7 @@ class PlayoffTournament implements TournamentInterface
             $stageWinners = $stageWinners->matching(Criteria::create()
                 ->orderBy([
                     self::POINTS => Criteria::DESC,
+                    self::ID => Criteria::ASC
                 ])
             );
             $teams = new ArrayCollection(array_merge($teams->toArray(), $stageWinners->toArray()));
