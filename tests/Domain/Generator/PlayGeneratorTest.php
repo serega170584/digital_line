@@ -74,7 +74,7 @@ class PlayGeneratorTest extends KernelTestCase
         }, $teams);
 
         $playoffStages = $stages->matching(Criteria::create()
-            ->where(Criteria::expr()->eq(self::IS_PLAYOFF, false))
+            ->where(Criteria::expr()->eq(self::IS_PLAYOFF, true))
             ->orderBy(['id' => Criteria::ASC]));
 
         /**
