@@ -3,9 +3,8 @@
 namespace App\Tests\Service;
 
 
-use App\Entity\Group;
-use App\Entity\Play;
 use App\Repository\PlayRepository;
+use App\Repository\StageRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class PlayGeneratorTest extends KernelTestCase
@@ -19,5 +18,21 @@ class PlayGeneratorTest extends KernelTestCase
          */
         $playRepository = $container->get(PlayRepository::class);
         $this->assertEquals($playRepository->count([]), 135);
+
+        $stageTeamCounts = [];
+        /**
+         * @var StageRepository $stageRepository
+         */
+        $stageRepository = $container->get(StageRepository::class);
+        $stages = $stageRepository->findAll();
+        $stage = current($stages);
+        $stageTeamCounts[] = $stage->getPlays()->count();
+        $stage = current($stages);
+        $stageTeamCounts[] = $stage->getPlays()->count();
+        $stage = current($stages);
+        $stageTeamCounts[] = $stage->getPlays()->count();
+        $stage = current($stages);
+        $stageTeamCounts[] = $stage->getPlays()->count();
+        $this->assertEqualsCanonicalizing($stageTeamCounts, [135, 4, 2, 1]);
     }
 }
