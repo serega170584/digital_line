@@ -5,17 +5,21 @@ namespace App\Domain\Tournaments;
 
 
 use App\Domain\Collection\StageArrayCollection;
+use App\Entity\Group;
 use App\Entity\Play;
 use App\Entity\Stage;
 use App\Entity\Team;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 
+const POINTS = 'points';
+
 class GroupTournament implements TournamentInterface
 {
     const ID = 'id';
     const TEAM = 'team';
     const OPPONENT = 'opponent';
+    const WINNERS_COUNT = 4;
 
     /**
      * @var StageArrayCollection
@@ -29,6 +33,10 @@ class GroupTournament implements TournamentInterface
      * @var Stage
      */
     private $stage;
+    /**
+     * @var ArrayCollection
+     */
+    private $losers;
 
     public function build()
     {
@@ -46,6 +54,7 @@ class GroupTournament implements TournamentInterface
             $play->getTeam()->getTeamGroup(),
             $play->getOpponent()->getTeamGroup()
         ]);
+        $this->buildLosers();
     }
 
     /**
@@ -85,5 +94,36 @@ class GroupTournament implements TournamentInterface
                 self::OPPONENT => Criteria::ASC
             ])
         );
+    }
+
+    /**
+     * @return $this
+     */
+    private function buildLosers(): self
+    {
+        $losers = $this->groups->map(function (Group $group) {
+            $group->getTeams()->matching(Criteria::create()
+                ->orderBy([
+                    POINTS => Criteria::DESC,
+                ])
+            )->slice(self::WINNERS_COUNT);
+        });
+        $losers = $losers->toArray();
+        $losers = new ArrayCollection(array_merge(...$losers));
+        $losers = $losers->matching(Criteria::create()
+            ->orderBy([
+                POINTS => Criteria::DESC,
+                self::ID => Criteria::ASC
+            ]));
+        $this->losers = $losers;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLosers(): ArrayCollection
+    {
+        return $this->losers;
     }
 }
