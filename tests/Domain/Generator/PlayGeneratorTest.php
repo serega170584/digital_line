@@ -89,14 +89,9 @@ class PlayGeneratorTest extends KernelTestCase
             ->map(function (Play $play) {
                 return $play->getTeam()->getName();
             });
-        var_dump($names->toArray());
-        var_dump([
-            'A', 'C', 'B', 'D'
-        ]);
-        die('asd');
         $this->assertEquals([
             'A', 'C', 'B', 'D'
-        ], $names->toArray());
+        ], array_values($names->toArray()));
 
 //        $names = $stage->getPlays()
 //            ->matching(Criteria::create()
