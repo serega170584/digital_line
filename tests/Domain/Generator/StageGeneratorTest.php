@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class StageGeneratorTest extends KernelTestCase
 {
     const ID = 'id';
-    const IS_PLAYOFF = 'is_playoff';
+    const IS_PLAYOFF = 'isPlayoff';
 
     public function testGenerate()
     {
