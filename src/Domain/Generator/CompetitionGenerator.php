@@ -7,6 +7,7 @@ namespace App\Domain\Generator;
 use App\Entity\Stage;
 use App\Repository\StageRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
 
 class CompetitionGenerator extends Generator
 {
@@ -33,13 +34,13 @@ class CompetitionGenerator extends Generator
 
     /**
      * CompetitionGenerator constructor.
-     * @param EntityManagerInterface $entityManager
+     * @param EntityManagerInterface|null $entityManager
      * @param StageGenerator $stageGenerator
      * @param GroupGenerator $groupGenerator
      * @param TeamGenerator $teamGenerator
      * @param PlayGenerator $playGenerator
      */
-    public function __construct(EntityManagerInterface $entityManager,
+    public function __construct(?EntityManagerInterface $entityManager,
                                 StageGenerator $stageGenerator,
                                 GroupGenerator $groupGenerator,
                                 TeamGenerator $teamGenerator,
@@ -59,6 +60,7 @@ class CompetitionGenerator extends Generator
      */
     public function execute(): self
     {
+
         if (!$this->stageRepository->count([])) {
             $stageGenerator = $this->stageGenerator;
             $stageGenerator->execute();
@@ -75,5 +77,4 @@ class CompetitionGenerator extends Generator
         }
         return $this;
     }
-
 }

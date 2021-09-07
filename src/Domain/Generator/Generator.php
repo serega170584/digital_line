@@ -5,6 +5,7 @@ namespace App\Domain\Generator;
 
 use App\Entity\Stage;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
 
 abstract class Generator
 {
@@ -12,10 +13,19 @@ abstract class Generator
      * @var EntityManagerInterface
      */
     protected $entityManager;
+    /**
+     * @var ObjectManager
+     */
+    private $fixturesManager;
+    /**
+     * @var ObjectManager|EntityManagerInterface
+     */
+    private $manager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
+        $this->manager = $entityManager;
     }
 
     /**
@@ -24,7 +34,7 @@ abstract class Generator
      */
     public function persist($entityObject)
     {
-        $this->entityManager->persist($entityObject);
+        $this->manager->persist($entityObject);
     }
 
     abstract public function execute();
@@ -36,7 +46,15 @@ abstract class Generator
      */
     public function flush(): self
     {
-        $this->entityManager->flush();
+        $this->manager->flush();
         return $this;
+    }
+
+    /**
+     * @param ObjectManager $fixturesManager
+     */
+    public function setFixturesManager(ObjectManager $fixturesManager): void
+    {
+        $this->fixturesManager = $fixturesManager;
     }
 }
