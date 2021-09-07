@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CompetitionController extends AbstractController
 {
     /**
-     * @Route("/index", name="index")
+     * @Route("/competition", name="competition")
      * @param CompetitionGenerator $competitionGenerator
      * @param CupTournament $cupTournament
      * @return Response
