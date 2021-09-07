@@ -4,7 +4,10 @@
 namespace App\Domain\Generator;
 
 
+use App\Repository\GroupRepository;
+use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
+use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CompetitionGenerator extends Generator
@@ -15,10 +18,6 @@ class CompetitionGenerator extends Generator
      * @var StageGenerator
      */
     private $stageGenerator;
-    /**
-     * @var StageRepository
-     */
-    private $stageRepository;
     /**
      * @var GroupGenerator
      */
@@ -59,11 +58,4 @@ class CompetitionGenerator extends Generator
         return !$this->stageRepository->count([]);
     }
 
-    /**
-     * @param StageRepository $stageRepository
-     */
-    public function setStageRepository(StageRepository $stageRepository): void
-    {
-        $this->stageRepository = $stageRepository;
-    }
 }

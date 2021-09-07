@@ -2,7 +2,9 @@
 
 namespace App\Domain\Generator;
 
+use App\Repository\GroupRepository;
 use App\Repository\PlayRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PlayGenerator extends Generator
 {
@@ -18,11 +20,10 @@ class PlayGenerator extends Generator
      */
     private $repository;
 
-    /**
-     * @param PlayRepository $repository
-     */
-    public function setRepository(PlayRepository $repository): void
+    public function __construct(EntityManagerInterface $entityManager, PlayRepository $playRepository)
     {
-        $this->repository = $repository;
+        parent::__construct($entityManager);
+        $this->repository = $playRepository;
     }
+
 }
