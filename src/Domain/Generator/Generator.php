@@ -14,10 +14,6 @@ abstract class Generator
      */
     protected $entityManager;
     /**
-     * @var ObjectManager
-     */
-    private $fixturesManager;
-    /**
      * @var ObjectManager|EntityManagerInterface
      */
     private $manager;
@@ -51,10 +47,11 @@ abstract class Generator
     }
 
     /**
-     * @param ObjectManager $fixturesManager
+     * @param EntityManagerInterface|ObjectManager $manager
      */
-    public function setFixturesManager(ObjectManager $fixturesManager): void
+    public function setManager($manager): void
     {
-        $this->fixturesManager = $fixturesManager;
+        $this->manager = $manager;
     }
+
 }
