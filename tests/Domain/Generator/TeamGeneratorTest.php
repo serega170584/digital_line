@@ -59,5 +59,21 @@ class TeamGeneratorTest extends KernelTestCase
             'A', 'B', 'C', 'D',
             'E', 'F', 'G', 'H',
         ]);
+
+        /**
+         * @var Group $group
+         */
+        $group = current($groupRepository->findBy([self::NAME => 'B'], [self::ID => Criteria::ASC]));
+        /**
+         * @var Team[] $stages
+         */
+        $teams = $teamRepository->findBy([self::GROUP => $group], [self::ID => Criteria::ASC]);
+        $names = array_map(function (Team $team) {
+            return $team->getName();
+        }, $teams);
+        $this->assertEqualsCanonicalizing($names, [
+            'I', 'J', 'K', 'L',
+            'M', 'N', 'O', 'P'
+        ]);
     }
 }
