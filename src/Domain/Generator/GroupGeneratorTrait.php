@@ -14,6 +14,10 @@ use App\Entity\Group;
  */
 trait GroupGeneratorTrait
 {
+    /**
+     * @return $this
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function execute()
     {
         $records = ['A', 'B'];

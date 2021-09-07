@@ -31,6 +31,10 @@ trait PlayGeneratorTrait
      */
     private $teams;
 
+    /**
+     * @return $this
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function execute(): self
     {
         $this->inflateGroup(0, PlayGenerator::GROUP_TEAMS_COUNT);
@@ -39,6 +43,12 @@ trait PlayGeneratorTrait
         return $this;
     }
 
+    /**
+     * @param $fromTeamIndex
+     * @param $toTeamIndex
+     * @return $this
+     * @throws \Doctrine\ORM\ORMException
+     */
     private function inflateGroup($fromTeamIndex, $toTeamIndex): self
     {
         $stages = $this->stages;
@@ -77,6 +87,10 @@ trait PlayGeneratorTrait
         return $this;
     }
 
+    /**
+     * @return $this
+     * @throws \Doctrine\ORM\ORMException
+     */
     private function inflatePlayoff(): self
     {
         next($this->stages);
@@ -111,6 +125,15 @@ trait PlayGeneratorTrait
         return $this;
     }
 
+    /**
+     * @param $team
+     * @param $opponent
+     * @param $playOrder
+     * @param $winnersCount
+     * @param $shift
+     * @return $this
+     * @throws \Doctrine\ORM\ORMException
+     */
     private function inflatePlayoffPlay($team, $opponent, $playOrder, $winnersCount, $shift): self
     {
         $stage = current($this->stages);

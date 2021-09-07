@@ -23,6 +23,10 @@ trait TeamGeneratorTrait
      */
     private $teams;
 
+    /**
+     * @return $this
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function execute(): self
     {
         $groups = $this->groups;

@@ -3,7 +3,10 @@
 
 namespace App\Domain\Generator;
 
+use App\Entity\Group;
+use App\Entity\Play;
 use App\Entity\Stage;
+use App\Entity\Team;
 use Doctrine\ORM\EntityManagerInterface;
 
 abstract class Generator
@@ -17,6 +20,11 @@ abstract class Generator
     {
         $this->entityManager = $entityManager;
     }
+
+    /**
+     * @return Stage|Group|Team|Play
+     */
+    abstract public function createEntityObject();
 
     /**
      * @param Stage $entityObject
