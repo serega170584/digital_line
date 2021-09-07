@@ -45,7 +45,7 @@
                 <ul style="list-style: none;">
                     <li>Results</li>
                     {% set count = 1 %}
-                    {% for team in cupTournament.getTable().getTable() %}
+                    {% for team in cupTournament.getTable() %}
                         <li>
                             {{ count }}. {{ team.getName }}
                         </li>
