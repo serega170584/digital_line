@@ -19,6 +19,8 @@ class PlayGeneratorTest extends KernelTestCase
     const IS_PLAYOFF = 'isPlayoff';
     const TEAM = 'team';
     const OPPONENT = 'opponent';
+    const ID = 'id';
+    const STAGE_ORDER = 'stageOrder';
 
     public function testGenerate()
     {
@@ -75,19 +77,28 @@ class PlayGeneratorTest extends KernelTestCase
 
         $playoffStages = $stages->matching(Criteria::create()
             ->where(Criteria::expr()->eq(self::IS_PLAYOFF, true))
-            ->orderBy(['id' => Criteria::ASC]));
+            ->orderBy([self::ID => Criteria::ASC]));
 
         /**
          * @var Stage $stage
          */
         $stage = $playoffStages->current();
-        $names = $stage->getPlays()->map(function (Play $play) {
-            return $play->getTeam()->getName();
-        });
-        $this->assertEqualsCanonicalizing([
-            'A', 'B', 'C', 'D'
+        $names = $stage->getPlays()
+            ->matching(Criteria::create()
+                ->orderBy([self::STAGE_ORDER => Criteria::ASC]))
+            ->map(function (Play $play) {
+                return $play->getTeam()->getName();
+            });
+        $this->assertEquals([
+            'A', 'C', 'B', 'D'
         ], $names->toArray());
 
+        $names = $stage->getPlays()
+            ->matching(Criteria::create()
+                ->orderBy([self::STAGE_ORDER => Criteria::ASC]))
+            ->map(function (Play $play) {
+                return $play->getOpponent()->getName();
+            });
         $this->assertEquals([
             'L', 'J', 'K', 'I'
         ], $names->toArray());
