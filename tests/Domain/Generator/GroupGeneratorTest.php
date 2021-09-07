@@ -26,6 +26,8 @@ class GroupGeneratorTest extends KernelTestCase
         $names = array_map(function (Group $group) {
             return $group->getName();
         }, $groups);
+        var_dump($names);
+        die('asd');
         $this->assertEquals($names, ['A', 'B']);
         $this->assertEquals(['A', 'B'], $names);
     }
