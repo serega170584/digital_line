@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -13,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Team[]    findAll()
  * @method Team[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TeamRepository extends ServiceEntityRepository
+class TeamRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     use RepositoryTrait;
 

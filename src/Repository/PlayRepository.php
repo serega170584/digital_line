@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Play;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -13,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Play[]    findAll()
  * @method Play[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PlayRepository extends ServiceEntityRepository
+class PlayRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     use RepositoryTrait;
 

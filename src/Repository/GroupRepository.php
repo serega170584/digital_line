@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Repository\RepositoryTrait;
 use App\Entity\Group;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -14,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Group[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  * @method Group createEntityObject()
  */
-class GroupRepository extends ServiceEntityRepository
+class GroupRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     use RepositoryTrait;
 
