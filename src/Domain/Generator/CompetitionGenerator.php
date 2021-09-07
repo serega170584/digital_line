@@ -4,6 +4,7 @@
 namespace App\Domain\Generator;
 
 
+use App\Entity\Stage;
 use App\Repository\StageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -53,7 +54,7 @@ class CompetitionGenerator extends Generator
         $this->groupGenerator = $groupGenerator;
         $this->teamGenerator = $teamGenerator;
         $this->playGenerator = $playGenerator;
-        $this->stageRepository = $this->entityManager->getRepository(StageRepository::class);
+        $this->stageRepository = $this->entityManager->getRepository(Stage::class);
     }
 
     public function isEmpty(): bool
