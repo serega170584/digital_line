@@ -16,6 +16,7 @@ class TeamGeneratorTest extends KernelTestCase
     const ID = 'id';
     const NAME = 'name';
     const GROUP = 'teamGroup';
+    const POINTS = 'points';
 
     public function testGenerate()
     {
@@ -58,6 +59,16 @@ class TeamGeneratorTest extends KernelTestCase
         $this->assertEqualsCanonicalizing($names->toArray(), [
             'A', 'B', 'C', 'D',
             'E', 'F', 'G', 'H',
+        ]);
+
+        $points = $group->getTeams()->matching(Criteria::create()
+            ->orderBy([self::POINTS => Criteria::DESC]))
+            ->map(function (Team $team) {
+                return $team->getPoints();
+            });
+        $this->assertEquals($points->toArray(), [
+            7, 6, 5, 4,
+            3, 2, 1, 0,
         ]);
 
         /**
