@@ -14,7 +14,7 @@ class TeamGeneratorTest extends KernelTestCase
 {
     const ID = 'id';
     const NAME = 'name';
-    const GROUP = 'group';
+    const GROUP = 'teamGroup';
 
     public function testGenerate()
     {
@@ -51,7 +51,7 @@ class TeamGeneratorTest extends KernelTestCase
         /**
          * @var Team[] $stages
          */
-        $teams = $teamRepository->findBy([self::GROUP =>$group], [self::ID => Criteria::ASC]);
+        $teams = $teamRepository->findBy([self::GROUP => $group], [self::ID => Criteria::ASC]);
         $names = array_map(function (Team $team) {
             return $team->getName();
         }, $teams);
