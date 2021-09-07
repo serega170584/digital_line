@@ -11,7 +11,7 @@ class DigitalLineFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        new CompetitionGenerator()
+//        new CompetitionGenerator()
         $manager->flush();
     }
 }
