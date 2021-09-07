@@ -12,11 +12,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-const TEAM = 'team';
 
 class PlayGeneratorTest extends KernelTestCase
 {
     const IS_PLAYOFF = 'isPlayoff';
+    const TEAM = 'team';
+    const OPPONENT = 'opponent';
 
     public function testGenerate()
     {
@@ -60,6 +61,13 @@ class PlayGeneratorTest extends KernelTestCase
         array_map(function (Team $team) use ($groupStage) {
             $groupPlaysCount = $groupStage->getPlays()->matching(Criteria::create()
                 ->where(Criteria::expr()->eq(TEAM, $team)))
+                ->count();
+            $this->assertEquals(8, $groupPlaysCount);
+        }, $teams);
+
+        array_map(function (Team $team) use ($groupStage) {
+            $groupPlaysCount = $groupStage->getPlays()->matching(Criteria::create()
+                ->where(Criteria::expr()->eq(OPPONENT, $team)))
                 ->count();
             $this->assertEquals(8, $groupPlaysCount);
         }, $teams);
