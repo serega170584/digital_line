@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class GroupGenerator extends Generator
 {
-    use GeneratorTrait;
+    use GeneratorTrait, GroupGeneratorTrait;
 
     /**
      * @var Group[]
@@ -25,22 +25,6 @@ class GroupGenerator extends Generator
     {
         parent::__construct($entityManager);
         $this->repository = $groupRepository;
-    }
-
-    /**
-     * @return $this
-     * @throws \Doctrine\ORM\ORMException
-     */
-    public function execute(): self
-    {
-        $records = ['A', 'B'];
-        foreach ($records as $name) {
-            $entityObject = $this->createEntityObject();
-            $entityObject->setName($name);
-            $this->persist($entityObject);
-            $this->groups[] = $entityObject;
-        }
-        return $this;
     }
 
     /**
