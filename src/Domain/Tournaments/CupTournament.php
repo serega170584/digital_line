@@ -25,7 +25,10 @@ class CupTournament implements TournamentInterface
      */
     private $table;
 
-    public function __construct(StageRepository $stageRepository, GroupTournament $groupTournament, PlayoffTournament $playoffTournament)
+    public function __construct(
+        StageRepository $stageRepository,
+        GroupTournament $groupTournament,
+        PlayoffTournament $playoffTournament)
     {
         $this->groupTournament = $groupTournament;
         $this->playoffTournament = $playoffTournament;

@@ -4,7 +4,6 @@ namespace App\Domain\Generator;
 
 use App\Entity\Group;
 use App\Repository\GroupRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 class GroupGenerator extends Generator
 {
@@ -19,17 +18,19 @@ class GroupGenerator extends Generator
      */
     private $repository;
 
-    public function __construct(EntityManagerInterface $entityManager, GroupRepository $groupRepository)
-    {
-        parent::__construct($entityManager);
-        $this->repository = $groupRepository;
-    }
-
     /**
      * @return Group[]
      */
     public function getGroups(): array
     {
         return $this->groups;
+    }
+
+    /**
+     * @param GroupRepository $repository
+     */
+    public function setRepository(GroupRepository $repository): void
+    {
+        $this->repository = $repository;
     }
 }

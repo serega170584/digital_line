@@ -9,6 +9,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class CompetitionGenerator extends Generator
 {
+    use CompetitionGeneratorTrait;
+
     /**
      * @var StageGenerator
      */
@@ -34,13 +36,12 @@ class CompetitionGenerator extends Generator
      * CompetitionGenerator constructor.
      * @param EntityManagerInterface $entityManager
      * @param StageGenerator $stageGenerator
-     * @param StageRepository $stageRepository
      * @param GroupGenerator $groupGenerator
      * @param TeamGenerator $teamGenerator
      * @param PlayGenerator $playGenerator
      */
     public function __construct(EntityManagerInterface $entityManager,
-                                StageGenerator $stageGenerator, StageRepository $stageRepository,
+                                StageGenerator $stageGenerator,
                                 GroupGenerator $groupGenerator,
                                 TeamGenerator $teamGenerator,
                                 PlayGenerator $playGenerator
@@ -48,31 +49,21 @@ class CompetitionGenerator extends Generator
     {
         parent::__construct($entityManager);
         $this->stageGenerator = $stageGenerator;
-        $this->stageRepository = $stageRepository;
         $this->groupGenerator = $groupGenerator;
         $this->teamGenerator = $teamGenerator;
         $this->playGenerator = $playGenerator;
     }
 
-    /**
-     * @throws \Doctrine\ORM\ORMException
-     */
-    public function execute(): self
+    public function isEmpty(): bool
     {
-        if (!$this->stageRepository->count([])) {
-            $stageGenerator = $this->stageGenerator;
-            $stageGenerator->execute();
-            $groupGenerator = $this->groupGenerator;
-            $groupGenerator->execute();
-            $teamGenerator = $this->teamGenerator;
-            $teamGenerator->setGroups($groupGenerator->getGroups());
-            $teamGenerator->execute();
-            $playGenerator = $this->playGenerator;
-            $playGenerator->setStages($stageGenerator->getStages());
-            $playGenerator->setTeams($teamGenerator->getTeams());
-            $playGenerator->execute();
-            $this->flush();
-        }
-        return $this;
+        return !$this->stageRepository->count([]);
+    }
+
+    /**
+     * @param StageRepository $stageRepository
+     */
+    public function setStageRepository(StageRepository $stageRepository): void
+    {
+        $this->stageRepository = $stageRepository;
     }
 }

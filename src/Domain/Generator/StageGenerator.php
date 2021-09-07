@@ -3,7 +3,6 @@
 namespace App\Domain\Generator;
 
 use App\Repository\StageRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class StageGenerator
@@ -18,9 +17,11 @@ class StageGenerator extends Generator
      */
     private $repository;
 
-    public function __construct(EntityManagerInterface $entityManager, StageRepository $stageRepository)
+    /**
+     * @param StageRepository $repository
+     */
+    public function setRepository(StageRepository $repository): void
     {
-        parent::__construct($entityManager);
-        $this->repository = $stageRepository;
+        $this->repository = $repository;
     }
 }

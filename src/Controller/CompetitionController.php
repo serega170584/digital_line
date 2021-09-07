@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Domain\Generator\CompetitionGenerator;
 use App\Domain\Tournaments\CupTournament;
+use App\Repository\StageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,11 +27,13 @@ class CompetitionController extends AbstractController
     /**
      * @Route("/generation", name="generation")
      * @param CompetitionGenerator $competitionGenerator
+     * @param StageRepository $stageRepository
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      */
-    public function generation(CompetitionGenerator $competitionGenerator)
+    public function generation(CompetitionGenerator $competitionGenerator, StageRepository $stageRepository)
     {
+        $competitionGenerator->setStageRepository($stageRepository);
         $competitionGenerator->execute();
         return $this->redirect('/competition');
     }
