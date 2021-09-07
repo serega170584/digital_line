@@ -8,6 +8,7 @@ use App\Entity\Team;
 use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -15,6 +16,8 @@ const TEAM = 'team';
 
 class PlayGeneratorTest extends KernelTestCase
 {
+    const IS_PLAYOFF = 'isPlayoff';
+
     public function testGenerate()
     {
         self::bootKernel();
@@ -41,19 +44,14 @@ class PlayGeneratorTest extends KernelTestCase
         $this->assertEqualsCanonicalizing($stageTeamCounts, [128, 4, 2, 1]);
 
         reset($stages);
-        $groupStages = array_map(function (Stage $stage) {
-            $res = false;
-            $isPlayoff = $stage->getIsPlayoff();
-            if (!$isPlayoff) {
-                $res = $stage;
-            }
-            return $res;
-        }, $stages);
+        $stages = new ArrayCollection($stages);
+        $groupStages = $stages->matching(Criteria::create()
+            ->where(Criteria::expr()->eq(self::IS_PLAYOFF, false)));
 
         /**
          * @var Stage $groupStage
          */
-        $groupStage = current($groupStages);
+        $groupStage = $groupStages->current();
         /**
          * @var TeamRepository $teamRepository
          */
