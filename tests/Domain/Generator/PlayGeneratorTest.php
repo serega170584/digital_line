@@ -17,8 +17,6 @@ class PlayGeneratorTest extends KernelTestCase
          * @var PlayRepository $playRepository
          */
         $playRepository = $container->get(PlayRepository::class);
-        $this->assertEquals($playRepository->count([]), 135);
-
         $stageTeamCounts = [];
         /**
          * @var StageRepository $stageRepository
@@ -27,14 +25,12 @@ class PlayGeneratorTest extends KernelTestCase
         $stages = $stageRepository->findAll();
         $stage = current($stages);
         $stageTeamCounts[] = $stage->getPlays()->count();
-        $stage = current($stages);
+        $stage = next($stages);
         $stageTeamCounts[] = $stage->getPlays()->count();
-        $stage = current($stages);
+        $stage = next($stages);
         $stageTeamCounts[] = $stage->getPlays()->count();
-        $stage = current($stages);
+        $stage = next($stages);
         $stageTeamCounts[] = $stage->getPlays()->count();
-        var_dump($stageTeamCounts);
-        die('asd');
         $this->assertEqualsCanonicalizing($stageTeamCounts, [135, 4, 2, 1]);
     }
 }
