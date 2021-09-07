@@ -99,7 +99,7 @@ class GroupTournament implements TournamentInterface
     /**
      * @return $this
      */
-    private function buildTable(): self
+    public function buildTable(): self
     {
         $losers = $this->groups->map(function (Group $group) {
             $group->getTeams()->matching(Criteria::create()
