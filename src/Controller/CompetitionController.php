@@ -6,6 +6,7 @@ use App\Domain\Generator\CompetitionGenerator;
 use App\Domain\Tournaments\CupTournament;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CompetitionController extends AbstractController
 {
