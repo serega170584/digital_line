@@ -10,8 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class CompetitionGenerator extends Generator
 {
-    use CompetitionGeneratorTrait;
-
     /**
      * @var StageGenerator
      */
@@ -40,7 +38,6 @@ class CompetitionGenerator extends Generator
      * @param GroupGenerator $groupGenerator
      * @param TeamGenerator $teamGenerator
      * @param PlayGenerator $playGenerator
-     * @param StageRepository $stageRepository
      */
     public function __construct(EntityManagerInterface $entityManager,
                                 StageGenerator $stageGenerator,
@@ -57,9 +54,26 @@ class CompetitionGenerator extends Generator
         $this->stageRepository = $this->entityManager->getRepository(Stage::class);
     }
 
-    public function isEmpty(): bool
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function execute(): self
     {
-        return !$this->stageRepository->count([]);
+        if (!$this->stageRepository->count([])) {
+            $stageGenerator = $this->stageGenerator;
+            $stageGenerator->execute();
+            $groupGenerator = $this->groupGenerator;
+            $groupGenerator->execute();
+            $teamGenerator = $this->teamGenerator;
+            $teamGenerator->setGroups($groupGenerator->getGroups());
+            $teamGenerator->execute();
+            $playGenerator = $this->playGenerator;
+            $playGenerator->setStages($stageGenerator->getStages());
+            $playGenerator->setTeams($teamGenerator->getTeams());
+            $playGenerator->execute();
+            $this->flush();
+        }
+        return $this;
     }
 
 }
