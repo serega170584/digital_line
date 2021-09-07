@@ -3,20 +3,11 @@
 
 namespace App\Domain\Generator;
 
-
-use App\Domain\Repository\RepositoryInterface;
-use App\Entity\Group;
-use App\Entity\Play;
 use App\Entity\Stage;
-use App\Entity\Team;
 use Doctrine\ORM\EntityManagerInterface;
 
 abstract class Generator
 {
-    /**
-     * @var RepositoryInterface
-     */
-    protected $repository;
     /**
      * @var EntityManagerInterface
      */
@@ -25,14 +16,6 @@ abstract class Generator
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-    }
-
-    /**
-     * @return Stage|Group|Team|Play
-     */
-    public function createEntityObject()
-    {
-        return $this->repository->createEntityObject();
     }
 
     /**
@@ -55,13 +38,5 @@ abstract class Generator
     {
         $this->entityManager->flush();
         return $this;
-    }
-
-    /**
-     * @param RepositoryInterface $repository
-     */
-    public function setRepository(RepositoryInterface $repository): void
-    {
-        $this->repository = $repository;
     }
 }

@@ -12,12 +12,10 @@ class CompetitionController extends AbstractController
 {
     /**
      * @Route("/competition", name="competition")
-     * @param CompetitionGenerator $competitionGenerator
      * @param CupTournament $cupTournament
      * @return Response
      */
-    public function competition(CompetitionGenerator $competitionGenerator,
-                                CupTournament $cupTournament)
+    public function competition(CupTournament $cupTournament)
     {
         $cupTournament->build();
         return $this->render('grid/competition.html.twig', [

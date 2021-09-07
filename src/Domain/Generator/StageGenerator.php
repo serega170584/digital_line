@@ -4,6 +4,9 @@
 namespace App\Domain\Generator;
 
 use App\Entity\Stage;
+use App\Repository\PlayRepository;
+use App\Repository\StageRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class StageGenerator
@@ -11,10 +14,23 @@ use App\Entity\Stage;
  */
 class StageGenerator extends Generator
 {
+    use GeneratorTrait;
+
     /**
      * @var Stage[]
      */
     private $stages;
+
+    /**
+     * @var StageRepository
+     */
+    private $repository;
+
+    public function __construct(EntityManagerInterface $entityManager, StageRepository $stageRepository)
+    {
+        parent::__construct($entityManager);
+        $this->repository = $stageRepository;
+    }
 
     /**
      * @return $this

@@ -6,9 +6,14 @@ namespace App\Domain\Generator;
 
 use App\Entity\Stage;
 use App\Entity\Team;
+use App\Repository\GroupRepository;
+use App\Repository\PlayRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PlayGenerator extends Generator
 {
+    use GeneratorTrait;
+
     private const GROUP_TEAMS_COUNT = 8;
     private const WINNER_POINTS_COUNT = 7;
     private const WINNERS_COUNT = 4;
@@ -27,6 +32,17 @@ class PlayGenerator extends Generator
      * @var Team[]
      */
     private $orderedTeams;
+
+    /**
+     * @var PlayRepository
+     */
+    private $repository;
+
+    public function __construct(EntityManagerInterface $entityManager, PlayRepository $playRepository)
+    {
+        parent::__construct($entityManager);
+        $this->repository = $playRepository;
+    }
 
     public function execute(): self
     {

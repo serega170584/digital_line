@@ -6,9 +6,12 @@ namespace App\Domain\Generator;
 
 use App\Entity\Group;
 use App\Entity\Team;
+use App\Repository\TeamRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class TeamGenerator extends Generator
 {
+    use GeneratorTrait;
 
     /**
      * @var Group[]
@@ -18,6 +21,17 @@ class TeamGenerator extends Generator
      * @var Team[]
      */
     private $teams;
+
+    /**
+     * @var TeamRepository
+     */
+    private $repository;
+
+    public function __construct(EntityManagerInterface $entityManager, TeamRepository $teamRepository)
+    {
+        parent::__construct($entityManager);
+        $this->repository = $teamRepository;
+    }
 
     public function execute(): self
     {
