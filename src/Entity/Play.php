@@ -6,7 +6,7 @@ use App\Repository\PlayRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PlayRepository::class)
+ * @ORM\Entity(repositoryClass=App\Repository\PlayRepository::class)
  * @ORM\Table(name="play", uniqueConstraints={
  *      @ORM\UniqueConstraint(name="team_opponent_stage_idx", columns={"team_id", "opponent_id", "stage_id"})
  * }, indexes={@ORM\Index(name="stage_order_id_idx", columns={"stage_order"})})
