@@ -18,7 +18,7 @@ abstract class Generator
      */
     private $manager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(?EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
         $this->manager = $entityManager;
