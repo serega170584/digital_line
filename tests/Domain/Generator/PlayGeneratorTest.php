@@ -159,6 +159,16 @@ class PlayGeneratorTest extends KernelTestCase
             'C', 'D'
         ], array_values($names->toArray()));
 
+        $lostGoals = $stage->getPlays()
+            ->matching(Criteria::create()
+                ->orderBy([self::STAGE_ORDER => Criteria::ASC]))
+            ->map(function (Play $play) {
+                return $play->getLostGoals();
+            });
+        $this->assertEquals([
+            0, 0
+        ], array_values($lostGoals->toArray()));
+
         $stage = $playoffStages->next();
         $names = $stage->getPlays()
             ->matching(Criteria::create()
@@ -189,5 +199,15 @@ class PlayGeneratorTest extends KernelTestCase
         $this->assertEquals([
             'B'
         ], array_values($names->toArray()));
+
+        $lostGoals = $stage->getPlays()
+            ->matching(Criteria::create()
+                ->orderBy([self::STAGE_ORDER => Criteria::ASC]))
+            ->map(function (Play $play) {
+                return $play->getLostGoals();
+            });
+        $this->assertEquals([
+            0
+        ], array_values($lostGoals->toArray()));
     }
 }
