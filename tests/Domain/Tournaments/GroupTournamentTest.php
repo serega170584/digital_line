@@ -23,6 +23,10 @@ class GroupTournamentTest extends KernelTestCase
          * @var GroupTournament $groupTournament
          */
         $groupTournament = $container->get(GroupTournament::class);
+        $stages = $stageRepository
+            ->findAllArrayCollection();
+        $groupStage = $stages->findIsGroup()->first();
+        $groupTournament->setStage($groupStage);
         $groupTournament->setPlayoffStages($playoffStages);
         $groupTournament->build();
         /**
