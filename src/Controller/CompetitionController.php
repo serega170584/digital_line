@@ -22,7 +22,7 @@ class CompetitionController extends AbstractController
     public function competition(CupTournament $cupTournament)
     {
         $cupTournament->build();
-        return $this->render('grid/competition.html.twig', [
+        return $this->render('competition/competition.html.twig', [
             'cupTournament' => $cupTournament,
         ]);
     }
@@ -58,6 +58,6 @@ class CompetitionController extends AbstractController
      */
     public function startPage()
     {
-        return $this->render('grid/index.html.twig');
+        return $this->render('competition/index.html.twig');
     }
 }
