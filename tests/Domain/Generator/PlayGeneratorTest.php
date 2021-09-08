@@ -123,5 +123,26 @@ class PlayGeneratorTest extends KernelTestCase
         $this->assertEquals([
             'C', 'D'
         ], array_values($names->toArray()));
+
+        $stage = $playoffStages->next();
+        $names = $stage->getPlays()
+            ->matching(Criteria::create()
+                ->orderBy([self::STAGE_ORDER => Criteria::ASC]))
+            ->map(function (Play $play) {
+                return $play->getTeam()->getName();
+            });
+        $this->assertEquals([
+            'A'
+        ], array_values($names->toArray()));
+
+        $names = $stage->getPlays()
+            ->matching(Criteria::create()
+                ->orderBy([self::STAGE_ORDER => Criteria::ASC]))
+            ->map(function (Play $play) {
+                return $play->getOpponent()->getName();
+            });
+        $this->assertEquals([
+            'B'
+        ], array_values($names->toArray()));
     }
 }
