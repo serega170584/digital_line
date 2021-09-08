@@ -109,12 +109,19 @@ class PlayGeneratorTest extends KernelTestCase
         })
             ->matching(Criteria::create()
                 ->orderBy([self::OPPONENT => Criteria::ASC]));
+        $opponents = $plays->map(function (Play $play) {
+            return $play->getOpponent()->getName();
+        });
+        $this->assertEquals([
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'
+        ], array_values($opponents->toArray()));
+
         $scoredGoals = $plays->map(function (Play $play) {
             return $play->getScoredGoals();
         });
-        var_dump($team->getName());
-        var_dump($scoredGoals);
-        die('asd');
+        $this->assertEquals([
+            0, 1, 1, 1, 1, 1, 1, 1
+        ], array_values($scoredGoals->toArray()));
 
         $playoffStages = $stages->matching(Criteria::create()
             ->where(Criteria::expr()->eq(self::IS_PLAYOFF, true))
