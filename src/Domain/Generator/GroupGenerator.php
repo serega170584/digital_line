@@ -3,8 +3,6 @@
 namespace App\Domain\Generator;
 
 use App\Entity\Group;
-use App\Repository\GroupRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 class GroupGenerator extends Generator
 {

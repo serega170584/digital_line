@@ -3,8 +3,6 @@
 namespace App\Domain\Generator;
 
 use App\Entity\Stage;
-use App\Repository\StageRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class StageGenerator

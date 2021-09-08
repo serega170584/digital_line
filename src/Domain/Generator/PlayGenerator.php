@@ -2,10 +2,8 @@
 
 namespace App\Domain\Generator;
 
-use App\Entity\Play;
 use App\Entity\Stage;
 use App\Entity\Team;
-use Doctrine\ORM\EntityManagerInterface;
 
 class PlayGenerator extends Generator
 {

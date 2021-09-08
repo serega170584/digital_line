@@ -19,8 +19,6 @@ class StageRepository extends ServiceEntityRepository implements RepositoryInter
 {
     use RepositoryTrait;
 
-    const ID = 'id';
-
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Stage::class);

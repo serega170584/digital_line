@@ -51,36 +51,4 @@ class TeamRepository extends ServiceEntityRepository implements RepositoryInterf
         ;
     }
     */
-
-    /**
-     * @param array $fields
-     * @return Team
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function addEntity(array $fields)
-    {
-        /**
-         * @var Team $entity
-         */
-        $entity = $this->createEntityObject();
-        $entity->setName(current($fields));
-        next($fields);
-        /**
-         * @var Group $teamGroup
-         */
-        $teamGroup = current($fields);
-        $teamGroup->addTeam($entity);
-        $entity->setTeamGroup($teamGroup);
-        $this->saveEntity($entity);
-        return $entity;
-    }
-
-    /**
-     * @param TeamGeneratorInterface $generator
-     */
-    public function setGenerator(TeamGeneratorInterface $generator): void
-    {
-        $this->generator = $generator;
-    }
 }
