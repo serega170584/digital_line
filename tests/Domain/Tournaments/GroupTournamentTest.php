@@ -59,11 +59,9 @@ class GroupTournamentTest extends KernelTestCase
         $teams = array_map(function (Team $team) {
             return $team->getName();
         }, $table);
-        var_dump($teams);
-        die('asd');
         $this->assertEquals([
-            'A', 'B', 'C', 'D',
-            'I', 'J', 'K', 'L'
+            'E', 'M', 'F', 'N',
+            'G', 'O', 'H', 'P'
         ], $teams);
     }
 }
