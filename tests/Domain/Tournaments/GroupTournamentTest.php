@@ -4,6 +4,7 @@ namespace App\Tests\Service;
 
 use App\Domain\Tournaments\GroupTournament;
 use App\Entity\Play;
+use App\Entity\Team;
 use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -52,5 +53,15 @@ class GroupTournamentTest extends KernelTestCase
             return $play->getLostGoals();
         });
         $this->assertEquals([0, 0, 0, 0, 0, 0, 0, 0], $lostGoals->toArray());
+
+        $groupTournament->buildTable();
+        $table = $groupTournament->getTable();
+        $teams = array_map(function (Team $team) {
+            return $team->getName();
+        }, $table);
+        $this->assertEquals([
+            'A', 'B', 'C', 'D',
+            'I', 'J', 'K', 'L'
+        ], $teams);
     }
 }
