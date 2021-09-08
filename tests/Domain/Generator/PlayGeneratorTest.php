@@ -90,7 +90,7 @@ class PlayGeneratorTest extends KernelTestCase
             return ($play->getTeam()->getTeamGroup() === $play->getOpponent()->getTeamGroup())
                 && ($play->getTeam()->getTeamGroup() === $group);
         })->count();
-        var_dump($stage->getPlays()->count());
+        var_dump($groupStage->getPlays()->count());
         die('asd');
         $this->assertEquals(64, $playsCount);
 
