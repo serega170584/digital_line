@@ -3,6 +3,7 @@
 namespace App\Tests\Service;
 
 use App\Domain\Tournaments\PlayoffTournament;
+use App\Entity\Play;
 use App\Entity\Stage;
 use App\Repository\StageRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -31,5 +32,10 @@ class PlayoffTournamentTest extends KernelTestCase
          */
         $stage = $stages->current();
         $this->assertEquals('1/4', $stage->getName());
+        $plays = $stage->getOrderedPlays();
+        $teams = $plays->map(function (Play $play) {
+            return $play->getTeam()->getName();
+        });
+        $this->assert(['A', 'C', 'B', 'D'], array_values($teams));
     }
 }
