@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 
-class GroupTournament implements TournamentInterface
+class GroupTournament extends Tournament
 {
     const ID = 'id';
     const TEAM = 'team';

@@ -9,7 +9,7 @@ use App\Repository\StageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 
-class PlayoffTournament implements TournamentInterface
+class PlayoffTournament extends Tournament
 {
     const STAGE_ORDER = 'stageOrder';
     const ID = 'id';

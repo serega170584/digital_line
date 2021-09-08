@@ -7,7 +7,7 @@ use App\Entity\Team;
 use App\Repository\StageRepository;
 use Doctrine\Common\Collections\Collection;
 
-class CupTournament implements TournamentInterface
+class CupTournament extends Tournament
 {
     /**
      * @var StageRepository
