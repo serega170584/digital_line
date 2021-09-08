@@ -3,6 +3,7 @@
 namespace App\Tests\Service;
 
 use App\Domain\Tournaments\GroupTournament;
+use App\Entity\Group;
 use App\Entity\Play;
 use App\Entity\Team;
 use App\Repository\StageRepository;
@@ -30,6 +31,10 @@ class GroupTournamentTest extends KernelTestCase
         $groupTournament->setStage($groupStage);
         $groupTournament->setPlayoffStages($playoffStages);
         $groupTournament->build();
+        $groups = $groupTournament->getGroups()->map(function (Group $group) {
+            return $group->getName();
+        });
+        $this->assertEquals(['A', 'B'], array_values($groups->toArray()));
         /**
          * @var TeamRepository $teamRepository
          */
