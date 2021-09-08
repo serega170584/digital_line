@@ -89,5 +89,6 @@ class PlayoffTournamentTest extends KernelTestCase
             return $play->getLostGoals();
         });
         $this->assertEquals([0], array_values($lostGoals->toArray()));
+        $this->assertEmpty($stages->next());
     }
 }
