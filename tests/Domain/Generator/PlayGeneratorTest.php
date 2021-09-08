@@ -86,7 +86,7 @@ class PlayGeneratorTest extends KernelTestCase
          */
         $groups = $groupRepository->findAll();
         $group = current($groups);
-        $playsCount = $stage->getPlays()->filter(function (Play $play) use ($group) {
+        $playsCount = $groupStage->getPlays()->filter(function (Play $play) use ($group) {
             return ($play->getTeam()->getTeamGroup() === $play->getOpponent()->getTeamGroup())
                 && ($play->getTeam()->getTeamGroup() === $group);
         })->count();
