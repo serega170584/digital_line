@@ -8,6 +8,7 @@ use App\Entity\Play;
 use App\Entity\Stage;
 use App\Entity\Team;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 
 class GroupTournament implements TournamentInterface
@@ -79,7 +80,7 @@ class GroupTournament implements TournamentInterface
 
     /**
      * @param Team $team
-     * @return Play[]
+     * @return Play[]|Collection
      */
     public function findTeamPlays(Team $team)
     {

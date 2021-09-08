@@ -5,6 +5,7 @@ namespace App\Domain\Tournaments;
 use App\Entity\Play;
 use App\Entity\Team;
 use App\Repository\StageRepository;
+use Doctrine\Common\Collections\Collection;
 
 class CupTournament implements TournamentInterface
 {
@@ -59,7 +60,7 @@ class CupTournament implements TournamentInterface
 
     /**
      * @param Team $team
-     * @return Play[]
+     * @return Play[]|Collection
      */
     public function findTeamGroupPlays(Team $team)
     {
