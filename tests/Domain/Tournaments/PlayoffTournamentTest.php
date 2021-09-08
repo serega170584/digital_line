@@ -51,7 +51,7 @@ class PlayoffTournamentTest extends KernelTestCase
         $this->assertEquals([0, 0, 0, 0], array_values($lostGoals->toArray()));
 
         $stage = $stages->next();
-        $this->assertEquals('1/4', $stage->getName());
+        $this->assertEquals('1/2', $stage->getName());
         $plays = $stage->getOrderedPlays();
         $teams = $plays->map(function (Play $play) {
             return $play->getTeam()->getName();
@@ -69,5 +69,25 @@ class PlayoffTournamentTest extends KernelTestCase
             return $play->getLostGoals();
         });
         $this->assertEquals([0, 0], array_values($lostGoals->toArray()));
+
+        $stage = $stages->next();
+        $this->assertEquals('Final', $stage->getName());
+        $plays = $stage->getOrderedPlays();
+        $teams = $plays->map(function (Play $play) {
+            return $play->getTeam()->getName();
+        });
+        $this->assertEquals(['A'], array_values($teams->toArray()));
+        $opponents = $plays->map(function (Play $play) {
+            return $play->getOpponent()->getName();
+        });
+        $this->assertEquals(['B'], array_values($opponents->toArray()));
+        $scoredGoals = $plays->map(function (Play $play) {
+            return $play->getScoredGoals();
+        });
+        $this->assertEquals([1], array_values($scoredGoals->toArray()));
+        $lostGoals = $plays->map(function (Play $play) {
+            return $play->getLostGoals();
+        });
+        $this->assertEquals([0], array_values($lostGoals->toArray()));
     }
 }
