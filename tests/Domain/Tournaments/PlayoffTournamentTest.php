@@ -37,5 +37,9 @@ class PlayoffTournamentTest extends KernelTestCase
             return $play->getTeam()->getName();
         });
         $this->assertEquals(['A', 'C', 'B', 'D'], array_values($teams->toArray()));
+        $opponents = $plays->map(function (Play $play) {
+            return $play->getOpponent()->getName();
+        });
+        $this->assertEquals(['L', 'J', 'K', 'I'], array_values($opponents->toArray()));
     }
 }
