@@ -112,6 +112,7 @@ class PlayGeneratorTest extends KernelTestCase
         $scoredGoals = $plays->map(function (Play $play) {
             return $play->getScoredGoals();
         });
+        var_dump($team->getName());
         var_dump($scoredGoals);
         die('asd');
 
