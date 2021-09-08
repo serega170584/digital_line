@@ -5,6 +5,7 @@ namespace App\Tests\Service;
 use App\Domain\Tournaments\PlayoffTournament;
 use App\Entity\Play;
 use App\Entity\Stage;
+use App\Entity\Team;
 use App\Repository\StageRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -26,6 +27,7 @@ class PlayoffTournamentTest extends KernelTestCase
         $playoffTournament = $container->get(PlayoffTournament::class);
         $playoffTournament->setStages($playoffStages);
         $playoffTournament->build();
+
         $stages = $playoffTournament->getStages();
         /**
          * @var Stage $stage
@@ -90,5 +92,15 @@ class PlayoffTournamentTest extends KernelTestCase
         });
         $this->assertEquals([0], array_values($lostGoals->toArray()));
         $this->assertEmpty($stages->next());
+
+        $playoffTournament->buildTable();
+        $table = $playoffTournament->getTable();
+        $teams = array_map(function (Team $team) {
+            return $team->getName();
+        }, $table);
+        $this->assertEquals([
+            'A', 'B', 'C', 'D',
+            'I', 'J', 'K', 'L'
+        ], array_values($teams));
     }
 }
