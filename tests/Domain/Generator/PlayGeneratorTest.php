@@ -110,10 +110,8 @@ class PlayGeneratorTest extends KernelTestCase
             ->map(function (Play $play) {
                 return $play->getTeam()->getName();
             });
-        var_dump($names);
-        die('asd');
         $this->assertEquals([
-            'A', 'C', 'B', 'D'
+            'A', 'B'
         ], array_values($names->toArray()));
 
         $names = $stage->getPlays()
@@ -123,7 +121,7 @@ class PlayGeneratorTest extends KernelTestCase
                 return $play->getOpponent()->getName();
             });
         $this->assertEquals([
-            'L', 'J', 'K', 'I'
+            'C', 'D'
         ], array_values($names->toArray()));
     }
 }
