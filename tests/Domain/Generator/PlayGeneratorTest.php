@@ -90,6 +90,8 @@ class PlayGeneratorTest extends KernelTestCase
             return ($play->getTeam()->getTeamGroup() === $play->getTeam()->getTeamGroup())
                 && ($play->getTeam()->getTeamGroup() === $group);
         })->count();
+        var_dump($playsCount);
+        die('asd');
         $this->assertEquals(64, $playsCount);
 
         $playoffStages = $stages->matching(Criteria::create()
