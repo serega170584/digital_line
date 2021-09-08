@@ -45,5 +45,17 @@ class CupTournamentTest extends KernelTestCase
             return $play->getLostGoals();
         });
         $this->assertEquals([0, 0, 0, 0, 0, 0, 0, 0], $lostGoals->toArray());
+
+        $cupTournament->buildTable();
+        $table = $cupTournament->getTable();
+        $teams = array_map(function (Team $team) {
+            return $team->getName();
+        }, $table);
+        $this->assertEquals([
+            'A', 'B', 'C', 'D',
+            'I', 'J', 'K', 'L',
+            'E', 'M', 'F', 'N',
+            'G', 'O', 'H', 'P'
+        ], $teams);
     }
 }
