@@ -12,6 +12,7 @@ use App\Repository\PlayRepository;
 use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -98,6 +99,21 @@ class PlayGeneratorTest extends KernelTestCase
                 && ($play->getTeam()->getTeamGroup() === $group);
         })->count();
         $this->assertEquals(64, $playsCount);
+
+        $team = current($teams);
+        /**
+         * @var Collection $plays
+         */
+        $plays = $team->getPlays()->filter(function (Play $play) use ($groupStage) {
+            return $groupStage->getPlays()->contains($play);
+        })
+            ->matching(Criteria::create()
+                ->orderBy([self::OPPONENT => Criteria::ASC]));
+        $scoredGoals = $plays->map(function (Play $play) {
+            return $play->getScoredGoals();
+        });
+        var_dump($scoredGoals);
+        die('asd');
 
         $playoffStages = $stages->matching(Criteria::create()
             ->where(Criteria::expr()->eq(self::IS_PLAYOFF, true))
