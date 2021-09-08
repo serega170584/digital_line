@@ -4,7 +4,7 @@ namespace App\Tests\Service;
 
 use App\Domain\Tournaments\GroupTournament;
 use App\Entity\Play;
-use App\Entity\Team;
+use App\Repository\StageRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -15,9 +15,15 @@ class GroupTournamentTest extends KernelTestCase
         self::bootKernel();
         $container = static::getContainer();
         /**
+         * @var StageRepository $stageRepository
+         */
+        $stageRepository = $container->get(StageRepository::class);
+        $playoffStages = $stageRepository->findAllArrayCollection()->findIsPlayoff();
+        /**
          * @var GroupTournament $groupTournament
          */
         $groupTournament = $container->get(GroupTournament::class);
+        $groupTournament->setPlayoffStages($playoffStages);
         $groupTournament->build();
         /**
          * @var TeamRepository $teamRepository
