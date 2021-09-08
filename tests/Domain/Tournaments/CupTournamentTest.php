@@ -33,5 +33,9 @@ class CupTournamentTest extends KernelTestCase
             return $play->getTeam()->getName();
         });
         $this->assertEquals(['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A'], $teamNames->toArray());
+        $opponentNames = $plays->map(function (Play $play) {
+            return $play->getOpponent()->getName();
+        });
+        $this->assertEquals(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'], $opponentNames->toArray());
     }
 }
